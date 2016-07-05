@@ -1,0 +1,535 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Mixed Up with Nerves - My Journey So Far</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
+    <link rel="stylesheet" href="css/customizations.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown>
+          <script type="text/template">
+            # Mixed Up with Nerves
+            ## My Journey So Far
+            
+            ----
+            
+            Elixir Meetup 2016-07-05
+            
+            Greg Mefford (@ferggo)
+            
+            ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 6em" -->
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # Thanks, Gaslight!
+            ![Nerves Logo](img/gaslight.jpg) <!-- .element: class="plain" -->
+          </script>
+        </section>
+
+        <!-- ===== Overview ===== -->
+        <section class="nav" data-markdown data-background-color="#b989d8">
+          <script type="text/template">
+            1. Quick intro to Nerves
+            2. What's New and What's Next
+            3. My Journey
+            4. Community Update
+          </script>
+        </section>
+
+        <!-- ===== Intro to Nerves ===== -->
+        <section>
+          <section class="nav" data-markdown data-background-color="#b989d8">
+            <script type="text/template">
+              1. Quick intro to Nerves
+              2. What's New and What's Next <!-- .element: class="inactive" -->
+              3. My Journey <!-- .element: class="inactive" -->
+              4. Community Update <!-- .element: class="inactive" -->
+            </script>
+          </section>
+        
+          <section data-markdown>
+            <script type="text/template">
+              # Nerves
+              ![Nerves Logo](img/nerves_logo_dark.png) <!-- .element: class="plain" -->
+              
+              Craft and deploy
+              
+              bulletproof embedded software
+              
+              in Elixir
+            </script>
+          </section>
+
+          <section data-markdown data-background-image="img/elixir_logo_on_pi.jpg">
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              # Elixir *<3* Embedded
+              * Fault-Tolerance
+              * Fast Garbage Collection
+              * Concurrency
+              * Constrained Hardware
+              * Binary Protocols
+              * ...
+            </script>
+          </section>
+
+          <section data-background-image="img/nerves_architecture.png" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/nerves_vs_raspbian.png" data-background-size="contain">
+          </section>
+
+          <section class="img-grid" data-markdown>
+            <script type="text/template">
+              ## Support for Lots of Boards
+              ![rpi0](img/rpi0.jpg) <!-- .element: class="plain" -->
+              ![rpi1](img/rpi1.jpg) <!-- .element: class="plain" -->
+              ![rpi2](img/rpi2.png) <!-- .element: class="plain" -->
+              ![rpi3](img/rpi3.jpg) <!-- .element: class="plain" -->
+              ![bbb](img/bbb.jpg) <!-- .element: class="plain" -->
+              ![galileo2](img/galileo2.jpg) <!-- .element: class="plain" -->
+              ![ev3](img/ev3.png) <!-- .element: class="plain" -->
+            </script>
+          </section>
+
+        </section>
+
+        <!-- ===== What's New and What's Next ===== -->
+        <section>
+          <section class="nav" data-markdown data-background-color="#b989d8">
+            <script type="text/template">
+              1. Quick intro to Nerves <!-- .element: class="inactive" -->
+              2. What's New and What's Next
+              3. My Journey <!-- .element: class="inactive" -->
+              4. Community Update <!-- .element: class="inactive" -->
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # *WiFi* support (interim)
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # *Bakeware* replaced
+              # by *native Mix* integration
+            </script>
+          </section>
+
+          <section data-background-image="img/nerves_br_flow.png" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/nerves_br_flow_problems.png" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/nerves_bake_flow.png" data-background-size="contain">
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              ## Mix integration
+              
+              No need to install Bakeware
+              
+              It's *just a Mix archive*, like Phoenix
+              
+              ``` bash
+              $ mix archive.install \
+              https://github.com/nerves-project/archives/raw/master/nerves_bootstrap.ez
+              
+              $ mix nerves.new hello_nerves --target rpi3
+              ```
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              ## Building with Mix
+              
+              ``` bash
+              $ mix deps.get # Download everything you need
+              $ mix firmware # Cross-Compile for the Target
+              $ mix firmware.burn # Burn an SD card
+              ```
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              ### How it Works - *blinky/mix.exs*
+              
+              ``` elixir
+              defmodule Blinky.Mixfile do
+                use Mix.Project
+
+                @target System.get_env("NERVES_TARGET") || "rpi3"
+
+                def project do
+                  [target: @target,
+                   aliases: aliases(),
+                   deps: deps() ++ system(@target)]
+                end
+
+                def system(target) do
+                  [
+                   {:"nerves_system_#{target}", "~> 0.6"}
+                  ]
+                end
+
+                def aliases do
+                  ["deps.precompile": ["nerves.precompile", "deps.precompile"],
+                   "deps.loadpaths":  ["deps.loadpaths",    "nerves.loadpaths"]]
+                end
+
+              end
+              ```
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              ### How it Works - *nerves_system_rpi3/mix.exs*
+              
+              ```
+              defmodule NervesSystemRpi3.Mixfile do
+                use Mix.Project
+
+                def project do
+                  [compilers: Mix.compilers ++ [:nerves_system]
+                   # ...
+                  ]
+                end
+
+                defp deps do
+                  [{:nerves_system, "~> 0.1.4"},
+                   {:nerves_system_br, "~> 0.6.0"},
+                   {:nerves_toolchain_arm_unknown_linux_gnueabihf, "~> 0.6.0"}]
+                end
+
+                # ...
+              end
+              ```
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              ### How it Works - *n_t_a_u_l_g/mix.exs*
+              
+              ```
+              defmodule NervesToolchainArmUnknownLinuxGnueabihf.Mixfile do
+                use Mix.Project
+
+                def project do
+                  [compilers: Mix.compilers ++ [:nerves_toolchain],
+                   # ...
+                  ]
+                end
+
+                def application do
+                  [env: [
+                    target_tuple: "arm-unknown-linux-gnueabihf"
+                  ]]
+                end
+
+                defp deps do
+                  [{:nerves_toolchain, "~> 0.6.2"}]
+                end
+
+              end
+              ```
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              ## *Documentation* on *HexDocs*
+              
+              ![HexDocs - Nerves](img/hexdocs.png) <!-- .element: class="plain" -->
+
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              ## Use *Phoenix* for an *Embedded UI*
+              
+              ![Phoenix UI Docs](img/phoenix_ui.png) <!-- .element: class="plain" -->
+
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # Coming Soon:
+              ## More *robust WiFi* support
+              * autodiscovery
+              * network interface events API
+              * etc.
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # Coming Soon:
+              ## *Linkit Smart* board support
+              
+              ![LinkIt Smart](img/linkit-smart.jpg) <!-- .element: class="plain" -->
+
+            </script>
+          </section>
+          
+          <section data-markdown >
+            <script type="text/template">
+              # Coming Soon:
+              ## Over-the-Network
+              ## *firmware updates*
+              ## with *fail-back*
+              
+              ![Cellulose](img/cellulose.png) <!-- .element: class="plain" -->
+              
+            </script>
+          </section>
+
+        </section>
+
+        <!-- ===== My Journey ===== -->
+        <section>
+          <section class="nav" data-markdown data-background-color="#b989d8">
+            <script type="text/template">
+              1. Quick intro to Nerves <!-- .element: class="inactive" -->
+              2. What's New and What's Next <!-- .element: class="inactive" -->
+              3. My Journey
+              4. Community Update <!-- .element: class="inactive" -->
+            </script>
+          </section>
+        
+          <section class="img-grid" data-markdown >
+            <script type="text/template">
+              # How it All Started
+              * Interest in Elixir
+              * Some past experience with hardware
+              * Dusty Raspberry Pi
+              
+              ![Elixir Logo](img/elixir_logo.png) <!-- .element: class="plain" -->
+              ![CRD 124](img/crd-124.jpg) <!-- .element: class="plain" -->
+              ![Raspberry Pi](img/rpi1.jpg) <!-- .element: class="plain" -->
+
+            </script>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              *Garth Hitchens's* talk at *ElixirConf 2015* about using Nerves at *Rose Point Navigation Systems*
+              
+              ![Garth Hitchens](img/garth_talk.png) <!-- .element: class="plain" -->
+            </script>
+          </section>
+        
+          <section data-markdown data-background-image="img/nerves_hello_world.jpg">
+            <script type="text/template">
+              # Tried it, Struggled, Victory! <!-- .element: class="img-quote" -->
+            </script>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              # Wanted to *get involved*
+              Even though (*especially because*)
+              
+              I was *new to Elixir*
+            </script>
+          </section>
+        
+          <section data-background-video="img/neopixels.mp4" data-background-video-loop=true>
+            <div class="img-quote">
+              <h1>Worked on <em>NeoPixels</em></h1>
+              <h2>for <em>fun</em> and to <em>learn</em> Nerves
+            </div>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              # Joined Nerves *Core Team*
+              Initially to help with *on-hardware CI*
+              
+              ![Nerves Team](img/nerves_team.png) <!-- .element: class="plain" -->
+            </script>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              ## *Limited* and *Fragmented*
+              ## Free Time
+            </script>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              ## Focused on
+              ## *learning* and *teaching*
+              * Website Updates
+              * Documentation and Guides
+              * Speaking at Local Meetup (like this!)
+            </script>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              # Self-proclaimed
+              # *Community Manager*
+              * Welcome new people on the Slack channel
+              * Answer Questions and Improve READMEs
+              * Maintain the Website
+              * Track Issues and PRs on the many repositories
+              * Think about Roadmap
+            </script>
+          </section>
+        
+        </section>
+
+        <!-- ===== Community Update ===== -->
+        <section>
+          <section class="nav" data-markdown data-background-color="#b989d8">
+            <script type="text/template">
+              1. Quick intro to Nerves <!-- .element: class="inactive" -->
+              2. What's New and What's Next <!-- .element: class="inactive" -->
+              3. My Journey <!-- .element: class="inactive" -->
+              4. Community Update
+            </script>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              # Gaining *attention*
+              ![Nerves Logo](img/nerves_trend.png) <!-- .element: class="plain" -->
+            </script>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              ## *Nerves* is frequently mentioned
+              ## along with *Phoenix* and *Ecto*
+            </script>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              # Over *500 people* in the Slack channel
+            </script>
+          </section>
+        
+          <section data-markdown >
+            <script type="text/template">
+              ## *Justin* is working
+              ## *nearly full-time* on Nerves
+              ![Justin Schneck](img/justin_nerves.png) <!-- .element: class="plain" -->
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # Nerves Camp
+              ![Nerves Camp](img/nerves_camp.png) <!-- .element: class="plain" -->
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # ElixirConf (EU and US)
+              ![Badge Hacking](img/badge_hacking.png) <!-- .element: class="plain" -->
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # How *You* Can Help
+              * Try out a *guide*
+              * Report anything *confusing* or *broken*
+              * (especially if *you're new to Elixir*!)
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # How *You* Can Help
+              * *Share* your Nerves-based *project*
+              * We'd like to *feature it* on the website!
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # How *You* Can Help
+              ## *Website* re-design
+            </script>
+          </section>
+
+          <section data-markdown >
+            <script type="text/template">
+              # How *You* Can Help
+              ## Write a *Guide*
+            </script>
+          </section>
+
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # Thanks!
+            ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 6em" -->
+
+            Greg Mefford (@ferggo)
+          </script>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        controls: true,
+        transition: "fade",
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+</html>
