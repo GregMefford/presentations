@@ -1,0 +1,556 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Functional Full-Stack Systems with Elixir, Phoenix, Nerves, and Elm</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
+    <link rel="stylesheet" href="css/customizations.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown
+          data-background-image="img/circuit.svg"
+          data-background-color="#DFDBE5"
+          data-background-size="200px"
+          data-background-repeat="repeat">
+          <textarea data-template>
+            ## Functional
+            ## Full-Stack
+            ## Systems
+            with Elixir, Phoenix, Nerves, and Elm
+
+            ----
+
+            Elixir Meetup 2017-10-03
+
+            Greg Mefford (@ferggo)
+
+            ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 4em" -->
+            ![Le Tote](img/lt_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+
+          </textarea>
+        </section>
+
+        <!-- Who Even? -->
+        <section>
+          <section data-markdown class="nav"
+            data-background-image="img/circuit.svg"
+            data-background-color="#B595E5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Who Even?
+              ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown data-background-image="img/letote_homepage.png" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/garth_talk.png" data-background-size="contain">
+          </section>
+
+          <section data-markdown data-background-image="img/nerves_hello_world.jpg" data-background-size="contain">
+            <textarea data-template>
+              # Victory! <!-- .element: class="img-quote" -->
+            </textarea>
+          </section>
+
+          <section data-background-video="img/neopixels.mp4" data-background-video-loop=true>
+            <div class="img-quote">
+              <p>Made the <em>nerves_neopixel</em> library</p>
+            </div>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Wanted to *get involved*
+              Even though I was *new to Elixir*
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Wanted to *get involved*
+              *Because* I was new to Elixir
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Limited *time* and *energy*
+
+              ![Making a Mummy](img/make-a-mummy.jpg) <!-- .element: class="plain" style="height: 12em"-->
+              <!-- https://www.natgeokids.com/au/discover/history/egypt/how-to-make-a-mummy/ -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Community Management
+              * Welcome New People
+              * Answer Questions
+              * Improve Documentation
+              * Maintain the Website
+              * Herd Issues and PRs
+            </textarea>
+          </section>
+
+          <section data-background-image="img/nerves_team_2016.jpg" data-background-size="contain">
+            <div class="img-quote">
+              <h1>Joined <em>Nerves Core Team</em></h1>
+            </div>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Building a *welcoming* and *helpful* community
+              ![Welcome to Nerves](img/nerves_welcome.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              ## #nerves channel
+
+              https://elixir-slackin.herokuapp.com/
+
+              ![Slack](img/elixir_slack.png) <!-- .element: class="plain" style="height: 12em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # *&gt;1250* people today
+              # (*500* in July 2016)
+
+              ![Iceberg](img/iceberg.png) <!-- .element: class="plain" style="height: 10em" -->
+              <!-- https://dribbble.com/shots/2619672-Iceberg -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/nerves_team_2017.jpg" data-background-size="contain">
+          </section>
+
+        </section>
+
+        <!-- What Even? -->
+        <section>
+          <section data-markdown class="nav"
+            data-background-image="img/circuit.svg"
+            data-background-color="#B595E5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # What Even?
+              ![Three Fingers](img/three_fingers.png) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/hands_hands.png" data-background-size="contain">
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # 💜 Happy Family 💜
+              ![Elixir](img/elixir_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+              ![Phoenix](img/phoenix_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+              ![Nerves](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 4em" -->
+              ![Elm](img/elm_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- ===== Intro to Nerves ===== -->
+        <section>
+          <section data-markdown class="nav"
+            data-background-image="img/circuit.svg"
+            data-background-color="#B595E5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              ![Nerves Logo](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 6em" -->
+
+              Craft and deploy
+
+              bulletproof embedded software
+
+              in Elixir
+            </textarea>
+          </section>
+
+          <section data-markdown data-background-image="img/elixir_logo_on_pi.jpg">
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Nerves Platform
+              *BEAM* as your "Operating System"
+              * Minimal, customized Buildroot system</li>
+              * `init` process replaced by `erlinit`
+              * OTP supervision for external processes
+              * Limited things that can go wrong
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Nerves Platform
+              *Minimal* firmware
+              * small size
+              * small updates
+              * fast boot time
+              * limited attack surface
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Nerves Platform
+              App-level fault-tolerance with *Bootloader*
+              * Configure network
+              * Start management tooling
+              * Format storage partitions
+              * ... Then start your app
+            </textarea>
+          </section>
+
+          <section data-markdown class="img-grid"
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Support for *Lots of Targets*
+              ![rpi0](img/rpi0.png) <!-- .element: class="plain" -->
+              ![rpi1](img/rpi1.png) <!-- .element: class="plain" -->
+              ![rpi2](img/rpi2.png) <!-- .element: class="plain" -->
+              ![rpi3](img/rpi3.png) <!-- .element: class="plain" -->
+              ![bbb](img/bbb.png) <!-- .element: class="plain" -->
+              ![ev3](img/ev3.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Nerves 💜 Elixir
+
+              ``` bash
+              $ mix deps.get      # Download Pre-Compiled Infrastructure
+              $ mix firmware      # Cross-Compile your Project
+              $ mix firmware.burn # Burn your SD card
+              # ... or ...
+              $ mix firmware.push # Update your Firmware over the Network
+              ```
+            </textarea>
+          </section>
+
+        </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Elixir 💜 Embedded
+              Light-weight *concurrency*
+              * Small per-process memory foot-print
+              * Per-process garbage-collection
+              * Process-level fault-tolerance with OTP
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Elixir 💜 Embedded
+              *Binary* pattern-matching
+              ``` elixir
+              def decode(<<op :: 3, addr :: 6, data :: 7>>), do: {op, addr, data}
+
+              # ...
+
+              decode(<<0b01010101, 0b01010011>>) # => {2, 42, 83}
+              ```
+              <!-- .element: style="font-size: 20px" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Elixir 💜 Embedded
+              *Binary* pattern-matching
+              ``` elixir
+              def decode(<<0 :: 2, op :: 1, addr :: 9, data :: 4>>), do: # ...
+              def decode(<<        op :: 3, addr :: 6, data :: 7>>), do: # ...
+
+              # ...
+
+              decode(<<0b00010101, 0b01010011>>) # => {0, 341, 3}
+              decode(<<0b01010101, 0b01010011>>) # => {2, 42, 83}
+              ```
+              <!-- .element: style="font-size: 20px" -->
+            </textarea>
+          </section>
+
+        <!-- ===== Elixir and Phoenix ===== -->
+        <section>
+          <section data-markdown class="nav"
+            data-background-image="img/circuit.svg"
+            data-background-color="#B595E5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Phoenix 💜 "IoT"
+              ![Tons of cats](img/cats.png) <!-- .element: class="plain" style="height: 12em" -->
+            </textarea>
+          </section>
+
+          <section
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <h1>Use all your <em>Cores</em></h1>
+
+            <div class="fragment" style="float: left">
+              <img src="img/rpi3.png" class="plain" style="height: 14em" />
+              <p>4 Cores</p>
+            </div>
+            <div class="fragment", style="float: right">
+              <img src="img/r930.png" class="plain" style="height: 14em" />
+              <p>96 Cores / 192 Threads</p>
+            </div>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Pretty secure by default
+              ![Phoenix Security](img/phoenix_security.png) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Simultaneous Connections
+              (avoid hard CS problems for a longer time)
+              ![Phoenix 2M Connections](img/phoenix_2m_connections.png) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Embedded web server
+              (configuration, HMI, API)
+
+              ![Human-Machine Interface](img/hmi.jpg) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Channels
+              # Presence
+              # GraphQL
+              ![Connection](img/connection.png) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- ===== Elm ===== -->
+        <section>
+          <section data-markdown class="nav"
+            data-background-image="img/circuit.svg"
+            data-background-color="#B595E5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Elm
+              ## Functional Front-End
+
+              ![Elm logo](img/elm_logo.png) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Elm 💜 Elixir
+              * Pure functions
+              * No side-effects, just commands
+              * Pattern-matching
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Elm Architecture 💜 OTP
+              ![Elm logo](img/elm_architecture.png) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Elm 💜 Nerves
+              * Efficient DOM updates
+              * (probably) No runtime exceptions
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat">
+            <textarea data-template>
+              # Elm 💜 You
+              * Coaching compiler
+              * Side-effect-free packages
+            </textarea>
+          </section>
+
+        </section>
+
+        <section data-markdown class="nav"
+          data-background-image="img/circuit.svg"
+          data-background-color="#B595E5"
+          data-background-size="200px"
+          data-background-repeat="repeat">
+          <script type="text/template">
+            # Thanks! 💜
+            ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 6em" -->
+
+            Greg Mefford (@ferggo)
+          </script>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        controls: true,
+        transition: "fade",
+        width: 1920,
+        height: 1080,
+        center: false,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+</html>
