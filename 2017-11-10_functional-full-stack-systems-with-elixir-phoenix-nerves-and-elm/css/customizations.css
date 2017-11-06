@@ -116,11 +116,27 @@
   color: #9969b8;
 }
 
-section.img-grid img {
+.reveal section.img-grid img {
   width: 25%;
+}
+
+.reveal section.img-list p {
+  text-align: center;
+}
+
+.reveal section.img-list img {
+  display: block;
+  margin: 0 auto;
 }
 
 .reveal section .img-quote {
   background-color: rgba(255, 255, 255, 0.7);
   padding: 1em;
+}
+
+.reveal .attribution {
+  display: block;
+  height: 1.2em;
+  font-size: 0.5em;
+  margin: 0;
 }
