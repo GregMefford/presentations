@@ -64,26 +64,55 @@
               ## Functional
               ## Full-Stack
               ## 💜 Systems 💜
+
+              Notes:
+
+              This talk is about Functional Full-Stack Systems, so
+
+              I'm going to address what I mean by each, in reverse order.
+
+              Let's start with "Systems."
+
             </textarea>
           </section>
 
           <section data-background-image="img/monolith.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              Most systems start out as a monolith
+
+              because the first thing you build is,
+
+              by definition, the only thing you have.
             </aside>
           </section>
 
           <section data-background-image="img/microservices.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              Recently (in the grand scheme of things),
+
+              developers have been frequently using a
+
+              micro-service architecture to better manage
+
+              the scope of responsibility for particular
+
+              pieces of code and data.
             </aside>
           </section>
 
           <section data-background-image="img/hybrid.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              It's also common to have a hybrid Architecture
+
+              either as a transitionary step or permanently.
             </aside>
           </section>
 
           <section data-background-image="img/multi-monolith.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              It's also possible to split a monolith
+
+              into multiplem monoliths.
             </aside>
           </section>
 
@@ -99,6 +128,16 @@
               > are constrained to produce designs
               > which are copies of the communication
               > structures of these organizations.
+
+              Notes:
+
+              Conway's law says that the architecture you choose
+
+              will normally depend on the structure of your organization.
+
+              So keep that in mind, while designing your software
+
+              as well as your organization structure.
             </textarea>
           </section>
 
@@ -111,41 +150,90 @@
             <textarea data-template>
               # The Mythical Man-Month
               ![The Mythical Man-Month](img/mythical_man_month.jpg) <!-- .element: class="plain" style="height: 12em" -->
+
+              Notes:
+
+              Conway's Law was coined by the book TMM-M.
+
+              As a developer, if you haven't read this book, you really should.
+
+              One of the important concepts in it deals with the
+
+              cost of communication in teams.
             </textarea>
           </section>
 
           <section data-background-image="img/teams_pair.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              Teams naturally start out small.
+
+              For example, a pair of co-founders building an MVP.
+
+              Communication is very efficient because
+
+              there are only two brains involved
+
+              and one lossy path between them.
             </aside>
           </section>
 
           <section data-background-image="img/teams_small.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              As the team grows, there are more communication paths,
+
+              so there are more opportunities for misunderstanding
+
+              or information that simply never gets shared.
+
+              But for a small team, it's generally not a problem.
             </aside>
           </section>
 
           <section data-background-image="img/teams_full_mesh.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              As the team gets bigger,
+
+              it needs to be partitioned somehow,
+
+              or you'll literally spend
+
+              all of your time in meetings.
             </aside>
           </section>
 
           <section data-background-image="img/teams_grid.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              At a certain size, it's unlikely or impossible
+
+              that you'll interact regularly with everyone.
             </aside>
           </section>
 
           <section data-background-image="img/teams_small_teams.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              Ideally, small teams would be formed
+
+              with autonomy and responsibility
+
+              for a feature or service.
             </aside>
           </section>
 
           <section data-background-image="img/teams_leads.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              ... but you might need to have "team leads"
+
+              to make sure that communication flows between teams.
             </aside>
           </section>
 
           <section data-background-image="img/teams_informal_connections.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              ... or rely on informal connections,
+
+              perhaps based on relationships formed
+
+              while working on different teams within the org.
             </aside>
           </section>
 
@@ -164,61 +252,132 @@
               ## Functional
               ## 💜 Full-Stack 💜
               ## ~~Systems~~
+
+              Notes:
+
+              so... we're thinking about
+
+              technical systems as well as organizational systems.
+
+
+              put a mental bookmark in that
+
+              because we'll come back to it.
+
+
+              Next, let's talk about what I mean by
+
+              "Full-Stack Systems"
             </textarea>
           </section>
 
           <section data-background-image="img/stack_back-end.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              This is what we call a "Back-End Developer."
+
+              They write code that runs on servers,
+
+              which are typically owned by someone else,
+
+              in "The Cloud" :troll:
             </aside>
           </section>
 
           <section data-background-image="img/stack_front-end.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              If the person also acts as a "Front-End Developer,"
+
+              it means that they also write code that runs in a browser,
+
+              and we might call them a "Full-Stack" developer.
             </aside>
           </section>
 
           <section data-background-image="img/stack_full-stack.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              ... or maybe we reserve that title for a person who also knows
+
+              how to provision/administrate the servers and databases and such.
             </aside>
           </section>
 
           <section data-background-image="img/stack_mobile_web.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              We might also expect them to write front-end code
+
+              that runs works well on mobile devices.
             </aside>
           </section>
 
           <section data-background-image="img/stack_mobile_native.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              ... and we might also develop "native apps" for mobile devices.
             </aside>
           </section>
 
           <section data-background-image="img/stack_logistics.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              But what if your business is more than just a website?
+
+              What about logistics stuff like
+
+              barcodes, RFIDs, and GPS-based fleet-tracking?
             </aside>
           </section>
 
           <section data-background-image="img/stack_logistics_divide.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              Often, those parts of "the stack" are outside of the developers' direct control.
+
+              There's probably one or more vendors and a contracts involved.
+
+              Or, for a small company, spreadsheets.
             </aside>
           </section>
 
           <section data-background-image="img/stack_logistics_api.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              If you're lucky, there's a vendor on the other side of the contract
+
+              who makes the system work
+
+              and provides an API that your back-end developers can use.
             </aside>
           </section>
 
           <section data-background-image="img/stack_iot.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              ... but what if your your company is developing IoT-based products?
+
+              Maybe you have internal developers with the appropriate skill-sets
+
+              to work with the vendors' APIs along with their own.
             </aside>
           </section>
 
           <section data-background-image="img/stack_process_controls.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              ... or maybe you have a manufacturing process
+
+              that uses automated process controls and human-machine interfaces
+
+              to create or process the products you sell.
+
+              Unless this is the core of your business, there's probably no API
+
+              and you've just got whatever the vendor provides OOTB.
             </aside>
           </section>
 
           <section data-background-image="img/stack_integrated.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              What does "Full-Stak" mean for your business?
+
+              How "Full-Stack" are your internal developers?
+
+              Wouldn't it be great if you could make changes on your own terms,
+
+              by allocating your own developers instead of negotiating contracts?
             </aside>
           </section>
 
@@ -238,6 +397,10 @@
               ## 💜 Functional 💜
               ## ~~Full-Stack~~
               ## ~~Systems~~
+
+              Notes:
+
+              Finally, let's talk about "Functional Full-Stack Systems."
             </textarea>
           </section>
 
@@ -249,7 +412,29 @@
             data-separator-notes="^Notes:">
             <textarea data-template>
               # Functional
-              ![Anit-Fragile](img/anti-fragile.png) <!-- .element: class="plain" style="height: 12em" -->
+              ![Anti-Fragile](img/anti-fragile.png) <!-- .element: class="plain" style="height: 12em" -->
+
+              Notes:
+
+              First of all, "Functional," to me, means that it works and that
+
+              it recovers gracefully from errors,
+
+              ...because computers.
+
+              We'd really like for our systems to be "anti-fragile,"
+
+              meaning that failure actually makes them stronger.
+
+              The poster-child of this concept in technology
+
+              is the Netflix Chaos Engineering team.
+
+              By injecting failures into real production systems, engineers are
+
+              forced to develop systems that are resilient to failure
+
+              and improving over time.
             </textarea>
           </section>
 
@@ -259,6 +444,18 @@
             data-separator-notes="^Notes:">
             <textarea data-template>
               ![Kevlin Henney](img/kevlin_henney.png) <!-- .element: class="plain fragment" style="height: 14em" -->
+
+              Notes:
+
+              This is not what they meant when they said "let it crash."
+
+              (fragment): These crash screens are courtesy of Kevlin Henney's Twitter stream,
+
+              where you can find tons more pictures of crash screens in-the-wild.
+
+              People tweet these pictures at him, saying they've "found a @kevlinhenney"
+
+              It's pretty awesome.
             </textarea>
           </section>
 
@@ -271,6 +468,16 @@
             <textarea data-template>
               # Functional
               # z = F(x,y)
+
+              Notes:
+
+              So, besides having a system that _functions_,
+
+              I also really like systems that use a _functional programming_ style.
+
+              It makes the code much easier to test and reason about when it consists of
+
+              deterministic functions, always returning the same output for a given input.
             </textarea>
           </section>
 
@@ -286,6 +493,12 @@
               ![Phoenix](img/phoenix_logo.png) <!-- .element: class="plain" style="height: 4em" -->
               ![Nerves](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 4em" -->
               ![Elm](img/elm_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+
+              Notes:
+
+              Summing all of that up, I'd like to present this happy family of tools
+
+              that work well together to build a Functional Full-Stack System.
             </textarea>
           </section>
 
@@ -302,11 +515,26 @@
             <textarea data-template>
               # Who Even?
               ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 6em" -->
+
+              Notes:
+
+              ... but first, it's a little embarassing that I've talked to you
+
+              for so long without properly introducing who I am.
             </textarea>
           </section>
 
           <section data-background-image="img/letote_homepage.png" data-background-size="contain">
             <aside class="notes" data-markdown>
+              I work at Le Tote, where we enable women to always stay fashionable,
+
+              without having to continually maintain a closet full of clothes,
+
+              by shipping them boxes of clothing clothing on a subscription basis.
+
+              Specifically, I work on the team that uses Elixir, Phoenix, Nerves, and React
+
+              to make the magic happen in our fulfillment centers.
             </aside>
           </section>
 
@@ -318,12 +546,28 @@
             data-separator-notes="^Notes:">
             <textarea data-template>
               # ✅ Hiring!
-              ## DM for details:
               Elixir Slack: @gregmefford
 
               Twitter: @ferggo
 
               ![Le Tote](img/lt_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+
+              ![Elixir](img/elixir_logo.png) <!-- .element: class="plain" style="height: 3em" -->
+              ![Phoenix](img/phoenix_logo.png) <!-- .element: class="plain" style="height: 3em" -->
+              ![Nerves](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 3em" -->
+              ![React](img/react_logo.png) <!-- .element: class="plain" style="height: 3em" -->
+
+              Notes:
+
+              If you're paying attention, you'll notice that I didn't say "Elm."
+
+              We definitely have several people interested in using it,
+
+              but it hasn't happened yet.
+
+              Anyway... we're hiring,
+
+              so get in touch if you want to work on these kinds of systems!
             </textarea>
           </section>
 
