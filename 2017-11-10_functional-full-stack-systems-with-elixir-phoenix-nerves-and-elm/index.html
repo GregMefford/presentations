@@ -67,42 +67,38 @@
 
               Notes:
 
-              This talk is about Functional Full-Stack Systems, so
+              This talk is about Functional Full-Stack Systems
 
-              I'm going to address what I mean by each, in reverse order.
+              let's go through what I mean by each, in reverse order,
 
-              Let's start with "Systems."
+              Starting with "Systems."
 
             </textarea>
           </section>
 
           <section data-background-image="img/monolith.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              Most systems start out as a monolith
+              We're probably all familiar with the monolith, where all your code
 
-              because the first thing you build is,
+              is in one thing.
 
-              by definition, the only thing you have.
+              This is the obvious architecture because the first thing you build
+
+              it going to be a monolith by definition.
             </aside>
           </section>
 
           <section data-background-image="img/microservices.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              Recently (in the grand scheme of things),
+              On the opposite end of the spectrum, you might have a bunch of
 
-              developers have been frequently using a
-
-              micro-service architecture to better manage
-
-              the scope of responsibility for particular
-
-              pieces of code and data.
+              microservices, each with a small responsibility in the system.
             </aside>
           </section>
 
           <section data-background-image="img/hybrid.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              It's also common to have a hybrid Architecture
+              It's also common to have a hybrid Architecture,
 
               either as a transitionary step or permanently.
             </aside>
@@ -112,7 +108,7 @@
             <aside class="notes" data-markdown>
               It's also possible to split a monolith
 
-              into multiplem monoliths.
+              into multiple monoliths.
             </aside>
           </section>
 
@@ -137,7 +133,7 @@
 
               So keep that in mind, while designing your software
 
-              as well as your organization structure.
+              as well as your organization.
             </textarea>
           </section>
 
@@ -153,11 +149,17 @@
 
               Notes:
 
-              Conway's Law was coined by the book TMM-M.
+              Fun fact I learned while putting this talk together:
+
+              Conway's Law was coined in TMM-M.
+
+              Despite the awkwardly gender-specific title,
+
+              this book is jam-packed with wisdom.
 
               As a developer, if you haven't read this book, you really should.
 
-              One of the important concepts in it deals with the
+              One important concepts is the
 
               cost of communication in teams.
             </textarea>
@@ -167,25 +169,25 @@
             <aside class="notes" data-markdown>
               Teams naturally start out small.
 
-              For example, a pair of co-founders building an MVP.
+              Here, we have a pair of co-founders.
 
-              Communication is very efficient because
+              Communication is easy because
 
-              there are only two brains involved
+              there're only two brains
 
-              and one lossy path between them.
+              and one lossy channel between them.
             </aside>
           </section>
 
           <section data-background-image="img/teams_small.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              As the team grows, there are more communication paths,
+              As the team grows, there're more channels,
 
-              so there are more opportunities for misunderstanding
+              with more chances to misunderstand
 
-              or information that simply never gets shared.
+              or simply miss out on something.
 
-              But for a small team, it's generally not a problem.
+              For a small team, it's generally fine.
             </aside>
           </section>
 
@@ -195,7 +197,7 @@
 
               it needs to be partitioned somehow,
 
-              or you'll literally spend
+              or you'll be spending
 
               all of your time in meetings.
             </aside>
@@ -215,26 +217,61 @@
 
               with autonomy and responsibility
 
-              for a feature or service.
+              for all aspects of a feature or service.
             </aside>
           </section>
 
           <section data-background-image="img/teams_leads.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              ... but you might need to have "team leads"
+              You might also have overlapping teams to help
 
-              to make sure that communication flows between teams.
+              keep alignment across the organization.
+
+              For example, all the front-end engineers need to get together
+
+              to argue about whether to use gulp or grunt or yarn or webpack.
             </aside>
           </section>
 
           <section data-background-image="img/teams_informal_connections.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              ... or rely on informal connections,
+              Encourage informal communication outside formal teams,
 
-              perhaps based on relationships formed
+              because it builds empathy across the organization
 
-              while working on different teams within the org.
+              and leads to meeting business needs more quickly.
             </aside>
+          </section>
+
+          <!-- Summary: Systems -->
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              # Systems
+              * Technical and Organizational
+              * Small, Focused Teams
+              * Minimize Communication Overhead
+
+              ![small teams](img/teams_informal_connections.png) <!-- .element: class="plain" style="height: 8em" -->
+              ![small teams](img/microservices.png) <!-- .element: class="plain" style="height: 8em" -->
+
+              Notes:
+
+              So think about both technical and organizational systems.
+
+              We should keep teams small and focused.
+
+              Minimize the communication overhead, but encourage empathy.
+
+              Conway's Law tells us that this is a prerequisite to
+
+              being successful in building focused microservices.
+            </textarea>
           </section>
 
         </section>
@@ -255,63 +292,49 @@
 
               Notes:
 
-              so... we're thinking about
-
-              technical systems as well as organizational systems.
-
-
-              put a mental bookmark in that
-
-              because we'll come back to it.
-
-
-              Next, let's talk about what I mean by
-
-              "Full-Stack Systems"
+              Now, on to "Full-Stack Systems"
             </textarea>
           </section>
 
           <section data-background-image="img/stack_back-end.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              This is what we call a "Back-End Developer."
+              This is a "Back-End Developer."
 
-              They write code that runs on servers,
-
-              which are typically owned by someone else,
-
-              in "The Cloud" :troll:
+              They write code that runs on servers.
             </aside>
           </section>
 
           <section data-background-image="img/stack_front-end.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              If the person also acts as a "Front-End Developer,"
+              Sometimes, the same person is also a "Front-End Developer."
 
-              it means that they also write code that runs in a browser,
+              They write code that runs in a browser.
 
-              and we might call them a "Full-Stack" developer.
+              This is often call a "Full-Stack" developer.
             </aside>
           </section>
 
           <section data-background-image="img/stack_full-stack.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              ... or maybe we reserve that title for a person who also knows
-
-              how to provision/administrate the servers and databases and such.
+              ... or maybe they also provision the servers/databases/monitoring/etc.
             </aside>
           </section>
 
           <section data-background-image="img/stack_mobile_web.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              We might also expect them to write front-end code
+              They might also write front-end code
 
-              that runs works well on mobile devices.
+              that works well on mobile devices.
             </aside>
           </section>
 
           <section data-background-image="img/stack_mobile_native.png" data-background-size="contain">
             <aside class="notes" data-markdown>
               ... and we might also develop "native apps" for mobile devices.
+
+              This is normally where we draw the line because the
+
+              tools and skills needed are different enough that it makes sense.
             </aside>
           </section>
 
@@ -319,27 +342,25 @@
             <aside class="notes" data-markdown>
               But what if your business is more than just a website?
 
-              What about logistics stuff like
+              If you have physical goods, you probably have logistics to manage.
 
-              barcodes, RFIDs, and GPS-based fleet-tracking?
+              You've got barcodes, RFIDs, and GPS-based fleet-tracking.
             </aside>
           </section>
 
           <section data-background-image="img/stack_logistics_divide.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              Often, those parts of "the stack" are outside of the developers' direct control.
+              Maybe this part of "the stack" is outside the developers' control.
 
-              There's probably one or more vendors and a contracts involved.
+              Maybe there's vendors or contracts involved.
 
-              Or, for a small company, spreadsheets.
+              Or, you know, spreadsheets.
             </aside>
           </section>
 
           <section data-background-image="img/stack_logistics_api.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              If you're lucky, there's a vendor on the other side of the contract
-
-              who makes the system work
+              If you're lucky, there's somebody who makes the system work
 
               and provides an API that your back-end developers can use.
             </aside>
@@ -347,9 +368,9 @@
 
           <section data-background-image="img/stack_iot.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              ... but what if your your company is developing IoT-based products?
+              If your your company is developing IoT products,
 
-              Maybe you have internal developers with the appropriate skill-sets
+              Maybe you have people with the appropriate skill-sets
 
               to work with the vendors' APIs along with their own.
             </aside>
@@ -369,16 +390,29 @@
             </aside>
           </section>
 
-          <section data-background-image="img/stack_integrated.png" data-background-size="contain">
-            <aside class="notes" data-markdown>
-              What does "Full-Stak" mean for your business?
+          <!-- Summary: Full-Stack -->
 
-              How "Full-Stack" are your internal developers?
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              # Full-Stack
+              * What is "Full-Stack" for you?
+              * Direct Control without Contract Negotiation
 
-              Wouldn't it be great if you could make changes on your own terms,
+              ![small teams](img/stack_integrated.png) <!-- .element: class="plain" style="height: 10em" -->
 
-              by allocating your own developers instead of negotiating contracts?
-            </aside>
+              Notes:
+
+              What does "Full-Stack" mean for your business?
+
+              What if your engineers could use their existing skills across the stack,
+
+              taking more direct control without contract negotiations?
+            </textarea>
           </section>
 
         </section>
@@ -416,15 +450,13 @@
 
               Notes:
 
-              First of all, "Functional," to me, means that it works and that
+              * It works
 
-              it recovers gracefully from errors,
+              * It recovers gracefully from errors ...because computers.
 
-              ...because computers.
+              Ideally, we want "anti-fragile" systems,
 
-              We'd really like for our systems to be "anti-fragile,"
-
-              meaning that failure actually makes them stronger.
+              meaning that they get more resilient by handling failures.
 
               The poster-child of this concept in technology
 
@@ -453,9 +485,7 @@
 
               where you can find tons more pictures of crash screens in-the-wild.
 
-              People tweet these pictures at him, saying they've "found a @kevlinhenney"
-
-              It's pretty awesome.
+              It's pretty great, if that's your kind of thing.
             </textarea>
           </section>
 
@@ -473,11 +503,11 @@
 
               So, besides having a system that _functions_,
 
-              I also really like systems that use a _functional programming_ style.
+              I also really like the _functional programming_ style.
 
-              It makes the code much easier to test and reason about when it consists of
+              The code easier to test and reason about becasuse it's
 
-              deterministic functions, always returning the same output for a given input.
+              deterministic, returning the same output for a given input.
             </textarea>
           </section>
 
@@ -496,9 +526,9 @@
 
               Notes:
 
-              Summing all of that up, I'd like to present this happy family of tools
+              That brings us to this happy family of tools
 
-              that work well together to build a Functional Full-Stack System.
+              that work well to build a Functional Full-Stack System.
             </textarea>
           </section>
 
@@ -518,19 +548,17 @@
 
               Notes:
 
-              ... but first, it's a little embarassing that I've talked to you
+              ... but first, in the intrest of full disclosure,
 
-              for so long without properly introducing who I am.
+              I need to tell you a story about me.
             </textarea>
           </section>
 
           <section data-background-image="img/letote_homepage.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              I work at Le Tote, where we enable women to always stay fashionable,
+              I work at Le Tote, where we enable women's fashion through a
 
-              without having to continually maintain a closet full of clothes,
-
-              by shipping them boxes of clothing clothing on a subscription basis.
+              rental subscription service.
 
               Specifically, I work on the team that uses Elixir, Phoenix, Nerves, and React
 
@@ -559,7 +587,7 @@
 
               Notes:
 
-              If you're paying attention, you'll notice that I didn't say "Elm."
+              That's right, I didn't say "Elm."
 
               We definitely have several people interested in using it,
 
@@ -578,9 +606,8 @@
             data-background-repeat="repeat"
             data-separator-notes="^Notes:">
             <textarea data-template>
-              # Nerves Team
-              ![Nerves Team 2016](img/nerves_team_2016.jpg) <!-- .element: class="plain" style="height: 7em"-->
-              ![Nerves Team 2017](img/nerves_team_2017.jpg) <!-- .element: class="plain" style="height: 7em"-->
+              # You *Can* Contribute
+              ![Nerves](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 10em"-->
 
               Notes:
 
@@ -590,21 +617,19 @@
 
               want to briefly share my story in hopes that it will encourage
 
-              others that they _can_ contribute even if they feel like they
+              others that they _do_ have something they can contribute to the
 
-              don't have anything valuable to offer.
+              community if they want to even if they feel like they don't.
             </textarea>
           </section>
 
           <section data-background-image="img/garth_talk.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              Like many of us in the Nerves community, my story starts with Garth's
+              Like many in the Nerves community,
 
-              presentation from ElixirConf 2015, where he talked about how Rose
+              I found out about Nerves by watching
 
-              Point Navigation is using Nerves to run Elixir on embedded systems
-
-              in their products.
+              Garth's presentation from ElixirConf 2015.
             </aside>
           </section>
 
@@ -617,15 +642,15 @@
 
               Notes:
 
-              I had some embedded systems experience and an ancient Raspberry Pi
+              I had some electronics experience and an ancient Raspberry Pi.
 
-              that I had barely even turned on since buying it, so
+              I had barely turned it on since buying it,
 
-              I spent a while struggling through the process to get a Nerves
+              but I struggled through the process of getting started with Nerves.
 
-              firmware running on it, and it was _so exciting_ when I finally saw
+              There's something really visceral about programming physical devices
 
-              that iex shell booting up in just a few seconds on my device.
+              that makes such a small achievement really exciting.
             </textarea>
           </section>
 
@@ -634,9 +659,9 @@
               <p>Made the <em>nerves_neopixel</em> library</p>
             </div>
             <aside class="notes" data-markdown>
-              Then I immediately set to work on driving these blinkenlights,
+              Then, of course, I set to work on more blinkenlights,
 
-              because I needed something shiny to work on.
+              because everyone needs some bling in their life.
             </aside>
           </section>
 
@@ -695,7 +720,7 @@
 
               besides work and family.
 
-              Here's a picture of me and the kids having a relaxing weekend.
+              Here's me and my three kids having a relaxing weekend.
             </textarea>
           </section>
 
@@ -717,9 +742,9 @@
 
               For example, I started to manually and individually welcome each
 
-              new person to our Slack channel and invite them to chat about
+              new person to our Slack channel
 
-              what brought them to the community.
+              and invite them to get involved.
             </textarea>
           </section>
 
@@ -731,25 +756,25 @@
             data-separator-notes="^Notes:">
             <textarea data-template>
               # Community Management
-              * Welcome New People
+              * Welcome New People 🚀
               * Answer Questions
               * Improve Documentation and Guides
               * Maintain the Website
-              * Herd Issues and PRs
+              * Herd Issues and PRs (in our 35 reops 😱)
 
               Notes:
 
-              As I got more familiar with the project and core team,
+              Over time, I started helping in other ways, too.
 
-              I grew into other areas of community management.
+              There wasn't really any formal process involved.
 
-              There wasn't really any formal process involved, I just reached
+              I just reached out to the existing core team members on Slack and
 
-              out to some of the existing core team members on Slack and let
+              said I wanted to help out.
 
-              them know that I wanted to start contributing in these ways, and
+              They were happy to have the help with these things that are often
 
-              they were happy to have the help.
+              overlooked in open-source projects.
             </textarea>
           </section>
 
@@ -764,21 +789,21 @@
               # (*500* in July 2016)
 
               ![Iceberg](img/iceberg.png) <!-- .element: class="plain" style="height: 10em" -->
-              <!-- https://dribbble.com/shots/2619672-Iceberg -->
+              [Chris Fernandez - Iceberg](https://dribbble.com/shots/2619672-Iceberg) <!-- .element: class="attribution" -->
 
               Notes:
 
-              The community has grown significantly over the past couple of years.
+              The community has grown a lot.
 
-              We have over 1300 members in our Slack channel, but I see that as
+              We have over 1300 members in our Slack channel.
 
-              only the tip of the iceberg. There are probably many more people
+              I see that as the tip of the iceberg.
 
-              who have tried Nerves or are interested, but they aren't familiar
+              There are probably many more people that we never hear from because
 
-              with Slack or don't want to engage in that way.
+              they don't use Slack.
 
-              We've recently been working to have a stronger presence in
+              We've recently been working on having a stronger presence in
 
               other spaces like the Elixir Forum and Stack Overflow so that we
 
@@ -793,17 +818,15 @@
 
           <section data-background-image="img/summary.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              So now that you understand my particular bias toward
+              So now you understand my particular bias toward Elixir, Phoenix, and Nerves.
 
-              Elixir, Phoenix, and Nerves, let's talk about how we can use
-
-              this happy family of tools to build Full-Stack Functional Systems.
+              Let's talk about how to build Full-Stack Functional Systems.
             </aside>
           </section>
 
           <section data-background-image="img/hands_hands.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              For each part of the stack, yo have a lot of choices.
+              For each part of the stack, you have a lot of choices.
             </aside>
           </section>
 
@@ -820,28 +843,21 @@
             data-separator-notes="^Notes:">
             <textarea data-template>
               # Back-End Tools
-              ![Ruby and Rails](img/logos_ruby_rails.png) <!-- .element: class="plain fragment" style="width: 33%" -->
-              ![JavaScript and NodeJS](img/logos_js_node.png) <!-- .element: class="plain fragment" style="width: 33%" -->
-              ![Clojure and ...Clojure](img/logos_clojure_clojure.png) <!-- .element: class="plain fragment" style="width: 33%" -->
-              ![Elixir and Phoenix](img/logos_elixir_phoenix.png) <!-- .element: class="plain fragment" style="width: 33%" -->
+              ![Ruby and Rails](img/logos_ruby_rails.png) <!-- .element: class="plain fragment" style="width: 40%" -->
+              ![Clojure and ...Clojure](img/logos_clojure_clojure.png) <!-- .element: class="plain fragment" style="width: 40%" -->
+              ![Elixir and Phoenix](img/logos_elixir_phoenix.png) <!-- .element: class="plain fragment" style="width: 40%" -->
 
               Notes:
 
-              For the back-end, you choice of web framework will tend toward
+              (fragment) Ruby on Rails is popular, but not functional
 
-              the popular choices for the language you want to use.
+              (fragment) Clojure is functional, and it doesn't even _need_ a
 
-              (fragment) For Ruby, it's often Rails
+              web framework, because it's just functions after all.
 
-              (fragment) If you like writing JavaScript, you might use NodeJS
+              (framework) But I think Elixir and Phoenix are really great choices
 
-              (fragment) If you're into Clojure... well, it's just functions,
-
-              so why would you want a web framework?
-
-              (framework) For functional full-stack systems, I think
-
-              Elixir and Phoenix have a lot going for them.
+              for the "Full Stack" systems we're talking about today.
             </textarea>
           </section>
 
@@ -859,71 +875,76 @@
             <textarea data-template>
               # Elixir 💜 Embedded
               Light-weight *concurrency*
-              * Small per-process memory foot-print
-              * Per-process garbage-collection
-              * Process-level fault-tolerance with OTP
+              * Tons of tiny processes
+              * Process-level fault-tolerance
 
               Notes:
 
               Due to its Erlang roots, Elixir was born to be embedded.
 
-              The embedded systems we have today would have been considered
+              Today's low-cost embedded platforms are yesterday's supercomputers,
 
-              supercomputers when the BEAM was being designed, so it's not
+              so it's unsurprising that the BEAM would work well there.
+            </textarea>
+          </section>
 
-              surprising that it runs well on low-cost hardware.
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              # Elixir 💜 Embedded
+              Light-weight *concurrency*
+              * Per-Process Garbage-Collection
+              * Immutable Data Structures
+
+              Notes:
+
+              But I want to talk for a minute about this one-two punch:
+
+              Garbage-collection happens per-process, and data structures are immutable.
             </textarea>
           </section>
 
           <section data-background-image="img/gc_jvm.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              Let's talk about why per-process garbage-collection matters.
+              Here's what a typical memory usage graph looks like for
 
-              If we have a JVM that's under a constant workload, its memory
+              a Java virtual machine under a constant workload.
 
-              usage profile will probably look like this.
+              The shaded areas are wasted memory due mostly to a lack of
 
-              It grows for a while, then suddenly drops before growing again.
+              immutable data structures, which prevents the garbage collector
 
-              The shaded areas are wasted memory because they were temporarily
-
-              allocated to do some work, but weren't freed when they're no longer
-
-              needed, because it's difficult to tell whether they're still in use
-
-              somewhere else.
+              from quickly determining what memory is still in use somewhere.
             </aside>
           </section>
 
           <section data-background-image="img/gc_jvm_zoom.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              If we zoom in, we see that it is also continually doing this same
-
-              clean-up process, but on a smaller scale, to keep memory usage
-
-              in-check between Full-GCs.
+              If we zoom in, we see the same process, but on a smaller scale.
 
               When the overall memory usage hits 75%, it triggers a Full-GC that
 
               stops the whole VM while it determines what memory is no longer
 
-              referenced anywhere and frees it up. In a busy system with a lot of
+              referenced anywhere and frees it up.
 
-              memory, this can take a considerable about of time and cause
-
-              performance problems.
+              In a busy system, this can take a while and cause problems.
             </aside>
           </section>
 
           <section data-background-image="img/gc_beam.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              By contrast, the BEAM does garbage-collection on a per-process basis,
+              By contrast, the BEAM does garbage-collection on a per-process basis.
 
-              so there's not much discernable memory-waste for a system under
+              There's very little waste for a system under constant load.
 
-              constant load. The overall memory usage only ebbs and flows with
+              The overall memory usage only ebbs and flows with the
 
-              the actual memory requirements of your workload.
+              actual memory requirements of your workload.
 
               This means that you can run a system closer to its memory limit,
 
@@ -937,21 +958,21 @@
 
           <section data-background-image="img/gc_beam_zoom.png" data-background-size="contain">
             <aside class="notes" data-markdown>
-              If we zoom in, we see that this is due to each process allocating
+              If we zoom in, we see that each process allocates some memory,
 
-              some memory as it does its work, garbage-collecting along the way,
+              does its work,
 
-              and freeing it all when it's finished.
+              with tiny, independent garbage-collections along the way,
 
-              At any moment in time, there are a bunch of processes allocating a
+              and frees it all when it's finished.
+
+              At any moment, there are a bunch of processes allocating a
 
               small increment of memory, while a much smaller number are freeing
 
               their entire allocation.
 
-              So the net result is that the overall memory usage responds very
-
-              quickly to the demand on the system.
+              So the overall memory usage closely follows the actual demand on the system.
             </aside>
           </section>
 
@@ -963,7 +984,7 @@
             data-separator-notes="^Notes:">
             <textarea data-template>
               # Elixir 💜 Embedded
-              *Binary* pattern-matching
+              Binary pattern-matching
               ``` elixir
               def decode(<<op :: 3, addr :: 6, data :: 7>>), do: {op, addr, data}
 
@@ -972,6 +993,22 @@
               decode(<<0b01010101, 0b01010011>>) # => {2, 42, 83}
               ```
               <!-- .element: style="font-size: 20px" -->
+
+              Notes:
+
+              Another thing that's really great about Elixir for embedded development
+
+              is binary pattern-matching.
+
+              Let's pretend that we have an data sheet for an electronics component
+
+              that says we need to decode these 16 bits into
+
+              * a 3-bit operation code,
+              * a 6-bit address value,
+              * and a 7-bit data value.
+
+              It's really easy to just pattern-match like this, and you're done.
             </textarea>
           </section>
 
@@ -994,6 +1031,24 @@
               decode(<<0b01010101, 0b01010011>>) # => {2, 42, 83}
               ```
               <!-- .element: style="font-size: 20px" -->
+
+              Notes:
+
+              But oh, by the way, the data sheet also says that
+
+              if the first two bits are zeros, then you're in "extended address" mode,
+
+              so you should interpret the rest of the data as:
+
+              * a 1-bit operation code,
+              * a 9-bit address value,
+              * and a 4-bit data value.
+
+              No problem, just add another function head.
+
+              This example is obviously contrived, but it's so nice to be able
+
+              to do this instead of procedural bitwise operations.
             </textarea>
           </section>
 
@@ -1011,6 +1066,12 @@
             <textarea data-template>
               # Phoenix 💜 "IoT"
               ![Tons of cats](img/cats.png) <!-- .element: class="plain" style="height: 12em" -->
+
+              Notes:
+
+              Next, let's talk about Phoenix.
+
+              This is your server on IoT.
             </textarea>
           </section>
 
@@ -1027,6 +1088,22 @@
               ![The Road to 2M Websocket Connections](img/the_road_to_2m_websockets.png) <!-- .element: class="plain" style="height: 10em" -->
               <br/>
               [Gary Rennie - The Road to 2 Million Websocket Connections in Phoenix](https://youtu.be/c6JcVwbOGXc) <!-- .element: class="attribution" -->
+
+              Notes:
+
+              It turns out that Phoenix is pretty good at handling that
+
+              without much special tuning or architecture.
+
+              In this presentation, Gary describes how they were able to get a
+
+              single server to host 2M websocket connections.
+
+              That wasn't the limit of what's possible,
+
+              it was more of an arbitrary point at which they ran out of time
+
+              and motivation to keep going with the test.
             </textarea>
           </section>
 
@@ -1046,6 +1123,14 @@
               <img src="img/r930.png" class="plain" style="height: 14em" />
               <p>96 Cores / 192 Threads</p>
             </div>
+
+            <aside class="notes" data-markdown>
+              Phoenix does a great job of using all your cores
+
+              (fragment) Whether it's 4 cores in your Raspberry Pi
+
+              (fragment) or tons of cores in your beefy server hardware
+            </aside>
           </section>
 
           <section data-markdown
@@ -1058,6 +1143,20 @@
               # Pretty secure by default
               ![Phoenix Security](img/phoenix_security.png) <!-- .element: class="plain" style="height: 10em" -->
               [Griffin Byatt - Plugging the Security Holes in Your Phoenix Application](https://youtu.be/w3lKmFsmlvQ) <!-- .element: class="attribution" -->
+
+              Notes:
+
+              Phoenix is also pretty secure by default.
+
+              In this presentation, Griffin presented his findings from
+
+              analyzing a lot of Phoenix-based web applications in the wild.
+
+              My main take-away from his presentation was that,
+
+              unless you're doing something unusual,
+
+              Phoenix has your back and does the right thing by default.
             </textarea>
           </section>
 
@@ -1071,7 +1170,13 @@
               # Embedded web server
               (configuration, HMI, API)
 
-              ![Human-Machine Interface](img/hmi.jpg) <!-- .element: class="plain" style="height: 10em" -->
+              ![Process Controls](img/process_controls.png) <!-- .element: class="plain" style="height: 12em" -->
+
+              Notes:
+
+              Phoenix also makes a great embedded web server, whether you need
+
+              a configuration page, a human-machine interface, or just a JSON API.
             </textarea>
           </section>
 
@@ -1082,10 +1187,39 @@
             data-background-repeat="repeat"
             data-separator-notes="^Notes:">
             <textarea data-template>
-              # Channels
-              # Presence
-              # GraphQL
-              ![Connection](img/connection.png) <!-- .element: class="plain" style="height: 6em" -->
+              # Phoenix Channels
+              ![Channels](img/channels.png) <!-- .element: class="plain" style="height: 12em" -->
+
+              Notes:
+
+              Phoenix Channels also offer a great way to easily connect your devices
+
+              to a server, whether it's an app running in a browser or
+
+              a headless sensor device in the field.
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              # GraphQL Subscriptions
+
+              ![Live APIs with GraphQL Subscriptions - Bruce Williams and Ben Wilson](img/graphql_subscriptions.png) <!-- .element: class="plain" style="height: 10em" -->
+              <br/>
+              [Live APIs with GraphQL Subscriptions - Bruce Williams and Ben Wilson](https://youtu.be/PEckzwggd78) <!-- .element: class="attribution" -->
+
+              Notes:
+
+              I'm also really interested the GraphQL Subscriptions
+
+              feature that Bruce and Ben demoed at ElixirConf this year,
+
+              but I haven't had a chance to try it yet.
             </textarea>
           </section>
 
@@ -1105,6 +1239,22 @@
               ![Johnny Five](img/logos_j5.png) <!-- .element: class="plain fragment" style="width: 20%" -->
               ![Grisp](img/logos_grisp.png) <!-- .element: class="plain fragment" style="width: 20%" -->
               ![Ruby on Raspbian](img/logos_ruby_on_raspbian.png) <!-- .element: class="plain fragment" style="width: 20%" -->
+
+              Notes:
+
+              In the embedded space, there are also a bunch of options.
+
+              (fragment): The Johnny Five project is a popular way to get
+
+              JavaScript code running on embedded systems.
+
+              (fragment): Grisp is also an interesting project to run Erlang directly
+
+              on the metal of some purpose-built hardware.
+
+              (fragment): Or you can just Linux on a Raspberry Pi and use whatever
+
+              language you want.
             </textarea>
           </section>
 
@@ -1126,42 +1276,91 @@
               bulletproof embedded software
 
               in Elixir
+
+              Notes:
+
+              But I don't recommend you do that, because that's what Nerves is for.
             </textarea>
           </section>
 
-          <section data-markdown data-background-image="img/elixir_logo_on_pi.jpg">
+          <section data-background-image="img/elixir_logo_on_pi.jpg">
+            <aside class="notes" data-markdown>
+              We basically just put Elixir on a Raspberry Pi.
+
+              So... there you go!
+            </aside>
           </section>
 
-          <section data-markdown
-            data-background-image="img/circuit.svg"
-            data-background-color="#DFDBE5"
-            data-background-size="200px"
-            data-background-repeat="repeat"
-            data-separator-notes="^Notes:">
-            <textarea data-template>
-              # Nerves Platform
-              *BEAM* as your "Operating System"
-              * Minimal, customized Buildroot system</li>
-              * `init` process replaced by `erlinit`
-              * OTP supervision for external processes
-              * Limited things that can go wrong
-            </textarea>
+          <section data-background-image="img/nerves_vs_linux.png" data-background-size="contain">
+            <aside class="notes" data-markdown>
+              Nerves uses Buildroot to cross-compile a minimal Linux kernel and userland for you.
+
+              It's much smaller than a normal Linux installation because
+
+              it doesn't include all the drivers and tools you don't need to run your app.
+
+              In fact, we replace the init process with a small program called erlinit,
+
+              whose job is just to start the BEAM and run your app.
+            </aside>
           </section>
 
-          <section data-markdown
-            data-background-image="img/circuit.svg"
-            data-background-color="#DFDBE5"
-            data-background-size="200px"
-            data-background-repeat="repeat"
-            data-separator-notes="^Notes:">
-            <textarea data-template>
-              # Nerves Platform
-              *Minimal* firmware
-              * small size
-              * small updates
-              * fast boot time
-              * limited attack surface
-            </textarea>
+          <section data-background-image="img/nerves_system.png" data-background-size="contain">
+            <aside class="notes" data-markdown>
+              The Nerves team packages these up into what we call "systems" that
+
+              are specific to a given hardware target, like a Raspberry Pi Zero.
+
+              The systems we provide are really minimal,
+
+              but you can make your own if you need to.
+
+              We have pretty good documentation about how to do that.
+            </aside>
+          </section>
+
+          <section data-background-image="img/nerves_firmware.png" data-background-size="contain">
+            <aside class="notes" data-markdown>
+              When you build a Nerves "firmware," it adds your application code to
+
+              the pre-compiled system.
+
+              Your application is responsible for running any OS processes you need,
+
+              for example, using an Elixir Port.
+
+              This firmware runs from a read-only file-system on the device.
+
+              This helps prevent file system corruption when power is suddenly
+
+              removed from an embedded device while it's writing data, and also
+
+              give some peace of mind that the firmware you put on the device is
+
+              going to stay in a consistent state.
+
+              A Nerves firmware, including your application,
+
+              can be as small as 25 MB and boots in about 5 seconds.
+            </aside>
+          </section>
+
+          <section data-background-image="img/nerves_appdata.png" data-background-size="contain">
+            <aside class="notes" data-markdown>
+              Of course, we also have a writable partition that you can use to
+
+              persist your data in a place that won't corrupt your boot partition.
+            </aside>
+          </section>
+
+          <section data-background-image="img/nerves_b_firmware.png" data-background-size="contain">
+            <aside class="notes" data-markdown>
+              We also have a secondary "firmware slot" that you can use for
+
+              pushing updates to a running device without having to
+
+              re-program its SD card.
+            </aside>
           </section>
 
           <section data-markdown
@@ -1177,6 +1376,18 @@
               * Start management tooling
               * Format storage partitions
               * ... Then start your app
+
+              Notes:
+
+              We also have Bootloader, which can be used to ensure the device
+
+              comes up to a known-working state before trying to start your
+
+              application.
+
+              This allows for some limited remote diagnostics or firmware update,
+
+              even if your application fails to start for some reason.
             </textarea>
           </section>
 
@@ -1194,6 +1405,14 @@
               ![rpi3](img/rpi3.png) <!-- .element: class="plain" -->
               ![bbb](img/bbb.png) <!-- .element: class="plain" -->
               ![ev3](img/ev3.png) <!-- .element: class="plain" -->
+
+              Notes:
+
+              Nerves currently supports a bunch of popular and readily-available
+
+              target hardware, like the Raspberry Pi and Beaglebone families,
+
+              and the Lego EV3, which is really neat.
             </textarea>
           </section>
 
@@ -1206,7 +1425,8 @@
             <textarea data-template>
               # Nerves 💜 Elixir
 
-              ``` bash
+              ```bash
+              $ mix nerves.new    # Generate a Project
               $ mix deps.get      # Download Pre-Compiled Infrastructure
               $ mix firmware      # Cross-Compile your Project
               $ mix firmware.burn # Burn your SD card
@@ -1214,6 +1434,24 @@
               $ mix firmware.push # Update your Firmware over the Network
               ```
             </textarea>
+          </section>
+
+          <section data-background-image="img/all_in_one_nerves.png" data-background-size="contain">
+            <aside class="notes" data-markdown>
+              Nerves gives you the tools you need to build, for example,
+
+              an all-in-one touch-screen kiosk that connects to hardware devices
+
+              and back to a central server, mostly using technologies you already know.
+            </aside>
+          </section>
+
+          <section data-background-image="img/all_in_one_dev.png" data-background-size="contain">
+            <aside class="notes" data-markdown>
+              ... and you can use mocks of the hardware in dev and test environments
+
+              so that you don't need to have real hardware available.
+            </aside>
           </section>
 
         </section>
@@ -1249,6 +1487,19 @@
             </textarea>
           </section>
 
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              ![Programming People - JavaScript](img/programming_people_js.png) <!-- .element: class="plain" style="height: 12em" -->
+              <br/>
+              [Programming People - JavaScript](http://leftoversalad.com/c/015_programmingpeople/) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
         </section>
 
         <!-- ===== Elm ===== -->
@@ -1275,9 +1526,9 @@
             data-separator-notes="^Notes:">
             <textarea data-template>
               # Elm 💜 Elixir
-              * Pure functions
-              * No side-effects, just commands
-              * Pattern-matching
+              * Pure Functions
+              * Managed Side-Effects with Commands
+              * Pattern-Matching
             </textarea>
           </section>
 
@@ -1289,7 +1540,19 @@
             data-separator-notes="^Notes:">
             <textarea data-template>
               # Elm Architecture 💜 OTP
-              ![Elm logo](img/elm_architecture.png) <!-- .element: class="plain" style="height: 6em" -->
+              ![Elm Architecture](img/elm_architecture.png) <!-- .element: class="plain" style="height: 12em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              # Elm Architecture 💜 OTP
+              ![GenServer Architecture](img/genserver_architecture.png) <!-- .element: class="plain" style="height: 12em" -->
             </textarea>
           </section>
 
@@ -1315,7 +1578,16 @@
             <textarea data-template>
               # Elm 💜 You
               * Coaching compiler
-              * Side-effect-free packages
+
+              ```elm
+              type Action = Increment | Decrement | Reset
+
+
+              update action model =
+                case action of
+                  Increment -> model + 1
+                  Decrement -> model - 1
+              ```
             </textarea>
           </section>
 
@@ -1327,7 +1599,50 @@
             data-separator-notes="^Notes:">
             <textarea data-template>
               # Elm 💜 You
-              ```plain
+              * Coaching compiler
+
+              ```bash
+              This `case` does not have branches for all possibilities.
+
+              29|   case action of
+              30|     Increment -> model + 1
+              31|     Decrement -> model - 1
+              You need to account for the following values:
+
+                  Main.Reset
+
+              Add a branch to cover this pattern!
+
+              If you are seeing this error for the first time, check out these hints:
+              <https://github.com/elm-lang/elm-compiler/blob/0.16.0/hints/missing-patterns.md>
+              The recommendations about wildcard patterns and `Debug.crash` are important!
+              ```
+              <!-- .element: style="font-size: 0.4em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              # Elm 💜 You
+              * Side-effect-free packages
+              * Semver-enforced packages
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              # Elm 💜 You
+              ```bash
               $ elm-package install elm-lang/html
               Some new packages are needed. Here is the upgrade plan.
 
@@ -1345,9 +1660,59 @@
 
               Packages configured successfully!
               ```
+              <!-- .element: style="font-size: 0.4em" -->
             </textarea>
           </section>
 
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              ![Jessica Kerr - Adventures in Elm](img/adventures_in_elm.png) <!-- .element: class="plain" style="height: 12em" -->
+              <br/>
+              [Jessica Kerr - Adventures in Elm](https://youtu.be/cgXhMc8M4X4) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              ![Tomasz Kowal - Elixir and Elm: The Perfect Couple](img/elixir_and_elm_the_perfect_couple.png) <!-- .element: class="plain" style="height: 12em" -->
+              <br/>
+              [Tomasz Kowal - Elixir and Elm: The Perfect Couple](https://youtu.be/mIwD27qqr5U) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/circuit.svg"
+            data-background-color="#DFDBE5"
+            data-background-size="200px"
+            data-background-repeat="repeat"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              ![Richard Feldman - Make the Back-End Team Jealous: Elm in Production](img/make_the_back-end_team_jealous.png) <!-- .element: class="plain" style="height: 12em" -->
+              <br/>
+              [Richard Feldman - Make the Back-End Team Jealous: Elm in Production](https://youtu.be/FV0DXNB94NE) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- ==== Wrap-up ===== -->
+
+        <section data-background-image="img/summary.png" data-background-size="contain">
+          <aside class="notes" data-markdown>
+            * Think about what full-stack means for you
+            * Optimize for small teams and transferrable skills
+            * Make your systems (f/F)unctional
+          </aside>
         </section>
 
         <section data-markdown class="nav"
@@ -1375,6 +1740,7 @@
       Reveal.initialize({
         history: true,
         controls: false,
+        progress: false,
         transition: "fade",
         width: 1920,
         height: 1080,
