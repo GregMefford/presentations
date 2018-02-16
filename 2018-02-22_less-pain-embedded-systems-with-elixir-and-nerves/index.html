@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Less-Pain Embedded Systems with Elixir and Nerves</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
+    <link rel="stylesheet" href="css/customizations.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown class="title"
+          data-background-image="img/circuit.svg"
+          data-background-color="#DFDBE5"
+          data-background-size="200px"
+          data-background-repeat="repeat"
+          data-separator-notes="^Notes:">
+          <textarea data-template>
+            ## Less-Pain
+            ### Embedded Systems
+            ### with Elixir and Nerves
+
+            ----
+
+            LoneStar ElixirConf - 2018-02-22
+
+            Greg Mefford (@ferggo)
+
+            ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 4em" -->
+            ![Le Tote](img/lt_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+
+          </textarea>
+        </section>
+
+        <section data-markdown
+          data-background-image="img/circuit.svg"
+          data-background-color="#DFDBE5"
+          data-background-size="200px"
+          data-background-repeat="repeat"
+          data-separator-notes="^Notes:">
+          <textarea data-template>
+            # Code of Conduct 💜
+
+            http://lonestarelixir.com/2018/code-of-conduct
+          </textarea>
+        </section>
+
+        <section data-markdown class="schedule"
+          data-background-image="img/circuit.svg"
+          data-background-color="#DFDBE5"
+          data-background-size="200px"
+          data-background-repeat="repeat"
+          data-separator-notes="^Notes:">
+          <textarea data-template>
+            # Tentative schedule 🕘
+
+            * 7:30 AM - 8:30 AM (1:00)
+              * Registration/Breakfast
+            * 8:30 AM - 10:00 AM (1:30)
+              * Welcome / Overview
+              * Quick Win
+              * Nerves In Depth
+            *  10:00 AM - 10:30 AM (0:30)
+              * Break (and help resolve issues)
+
+          </textarea>
+        </section>
+
+        <section data-markdown class="schedule"
+          data-background-image="img/circuit.svg"
+          data-background-color="#DFDBE5"
+          data-background-size="200px"
+          data-background-repeat="repeat"
+          data-separator-notes="^Notes:">
+          <textarea data-template>
+            # Tentative schedule 🕘
+
+            *  10:30 AM - 12:00 PM (1:30)
+              * Scanning Barcodes
+              * Custom Nerves Systems
+              * Elixir Crash Course
+            *  12:00 PM - 1:30 PM (1:30)
+              * Lunch (and Play with the `eye` Firmware Code)
+
+          </textarea>
+        </section>
+
+        <section data-markdown class="schedule"
+          data-background-image="img/circuit.svg"
+          data-background-color="#DFDBE5"
+          data-background-size="200px"
+          data-background-repeat="repeat"
+          data-separator-notes="^Notes:">
+          <textarea data-template>
+            # Tentative schedule 🕘
+
+            *  1:30 PM - 3:00 PM (1:30)
+              * Logging / Monitoring
+              * Robustness
+              * Refactor and Re-Deploy
+            *  3:00 PM - 3:30 PM (0:30)
+              * Break
+            *  3:30 PM - 5:00 PM (1:30)
+              * Build / Lab time
+
+          </textarea>
+        </section>
+
+        <section data-markdown class="nav"
+          data-background-image="img/circuit.svg"
+          data-background-color="#B595E5"
+          data-background-size="200px"
+          data-background-repeat="repeat"
+          data-separator-notes="^Notes:">
+          <textarea data-template>
+            # Thanks! 💜
+            ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 6em" -->
+
+            Greg Mefford (@ferggo)
+          </textarea>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        controls: false,
+        progress: false,
+        transition: "fade",
+        width: 1024,
+        height: 768,
+        center: false,
+        pdfMaxPagesPerSlide: 1,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+</html>
