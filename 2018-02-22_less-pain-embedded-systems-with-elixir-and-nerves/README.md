@@ -22,6 +22,7 @@ asking a question in the Nerves section of the ElixirForum, or by asking in the
 highly recommend that you join the Nerves Slack channel! 💜
 
 ElixirForum: https://elixirforum.com/c/dedicated-sections/nerves
+
 Elixir-Lang Slack: https://elixir-slackin.herokuapp.com/
 
 ### Help me understand my audience
