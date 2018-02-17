@@ -54,6 +54,7 @@ really_ like for you to **reply to that email** with the following:
   * Raspberry Pi Zero W
   * Raspberry Pi Foundation Zero case with 3 covers
   * Raspberry Pi Camera V2
+  * Adafruit Raspberry Pi Camera Lens Adjustment Tool
   * 16 GB Class 10 MicroSD Card
   * MicroSD Card reader
 * Cables
