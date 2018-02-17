@@ -81,7 +81,7 @@
 .reveal {
   font-family: "quicksand";
   font-weight: bold;
-  font-size: 32px;
+  font-size: 24px;
 }
 
 .reveal h1,
@@ -107,7 +107,7 @@
 .reveal pre code {
   max-height: 75%;
   line-height: 1.5em;
-  font-size: 2em;
+  font-size: 1.75em;
 }
 
 .reveal li, .reveal p {
@@ -142,15 +142,6 @@
   margin: 0;
 }
 
-.reveal section.schedule {
-  font-size: 2em;
-}
-
-.reveal section.schedule h1 {
+.reveal section li li {
   font-size: 1em;
 }
-
-.reveal section.schedule li {
-  font-size: 0.75em;
-}
-
