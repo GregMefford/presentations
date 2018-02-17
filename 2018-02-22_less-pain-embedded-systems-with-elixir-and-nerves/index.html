@@ -26,112 +26,170 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section data-markdown class="title"
-          data-background-image="img/circuit.svg"
-          data-background-color="#DFDBE5"
-          data-background-size="200px"
-          data-background-repeat="repeat"
-          data-separator-notes="^Notes:">
-          <textarea data-template>
-            ## Less-Pain
-            ### Embedded Systems
-            ### with Elixir and Nerves
 
-            ----
+        <!-- Welcome -->
 
-            LoneStar ElixirConf - 2018-02-22
+        <section>
 
-            Greg Mefford (@ferggo)
+          <section data-markdown class="title">
+            <textarea data-template>
+              ## Less-Pain
+              ### Embedded Systems
+              ### with Elixir and Nerves
 
-            ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 4em" -->
-            ![Le Tote](img/lt_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+              ----
 
-          </textarea>
+              LoneStar ElixirConf - 2018-02-22
+
+              Greg Mefford (@ferggo)
+
+              ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 4em" -->
+              ![Le Tote](img/lt_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Code of Conduct 💜
+
+              http://lonestarelixir.com/2018/code-of-conduct
+            </textarea>
+          </section>
+
+          <section data-markdown class="schedule">
+            <textarea data-template>
+              # Tentative schedule 🕘
+
+              * 7:30 AM - 8:30 AM (1:00)
+                * Registration/Breakfast
+              * 8:30 AM - 10:00 AM (1:30)
+                * Welcome / Overview
+                * Quick Win
+                * Nerves In Depth
+              *  10:00 AM - 10:30 AM (0:30)
+                * Break (and help resolve issues)
+            </textarea>
+          </section>
+
+          <section data-markdown class="schedule">
+            <textarea data-template>
+              # Tentative schedule 🕘
+
+              *  10:30 AM - 12:00 PM (1:30)
+                * Scanning Barcodes
+                * Custom Nerves Systems
+                * Elixir Crash Course
+              *  12:00 PM - 1:30 PM (1:30)
+                * Lunch (and Play with the `eye` Firmware Code)
+            </textarea>
+          </section>
+
+          <section data-markdown class="schedule">
+            <textarea data-template>
+              # Tentative schedule 🕘
+
+              *  1:30 PM - 3:00 PM (1:30)
+                * Logging / Monitoring
+                * Robustness
+                * Refactor and Re-Deploy
+              *  3:00 PM - 3:30 PM (0:30)
+                * Break
+              *  3:30 PM - 5:00 PM (1:30)
+                * Build / Lab time
+            </textarea>
+          </section>
+
         </section>
 
-        <section data-markdown
-          data-background-image="img/circuit.svg"
-          data-background-color="#DFDBE5"
-          data-background-size="200px"
-          data-background-repeat="repeat"
-          data-separator-notes="^Notes:">
-          <textarea data-template>
-            # Code of Conduct 💜
+        <!-- Hardware Overview -->
 
-            http://lonestarelixir.com/2018/code-of-conduct
-          </textarea>
+        <section>
+
+          <section data-background-image="img/hardware_overview.jpg" data-background-size="contain">
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # For Today
+
+              * Raspberry Pi Zero W + case
+              * Pi camera v2
+              * Zero-size camera ribbon cable
+              * Lens adjustment tool
+              * 16 GB class 10 MicroSD card
+              * MicroSD card reader
+              * Male USB to MicroUSB cable
+              * QR codes and Stickers!
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # For Later
+
+              * MicroUSB OTG cable
+              * HDMI to Mini HDMI cable
+              * Standard-size camera ribbon cable
+              * 5V 2.5A MicroUSB AC power adapter
+              * 40-pin header
+              * Heatsink
+            </textarea>
+          </section>
+
+          <section data-background-image="img/hardware_assembly_01.jpg" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/hardware_assembly_02.jpg" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/hardware_assembly_03.jpg" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/hardware_assembly_04.jpg" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/hardware_assembly_05.jpg" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/hardware_assembly_06.jpg" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/hardware_assembly_07.jpg" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/hardware_assembly_08.jpg" data-background-size="contain">
+          </section>
+
         </section>
 
-        <section data-markdown class="schedule"
-          data-background-image="img/circuit.svg"
-          data-background-color="#DFDBE5"
-          data-background-size="200px"
-          data-background-repeat="repeat"
-          data-separator-notes="^Notes:">
-          <textarea data-template>
-            # Tentative schedule 🕘
+        <!-- Nerves Overview -->
 
-            * 7:30 AM - 8:30 AM (1:00)
-              * Registration/Breakfast
-            * 8:30 AM - 10:00 AM (1:30)
-              * Welcome / Overview
-              * Quick Win
-              * Nerves In Depth
-            *  10:00 AM - 10:30 AM (0:30)
-              * Break (and help resolve issues)
+        <section>
 
-          </textarea>
+          <section data-markdown>
+            <textarea data-template>
+              # Nerves Overview
+            </textarea>
+          </section>
+
         </section>
 
-        <section data-markdown class="schedule"
-          data-background-image="img/circuit.svg"
-          data-background-color="#DFDBE5"
-          data-background-size="200px"
-          data-background-repeat="repeat"
-          data-separator-notes="^Notes:">
-          <textarea data-template>
-            # Tentative schedule 🕘
+        <!-- Quick Win -->
 
-            *  10:30 AM - 12:00 PM (1:30)
-              * Scanning Barcodes
-              * Custom Nerves Systems
-              * Elixir Crash Course
-            *  12:00 PM - 1:30 PM (1:30)
-              * Lunch (and Play with the `eye` Firmware Code)
+        <section>
 
-          </textarea>
+          <section data-background-image="img/quick_win.jpg" data-background-size="contain">
+          </section>
+
         </section>
 
-        <section data-markdown class="schedule"
-          data-background-image="img/circuit.svg"
-          data-background-color="#DFDBE5"
-          data-background-size="200px"
-          data-background-repeat="repeat"
-          data-separator-notes="^Notes:">
+        <!-- Wrap Up -->
+
+        <section data-markdown class="nav">
           <textarea data-template>
-            # Tentative schedule 🕘
-
-            *  1:30 PM - 3:00 PM (1:30)
-              * Logging / Monitoring
-              * Robustness
-              * Refactor and Re-Deploy
-            *  3:00 PM - 3:30 PM (0:30)
-              * Break
-            *  3:30 PM - 5:00 PM (1:30)
-              * Build / Lab time
-
-          </textarea>
-        </section>
-
-        <section data-markdown class="nav"
-          data-background-image="img/circuit.svg"
-          data-background-color="#B595E5"
-          data-background-size="200px"
-          data-background-repeat="repeat"
-          data-separator-notes="^Notes:">
-          <textarea data-template>
-            # Thanks! 💜
+            ## Have Fun with Nerves! 💜
             ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 6em" -->
+            ![GregMefford](img/nerves_logo.png) <!-- .element: class="plain" style="height: 6em" -->
 
             Greg Mefford (@ferggo)
           </textarea>
@@ -163,6 +221,20 @@
           { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
         ]
       });
+
+      for (var slide of document.getElementsByTagName('section')){
+        if (slide.getAttribute('data-markdown')) slide.setAttribute('data-separator-notes', '^Notes:');
+
+        if (!(slide.getAttribute('data-background') ||
+              slide.getAttribute('data-background-image') ||
+              slide.getAttribute('data-background-video') ||
+              slide.getAttribute('data-background-iframe'))){
+          slide.setAttribute('data-background-image', 'img/circuit.svg');
+          slide.setAttribute('data-background-color', '#DFDBE5');
+          slide.setAttribute('data-background-size', '200px');
+          slide.setAttribute('data-background-repeat', 'repeat');
+        }
+      }
     </script>
   </body>
 </html>
