@@ -46,6 +46,10 @@ really_ like for you to **reply to that email** with the following:
 
 * A computer (see the sections below about setting up the required software).
 * Whatever dongles you need to allow you to plug in a standard-size USB cable.
+
+  ![USB-C](img/usb_c.png)
+  ![USB Dongle](img/usb_c_dongle.png)
+
 * A sense of fun and adventure.
 
 ### What will be provided
