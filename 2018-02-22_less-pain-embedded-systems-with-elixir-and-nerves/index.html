@@ -136,6 +136,16 @@
             </textarea>
           </section>
 
+          <section data-markdown>
+            <textarea data-template>
+              # Electronics Safety
+
+              * Touch some grounded metal (like your MacBook)
+              * It's technically not fine, but it'll probably be fine
+              * Be gentle with the ribbon cables/connectors
+            </textarea>
+          </section>
+
           <section data-background-image="img/hardware_assembly_01.jpg" data-background-size="contain">
           </section>
 
@@ -636,14 +646,6 @@
               ![Live APIs with GraphQL Subscriptions - Bruce Williams and Ben Wilson](img/graphql_subscriptions.png) <!-- .element: class="plain" style="height: 10em" -->
               <br/>
               [Live APIs with GraphQL Subscriptions - Bruce Williams and Ben Wilson](https://youtu.be/PEckzwggd78) <!-- .element: class="attribution" -->
-
-              Notes:
-
-              I'm also really interested the GraphQL Subscriptions
-
-              feature that Bruce and Ben demoed at ElixirConf this year,
-
-              but I haven't had a chance to try it yet.
             </textarea>
           </section>
 
@@ -656,10 +658,402 @@
           <section data-background-image="img/quick_win.jpg" data-background-size="contain">
           </section>
 
+          <section data-background-image="img/nerves_firmware.png" data-background-size="contain">
+          </section>
+
           <section data-background-image="img/gadget_power.png" data-background-size="contain">
           </section>
 
           <section data-background-image="img/gadget_composite.png" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/eye_barcode.png" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/eye_tunnel.png" data-background-size="contain">
+          </section>
+
+        </section>
+
+        <!-- Break Time! -->
+
+        <section data-markdown>
+          <textarea data-template>
+            # Break until 10:30 AM
+
+            * How is the pace?
+            * Any questions?
+            * Play with your shiny new hardware
+            * Mingle in the hall
+            * Get a snack, maybe?
+          </textarea>
+        </section>
+
+        <!-- Omni-Eye - Step 1 - Streaming Video -->
+
+        <section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Eye
+
+              ![Eye](img/eye.jpg) <!-- .element: class="plain" style="height: 14em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Omni Eye
+
+              ![Eye](img/omni_eye.jpg) <!-- .element: class="plain" style="height: 14em" -->
+              <br/>
+              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Let's Stream some Video
+              ## with *Picam*
+
+              ![Picam](img/picam.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://github.com/electricshaman/picam](https://github.com/electricshaman/picam) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Shortcut
+
+              Check out the `step1` branch from the `omni_eye` repo.
+
+              ``` bash
+              $ git clone https://github.com/GregMefford/omni_eye.git
+              $ git checkout step1
+              ```
+
+              The following slides show how we arrived there step-by-step.
+
+              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Getting Started
+
+              ``` bash
+              $ mkdir omni_eye
+              $ cd omni_eye
+              $ mix new eye --sup
+              $ mix nerves.new eye_fw
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Getting Started
+
+              ``` bash
+              omni_eye
+              ├── eye
+              │   ├── README.md
+              │   ├── config
+              │   ├── lib
+              │   ├── mix.exs
+              │   └── test
+              └── eye_fw
+                  ├── README.md
+                  ├── _build
+                  ├── config
+                  ├── deps
+                  ├── lib
+                  ├── mix.exs
+                  ├── mix.lock.host
+                  ├── rel
+                  └── test
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Poncho Project
+
+              ![Poncho Projects](img/poncho_projects.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [http://embedded-elixir.com/post/2017-05-19-poncho-projects/](http://embedded-elixir.com/post/2017-05-19-poncho-projects/) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/mix.exs
+              defp deps do
+                [
+                  {:picam, "~> 0.2.0"},
+                  {:cowboy, "~> 1.0.0"},
+                  {:plug, "~> 1.0"}
+                ]
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye_fw/mix.exs
+              defp deps do
+                [
+                  {:nerves, "~> 0.10.0", runtime: false},
+                  {:distillery, "~> 1.5"},
+                  {:eye, path: "../eye"}
+                ] ++ deps(@target)
+              end
+
+              defp deps("host"), do: []
+              defp deps(target) do
+                [
+                  {:shoehorn, "~> 0.2"},
+                  {:nerves_runtime, "~> 0.5"},
+                  {
+                    :nerves_init_gadget,
+                    github: "nerves-project/nerves_init_gadget",
+                    ref: "dhcp"
+                  },
+                ] ++ system(target)
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ![nerves_init_gadget](img/nerves_init_gadget.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://github.com/nerves-project/nerves_init_gadget/tree/dhcp](https://github.com/nerves-project/nerves_init_gadget/tree/dhcp) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ![nerves_init_gadget_deps](img/nerves_init_gadget_deps.png) <!-- .element: class="plain" style="height: 13em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye_fw/mix.exs
+              defp system("rpi0") do
+                [{:nerves_system_rpi0, "~> 0.21.0", runtime: false}]
+              end
+              defp system(target) do
+                Mix.raise "Unsupported MIX_TARGET: #{target}"
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/application.ex
+              defmodule Eye.Application do
+                use Application
+
+                def child_spec_no_args(module) do
+                  %{id: module, start: {module, :start_link, []}}
+                end
+
+                def start(_type, _args) do
+                  children = [
+                    child_spec_no_args(Picam.Camera),
+                    Plug.Adapters.Cowboy.child_spec(:http, Eye.Router, [], [port: 80])
+                  ]
+
+                  opts = [strategy: :one_for_one, name: Eye.Supervisor]
+                  Supervisor.start_link(children, opts)
+                end
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/router.ex
+              defmodule Eye.Router do
+                use Plug.Router
+
+                plug :match
+                plug :dispatch
+                # ...
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/router.ex
+              defmodule Eye.Router do
+                # ...
+                get "/" do
+                  markup = """
+                  <!DOCTYPE html>
+                  <html>
+                  <head>
+                    <meta charset="UTF-8" />
+                    <title>Eye - Video Stream</title>
+                  </head>
+                  <body> <img src="video.mjpg" /> </body>
+                  </html>
+                  """
+                  conn
+                  |> put_resp_header("Content-Type", "text/html")
+                  |> send_resp(200, markup)
+                end
+                #...
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/router.ex
+              defmodule Eye.Router do
+                #...
+                forward "/video.mjpg", to: Eye.JPEGStreamer
+
+                match _ do
+                  send_resp(conn, 404, "Oops. Try /")
+                end
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/jpeg_streamer.ex
+              defmodule Eye.JPEGStreamer do
+                import Plug.Conn
+                @behaviour Plug
+                @boundary "w58EW1cEpjzydSCq"
+
+                def init(opts), do: opts
+
+                def call(conn, _opts) do
+                  Eye.Camera.configure()
+                  conn
+                  |> put_resp_header("Age", "0")
+                  |> put_resp_header("Cache-Control", "no-cache, private")
+                  |> put_resp_header("Pragma", "no-cache")
+                  |> put_resp_header("Content-Type",
+                    "multipart/x-mixed-replace; boundary=#{@boundary}")
+                  |> send_chunked(200)
+                  |> send_pictures
+                end
+                # ...
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/jpeg_streamer.ex
+              defmodule Eye.JPEGStreamer do
+                # ...
+                defp send_pictures(conn) do
+                  conn
+                  |> send_picture()
+                  |> send_pictures()
+                end
+
+                defp send_picture(conn) do
+                  jpg = Eye.Camera.next_frame
+                  size = byte_size(jpg)
+                  header = "------#{@boundary}\r\nContent-Type: image/jpeg\r\nContent-length: #{size}\r\n\r\n"
+                  footer = "\r\n"
+                  with {:ok, conn} <- chunk(conn, header),
+                       {:ok, conn} <- chunk(conn, jpg),
+                       {:ok, conn} <- chunk(conn, footer),
+                    do: conn
+                end
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/camera.ex
+              defmodule Eye.Camera do
+                require Logger
+
+                def configure do
+                  Logger.info("Configuring camera")
+                  Picam.set_quality(10)
+                  Picam.set_size(1280, 720)
+                  Picam.set_fps(30)
+                end
+
+                def next_frame do
+                  Picam.next_frame()
+                end
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye_fw/config/config.exs
+              config :shoehorn,
+                init: [:nerves_runtime, :nerves_init_gadget],
+                app: Mix.Project.config()[:app]
+
+              # VVV Make sure you actually have an SSH key generated VVV
+              config :nerves_firmware_ssh,
+                authorized_keys: [
+                  File.read!(Path.join(System.user_home!, ".ssh/id_rsa.pub"))
+                ]
+              # ^^^ Before you burn your firmware to your SD card ^^^
+
+              config :nerves_init_gadget,
+              address_method: :static
+
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              $ export MIX_TARGET=rpi0
+              $ mix firmware
+              # Extract your SD card from the Zero
+              # Connect it to your laptop
+              $ mix firmware.burn
+              # Put it back into your Zero
+              ```
+              ![zero retention tab](img/hardware_assembly_07.jpg) <!-- .element: class="plain" style="height: 10em" -->
+              ![tilt up the zero](img/hardware_assembly_06.jpg) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
           </section>
 
         </section>
