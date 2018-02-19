@@ -1044,6 +1044,7 @@
           <section data-markdown>
             <textarea data-template>
               ``` bash
+              $ cd eye_fw
               $ export MIX_TARGET=rpi0
               $ mix firmware
               # Extract your SD card from the Zero
@@ -1053,6 +1054,104 @@
               ```
               ![zero retention tab](img/hardware_assembly_07.jpg) <!-- .element: class="plain" style="height: 10em" -->
               ![tilt up the zero](img/hardware_assembly_06.jpg) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- Custom System with zbar -->
+
+        <section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Scanning Barcodes with *`zbar`*
+              ![zbar-elixir](img/zbar-elixir.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://github.com/GregMefford/zbar-elixir](https://github.com/GregMefford/zbar-elixir) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Custom Nerves Systems
+              ![custom system docs](img/custom_system_hexdocs.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://hexdocs.pm/nerves/systems.html#customizing-your-own-nerves-system](https://hexdocs.pm/nerves/systems.html#customizing-your-own-nerves-system) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              # Leave the eye_fw directory
+              $ cd ..
+              $ git clone https://github.com/nerves-project/nerves_system_rpi0.git
+              $ mv nerves_system_rpi0{,_zbar}
+              $ cd nerves_system_rpi0_zbar
+              $ mix nerves.system.shell
+              ```
+              ![system shell](img/sys_shell_01.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/sys_shell_02.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_03.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_04.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_05.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_06.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_07.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_08.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_09.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_10.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+               Nerves /nerves/build > exit
+              $ git diff
+              ```
+              ![system shell](img/sys_shell_11.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              $ cd ../eye_fw
+              $ export MIX_TARGET=rpi0_zbar
+              ```
+
+              ``` elixir
+              # eye_fw/mix.exs
+              defp system("rpi0_zbar") do
+                [
+                  {
+                    :nerves_system_rpi0_zbar,
+                    path: "../nerves_system_rpi0_zbar",
+                    runtime: false
+                  }
+                ]
+              end
+              defp system(target) do
+                Mix.raise "Unsupported MIX_TARGET: #{target}"
+              end
+              ```
+
+              ``` bash
+              $ mix firmware
+              ```
+            </textarea>
+          </section>
+
+          <section data-background-image="img/sys_shell_12.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              $ mix firmware.push 192.168.24.1
+              ```
+              ![mix firmware push](img/firmware_push.png) <!-- .element: class="plain" -->
             </textarea>
           </section>
 
