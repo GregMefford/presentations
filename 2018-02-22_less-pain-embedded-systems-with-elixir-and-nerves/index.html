@@ -1161,6 +1161,278 @@
 
         </section>
 
+        <!-- Step 3 - Scanning barcodes with zbar and Plug -->
+
+        <section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Let's Actually
+              # Scan some Barcodes!
+              ![watch barcodes](img/step3_watch_barcodes.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/mix.exs
+              defmodule Eye.MixProject do
+                # ...
+
+                defp deps do
+                  [
+                    {:picam, "~> 0.2.0"},
+                    {:zbar, "~> 0.1.0"},
+                    {:cowboy, "~> 1.0.0"},
+                    {:plug, "~> 1.0"},
+                    {:poison, "~> 3.1.0"}
+                  ]
+                end
+
+                # ...
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/config/config.exs
+              config :eye, port: 4000
+              config :picam, camera: Picam.FakeCamera
+
+              config :logger, level: :debug, utc_log: true
+              config :logger, :console,
+                level: :debug,
+                format: "$dateT$time [$level] $message\n"
+              ```
+
+              ``` elixir
+              # eye_fw/config/config.exs
+              config :eye, port: 80
+              config :picam, camera: Picam.Camera
+
+              config :logger, level: :info, utc_log: true
+              config :logger, :console,
+                level: :info,
+                format: "$dateT$time [$level] $message\n"
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/application.ex
+              defmodule Eye.Application do
+                # ...
+                def start(_type, _args) do
+                  port = Application.get_env(:eye, :port)
+                  picam_camera = Application.get_env(:picam, :camera)
+
+                  children = [
+                    child_spec_no_args(picam_camera),
+                    Eye.BarcodeScanner,
+                    Plug.Adapters.Cowboy.child_spec(:http, Eye.Router, [], [port: port])
+                  ]
+
+                  opts = [strategy: :rest_for_one, name: Eye.Supervisor]
+                  Supervisor.start_link(children, opts)
+                end
+                # ...
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/barcode_scanner.ex
+              defmodule Eye.BarcodeScanner do
+                use GenServer
+                alias Eye.Camera
+
+                # BarcodeScanner API
+
+                def next_scan(timeout \\ 10_000) do
+                  GenServer.call(__MODULE__, :next_scan, timeout)
+                end
+
+                # ...
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/barcode_scanner.ex
+              defmodule Eye.BarcodeScanner do
+                # ...
+
+                # GenServer API
+
+                def start_link(opts \\ []) do
+                  GenServer.start_link(__MODULE__, opts, name: __MODULE__)
+                end
+
+                def init(_opts) do
+                  send(self(), :scan_next_frame)
+                  {:ok, []}
+                end
+
+                def handle_call(:next_scan, from, state) do
+                  {:noreply, [from | state]}
+                end
+
+                # ...
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/barcode_scanner.ex
+              defmodule Eye.BarcodeScanner do
+                # ...
+
+                def handle_info(:scan_next_frame, state) do
+                  {:ok, symbols} =
+                    Camera.next_frame()
+                    |> Zbar.scan()
+
+                  dispatch(symbols, state)
+
+                  send(self(), :scan_next_frame)
+                  {:noreply, []}
+                end
+
+                # Helpers
+
+                defp dispatch(symbols, requests) do
+                  Enum.each(requests, & GenServer.reply(&1, symbols))
+                end
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/router.ex
+              defmodule Eye.Router do
+                # ...
+                forward "/video.mjpg", to: Eye.JPEGStreamer
+
+                get "/barcodes.json" do
+                  response =
+                    Eye.BarcodeScanner.next_scan()
+                    |> format_symbols()
+                    |> Poison.encode!()
+
+                  conn
+                  |> put_resp_header("Age", "0")
+                  |> put_resp_header("Cache-Control", "no-cache, private")
+                  |> put_resp_header("Pragma", "no-cache")
+                  |> put_resp_header("Content-Type", "text/json")
+                  |> send_resp(200, response)
+                end
+
+                # ...
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` elixir
+              # eye/lib/eye/router.ex
+              defmodule Eye.Router do
+                # ...
+                defp format_symbols(nil), do: []
+                defp format_symbols(symbols) do
+                  Enum.map(symbols, & format_symbol/1)
+                end
+
+                defp format_symbol(%Zbar.Symbol{} = symbol) do
+                  symbol
+                  |> Map.delete(:__meta__)
+                  |> Map.update!(:points, & format_points/1)
+                end
+
+                defp format_points(points) do
+                  Enum.map(points, & format_point/1)
+                end
+
+                defp format_point({x, y}), do: %{x: x, y: y}
+              end
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Test images
+              ![test image](img/1280_720.jpg) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
+              ``` bash
+              $ cd ../eye
+              $ mix deps.get
+              $ iex -S mix
+              ```
+              ![iex barcodes](img/step3_iex_scan_barcode.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Push a firmware update
+              ``` bash
+              $ cd ../eye_fw
+              $ mix deps.get
+              $ mix firmware
+              $ mix firmware.push 192.168.24.1
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Serial console
+              ``` bash
+              # On OSX:
+              $ picocom /dev/tty.usbmodem<TAB> -b 115200
+              # On Linux (probably):
+              $ picocom /dev/ttyACM0 -b 115200
+              ```
+              ![picocom](img/step3_picocom.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              $ watch curl -s http://192.168.24.1/barcodes.json
+              ```
+              ![watch barcodes](img/step3_watch_barcodes.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+        </section>
+
         <!-- Wrap Up -->
 
         <section data-markdown class="nav">
