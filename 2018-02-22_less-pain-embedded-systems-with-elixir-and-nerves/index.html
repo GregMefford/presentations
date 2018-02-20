@@ -105,8 +105,7 @@
 
         <section>
 
-          <section data-background-image="img/hardware_overview.jpg" data-background-size="contain">
-          </section>
+          <section data-background-image="img/hardware_overview.jpg" data-background-size="contain"> </section>
 
           <section data-markdown>
             <textarea data-template>
@@ -1840,15 +1839,14 @@
 
         </section>
 
-        <!-- Step 5 - Phoenix Channels and GraphQL Subscriptions -->
+        <!-- Step 5 - Phoenix -->
 
         <section>
 
           <section data-markdown>
             <textarea data-template>
-              # Phoenix Channels and
-              # GraphQL Subscriptions
-              ![Phoenix](img/phoenix_is_not_your_application.png) <!-- .element: class="plain" -->
+              # Phoenix
+              ![Phoenix](img/phoenix_is_not_your_application.jpg) <!-- .element: class="plain" -->
             </textarea>
           </section>
 
@@ -1948,16 +1946,77 @@
             </textarea>
           </section>
 
+          <section data-background-image="img/step5_move_things.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_rename_things_1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_rename_things_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_remove_plug_from_eye_1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_remove_plug_from_eye_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_router.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_root_plug.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_index_html.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_endpoint.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_deps.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_fw_deps.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_config.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_config_base.png" data-background-size="contain"> </section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              ![ui config base](img/step5_eye_ui_config_dev.png) <!-- .element: class="plain" -->
+              ![ui config base](img/step5_eye_ui_config_test.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step5_eye_ui_config_prod.png" data-background-size="contain"> </section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              ![fw config](img/step5_eye_fw_config_1.png) <!-- .element: class="plain" -->
+              ![fw config](img/step5_eye_fw_config_2.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step5_eye_fw_config_host.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_fw_config_target.png" data-background-size="contain"> </section>
+
           <section data-markdown>
             <textarea data-template>
-              ``` elixir
-              # eye/mix.exs
-              defmodule Eye.MixProject do
-                # ...
+              # Try it in `iex`
+              ``` bash
+              $ cd ../eye
+              $ mix deps.get
+              $ iex -S mix
+              ```
+              ![eye in iex](img/step5_eye_in_iex.png) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
 
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
+              ``` bash
+              $ cd ../eye_ui/assets
+              $ npm install
+              $ brunch build
+              $ cd ../
+              $ iex -S mix phx.server
+              ```
+              ![graphql mutation](img/step4_graphiql_mutation.png) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
 
-                # ...
-              end
+          <section data-markdown>
+            <textarea data-template>
+              # Try it on your Device
+              ``` bash
+              $ cd ../eye_fw
+              $ mix deps.get
+              $ mix firmware
+              $ mix firmware.push 192.168.24.1
+              # On OSX:
+              $ picocom /dev/tty.usbmodem<TAB> -b 115200
+              # On Linux (probably):
+              $ picocom /dev/ttyACM0 -b 115200
               ```
             </textarea>
           </section>
