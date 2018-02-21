@@ -2009,6 +2009,103 @@
             <textarea data-template>
               # Try it on your Device
               ``` bash
+              $ cd assets
+              $ brunch build --production
+              $ cd ../ # to the eye_ui directory
+              $ mix phx.digest
+              $ cd ../eye_fw
+              $ mix deps.get
+              $ mix firmware
+              $ mix firmware.push 192.168.24.1
+              # On OSX:
+              $ picocom /dev/tty.usbmodem<TAB> -b 115200
+              # On Linux (probably):
+              $ picocom /dev/ttyACM0 -b 115200
+              ```
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- Step 6 - Phoenix Channels and GraphQL Subscriptions -->
+
+        <section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Phoenix Channels and
+              # GraphQL Subscriptions
+              ![JavaScript](img/programming_people_js.png) <!-- .element: class="plain" style="height: 12em" -->
+              <br/>
+              [Programming People - JavaScript](http://leftoversalad.com/c/015_programmingpeople/) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Shortcut
+
+              Check out the `step6` branch
+
+              from the `omni_eye` repo.
+
+              ``` bash
+              $ git checkout step6
+              ```
+
+              The following slides show how
+
+              we arrived there step-by-step.
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step6_index_html.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ![css](img/step6_css_1.png) <!-- .element: class="plain" -->
+              ![css](img/step6_css_2.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step6_schema_1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_schema_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_schemas_barcode.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_resolvers_barcode.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_publisher.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_publishers_barcode.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_application.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_user_socket.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_package_json.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_js_1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_js_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_js_3.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_js_4.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_js_5.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_js_6.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
+              ``` bash
+              $ cd ../eye_ui/assets
+              $ npm install
+              $ brunch build
+              $ cd ../
+              $ iex -S mix phx.server
+              ```
+              ![graphql mutation](img/step4_graphiql_mutation.png) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it on your Device
+              ``` bash
+              $ cd assets
+              $ brunch build --production
+              $ cd ../ # to the eye_ui directory
+              $ mix phx.digest
               $ cd ../eye_fw
               $ mix deps.get
               $ mix firmware
