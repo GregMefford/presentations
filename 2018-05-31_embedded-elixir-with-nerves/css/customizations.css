@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'chunkfive';
+    src: url('../fonts/chunkfive-webfont.woff2') format('woff2'),
+         url('../fonts/chunkfive-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'antonio';
+    src: url('../fonts/antonio-regular-webfont.woff2') format('woff2'),
+         url('../fonts/antonio-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'antonio';
+    src: url('../fonts/antonio-bold-webfont.woff2') format('woff2'),
+         url('../fonts/antonio-bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'quicksand-dash';
+    src: url('../fonts/quicksand_dash-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand_dash-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-bold-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand-bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-bolditalic-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand-bolditalic-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+
+}
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-italic-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+
+}
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-light-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand-light-webfont.woff') format('woff');
+    font-weight: light;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-lightitalic-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand-lightitalic-webfont.woff') format('woff');
+    font-weight: light;
+    font-style: italic;
+
+}
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-regular-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.reveal {
+  font-family: "quicksand";
+  font-weight: bold;
+  font-size: 36px;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: "quicksand";
+}
+
+.reveal em,
+.reveal h1 em,
+.reveal h2 em,
+.reveal h3 em,
+.reveal h4 em,
+.reveal h5 em,
+.reveal h6 em {
+  color: #693988;
+  font-style: normal;
+}
+
+.reveal pre code {
+  max-height: 75%;
+  line-height: 1.5em;
+  font-size: 3.0em;
+}
+
+.reveal li, .reveal p {
+  font-size: 1.6em;
+}
+.reveal section.nav li.inactive {
+  color: #9969b8;
+}
+
+.reveal section.img-grid img {
+  width: 25%;
+}
+
+.reveal section.img-list p {
+  text-align: center;
+}
+
+.reveal section.img-list img {
+  display: block;
+  margin: 0 auto;
+}
+
+.reveal section .img-quote {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 1em;
+}
+
+.reveal .attribution {
+  display: block;
+  height: 1.2em;
+  font-size: 0.5em;
+  margin: 0;
+}
+
+.reveal section li li {
+  font-size: 1em;
+}
