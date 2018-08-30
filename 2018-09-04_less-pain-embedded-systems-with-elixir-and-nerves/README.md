@@ -35,7 +35,7 @@ can organize the material in a way that will help you learn, I would _really
 really_ like for you to **reply to that email** with the following:
 
 * What operating system are you bringing? (Windows, OSX, Linux, ...other? 😬😅)
-* Your experience level with: (new, beginner, experienced, professional)
+* Your experience level with: (none, some, lots)
   * Programming
   * Hardware and Embedded Systems
   * Elixir
