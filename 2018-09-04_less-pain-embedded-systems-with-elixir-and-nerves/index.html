@@ -345,26 +345,145 @@
 
         <section>
 
-          <section data-markdown>
+          <section data-markdown class="nav center">
             <textarea data-template>
               # Elixir 💜 Embedded
-              Light-weight *concurrency*
-              * Tons of tiny processes
+
+              Notes:
+              * At Code BEAM -> don't need convincing.
+              * Let's talk about _reasons_ BEAM is a good choice,
+              * in case hadn't thought about it
+              * or want to explain it to someone else.
+            </textarea>
+          </section>
+
+          <!-- BEAM is Embedded-First -->
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Elixir 💜 Embedded
+              * *BEAM is Embedded-First*
+              * Baked-In Fault-Tolerance
+              * Light-Weight Concurrency
+              * Binary Pattern-Matching
+              * Integrated IoT Platform
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # BEAM is *Embedded-First*
+              ## Ericsson *ADX301*
+              10 Gbps - 160 Gbps Telecom Switch System
+
+              ![AXD301](img/ericsson_axd301.png) <!-- .element: class="plain" style="height: 12em" -->
+              Notes:
+              * Erlang/OTP born as control plane these telecom switches
+              * Scalable total throughout by adding cards and cabinets
+              * The Erlang part is to control all the ASICs on the data path
+
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # BEAM is *Embedded-First*
+              ## Ericsson *ADX301*
+              Erlang/OTP-powered Control Plane
+
+              ![AXD301 Control Processor Board](img/ericsson_axd301_cpu.png) <!-- .element: class="plain" -->
+              Notes:
+              * I wasn't able to find specs on this CPU's speed
+              * I'd guess it's less-powerful than a modern Raspberry Pi
+              * No surprise that we can run powerful embedded systems with Elixir
+            </textarea>
+          </section>
+
+          <!-- Baked-In Fault-Tolerance -->
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Elixir 💜 Embedded
+              * BEAM is Embedded-First
+              * *Baked-In Fault-Tolerance*
+              * Light-Weight Concurrency
+              * Binary Pattern-Matching
+              * Integrated IoT Platform
+
+              Notes:
+              * OTP brings FT primitives that we don't have to design
+
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/crash_screens.jpg"
+            data-background-size="contain"
+            data-separator-notes="^Notes:">
+            <textarea data-template>
+              ![Kevlin Henney](img/kevlin_henney.png) <!-- .element: class="plain fragment" style="height: 14em" -->
+
+              Notes:
+              * Not what they meant by "let it crash."
+              * (fragment): Crash screens c/o Kevlin Henney
+              * There are plenty more where these came from
+            </textarea>
+          </section>
+
+          <!-- Light-Weight Concurrency -->
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Elixir 💜 Embedded
+              * BEAM is Embedded-First
+              * Baked-In Fault-Tolerance
+              * *Light-Weight Concurrency*
+              * Binary Pattern-Matching
+              * Integrated IoT Platform
+
+              Notes:
+              * BEAM gives us baked-in concurrency primitives
+              * via processes and message-passing
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Light-weight *concurrency*
+              * Lots of tiny processes
               * Process-level fault-tolerance
+
+              <div slye="clear: both" />
+              <div style="float: left">
+                <p style="margin-bottom: -36px">4 Cores</p>
+                <img src="img/rpi3.png" class="plain" style="width: 950px" />
+              </div>
+              <div style="float: right">
+                <p style="margin-bottom: -36px">96 Cores / 192 Threads</p>
+                <img src="img/r930.png" class="plain" style="width: 950px" />
+              </div>
+
+              Notes:
+              * Allows us to easily make use of all cores
+              * Whether it's 4 in your Raspberry Pi
+              * Or a bunch of hyper-threaded cores in a server
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Light-weight *concurrency*
               * Per-Process Garbage-Collection
               * Immutable Data Structures
 
+              ![Erlang Memory Model](img/erlang_memory_model.png) <!-- .element: class="plain" style="height: 12em"-->
+              <br/>
+              [Hamidreza Soleimani's Blog - Erlang Garbage Collection Details and Why It Matters](https://hamidreza-s.github.io/erlang%20garbage%20collection%20memory%20layout%20soft%20realtime/2015/08/24/erlang-garbage-collection-details-and-why-it-matters.html) <!-- .element: class="attribution" -->
+
               Notes:
-
-              Due to its Erlang roots, Elixir was born to be embedded.
-
-              Today's low-cost embedded platforms are yesterday's supercomputers,
-
-              so it's unsurprising that the BEAM would work well there.
-
-              But I want to talk for a minute about this one-two punch:
-
-              Garbage-collection happens per-process, and data structures are immutable.
+              * In particular, I want to look more closely at these two:
+              * Per-process garbage-collection
+              * Immutable data structures
             </textarea>
           </section>
 
@@ -436,10 +555,26 @@
             </aside>
           </section>
 
+          <!-- Binary Pattern-Matching -->
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Elixir 💜 Embedded
+              * BEAM is Embedded-First
+              * Baked-In Fault-Tolerance
+              * Light-Weight Concurrency
+              * *Binary Pattern-Matching*
+              * Integrated IoT Platform
+
+              Notes:
+              * Binary pattern-mathing is super-cool for embedded
+            </textarea>
+          </section>
+
           <section data-markdown>
             <textarea data-template>
               # Elixir 💜 Embedded
-              *Binary* pattern-matching
+              *Binary* Pattern-Matching
 
               ``` elixir
               def decode(<<op::3, addr::6, data::7>>), do: {op, addr, data}
@@ -448,13 +583,9 @@
 
               decode(<<0b01010101, 0b01010011>>) # => {2, 42, 83}
               ```
+              <!-- .element style="font-size: 15px" -->
 
               Notes:
-
-              Another thing that's really great about Elixir for embedded development
-
-              is binary pattern-matching.
-
               Let's pretend that we have an data sheet for an electronics component
 
               that says we need to decode these 16 bits into
@@ -470,7 +601,7 @@
           <section data-markdown>
             <textarea data-template>
               # Elixir 💜 Embedded
-              *Binary* pattern-matching
+              *Binary* Pattern-Matching
               ``` elixir
               def decode(<<0::2, op::1, addr::9, data::4>>), do: # ...
               def decode(<<      op::3, addr::6, data::7>>), do: # ...
@@ -480,6 +611,7 @@
               decode(<<0b00010101, 0b01010011>>) # => {0, 341, 3}
               decode(<<0b01010101, 0b01010011>>) # => {2, 42, 83}
               ```
+              <!-- .element style="font-size: 15px" -->
 
               Notes:
 
@@ -501,6 +633,105 @@
             </textarea>
           </section>
 
+          <!-- Integrated IoT Platform -->
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Elixir 💜 Embedded
+              * BEAM is Embedded-First
+              * Baked-In Fault-Tolerance
+              * Light-Weight Concurrency
+              * Binary Pattern-Matching
+              * *Integrated IoT Platform*
+
+              Notes:
+              * Elixir is also a great choice for an integrated IoT platform.
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Integrated IoT Platform
+              ![Tons of cats](img/cats.png) <!-- .element: class="plain" style="height: 900px" -->
+
+              Notes:
+              This is what it looks like when all your embedded devices decide to connect to your server at once.
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Integrated IoT Platform
+              ![Phoenix Channels](img/channels.png) <!-- .element: class="plain" style="height: 900px" -->
+
+              Notes:
+              * If you want to, you can build a whole stack using Elixir
+              * On the client and the server side
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Integrated IoT Platform
+              ![Phoenix Channels](img/channels_logos.png) <!-- .element: class="plain" style="height: 900px" -->
+
+              Notes:
+              * Using Phoenix and Channels on the back-end
+              * to talk to Elixir and Nerves on a headless device
+              * Or to a JavaScript client running on a kiosk-style device
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- Options for Embedding Elixir -->
+
+        <section>
+          <section data-markdown class="nav">
+            <textarea data-template>
+
+              # Options for Embedding Elixir
+
+              ![Platform Logos](img/platform_logos.png) <!-- .element: class="plain" -->
+
+              Notes:
+
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+
+              ![Raspbian logo](img/logos_raspbian.png) <!-- .element: class="plain" style="height: 4em"-->
+              ![Elixir logo](img/logos_elixir.png) <!-- .element: class="plain" style="height: 4em"-->
+              ![Windows logo](img/logos_windows.png) <!-- .element: class="plain" style="height: 4em"-->
+
+              * Well of course that works...
+              * Deployment / Packaging
+              * Administration
+              * Long boot times
+              * Read/Write filesystem
+
+              Notes:
+
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+
+              # GRiSP
+
+              * Bare-metal BEAM 🤘
+              * Purpose-built hardware
+              * Real-time
+
+              ![GRiSP Board](img/grisp_board.png) <!-- .element: class="plain" style="height: 800px" -->
+
+              Notes:
+
+            </textarea>
+          </section>
         </section>
 
         <!-- Nerves -->
@@ -508,7 +739,7 @@
         <section>
           <section data-markdown class="nav">
             <textarea data-template>
-              ![Nerves Logo](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 6em" -->
+              ![Nerves Sticker](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 6em" -->
 
               Craft and deploy
 
@@ -518,7 +749,6 @@
 
               Notes:
 
-              But I don't recommend you do that, because that's what Nerves is for.
             </textarea>
           </section>
 
@@ -528,6 +758,21 @@
 
               So... there you go!
             </aside>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ![Nerves Sticker](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 6em" -->
+
+              * Minimal Linux with Buildroot
+              * Commodity or custom hardware
+              * BEAM as "operating system"
+              * Read-only filesystem
+              * Firmware artifacts
+
+              Notes:
+
+            </textarea>
           </section>
 
           <section data-background-image="img/nerves_vs_linux.png" data-background-size="contain">
@@ -545,6 +790,7 @@
           </section>
 
           <section data-background-image="img/nerves_system.png" data-background-size="contain">
+            <img class="plain fragment" src="img/rpi0.png" style="max-width: 30%" />
             <aside class="notes" data-markdown>
               The Nerves team packages these up into what we call "systems" that
 
@@ -584,6 +830,14 @@
             </aside>
           </section>
 
+          <section data-background-image="img/nerves_toolchain.png" data-background-size="contain">
+            <aside class="notes" data-markdown>
+              Of course, we also have a writable partition that you can use to
+
+              persist your data in a place that won't corrupt your boot partition.
+            </aside>
+          </section>
+
           <section data-background-image="img/nerves_appdata.png" data-background-size="contain">
             <aside class="notes" data-markdown>
               Of course, we also have a writable partition that you can use to
@@ -600,6 +854,26 @@
 
               re-program its SD card.
             </aside>
+          </section>
+
+          <section data-markdown class="img-grid">
+            <textarea data-template>
+              # Support for *Lots of Targets*
+              ![rpi0](img/rpi0.png) <!-- .element: class="plain" -->
+              ![rpi1](img/rpi1.png) <!-- .element: class="plain" -->
+              ![rpi2](img/rpi2.png) <!-- .element: class="plain" -->
+              ![rpi3](img/rpi3.png) <!-- .element: class="plain" -->
+              ![bbb](img/bbb.png) <!-- .element: class="plain" -->
+              ![ev3](img/ev3.png) <!-- .element: class="plain" -->
+
+              Notes:
+
+              Nerves currently supports a bunch of popular and readily-available
+
+              target hardware, like the Raspberry Pi and Beaglebone families,
+
+              and the Lego EV3, which is really neat.
+            </textarea>
           </section>
 
           <section data-markdown>
@@ -637,37 +911,17 @@
             </textarea>
           </section>
 
-          <section data-markdown class="img-grid">
-            <textarea data-template>
-              # Support for *Lots of Targets*
-              ![rpi0](img/rpi0.png) <!-- .element: class="plain" -->
-              ![rpi1](img/rpi1.png) <!-- .element: class="plain" -->
-              ![rpi2](img/rpi2.png) <!-- .element: class="plain" -->
-              ![rpi3](img/rpi3.png) <!-- .element: class="plain" -->
-              ![bbb](img/bbb.png) <!-- .element: class="plain" -->
-              ![ev3](img/ev3.png) <!-- .element: class="plain" -->
-
-              Notes:
-
-              Nerves currently supports a bunch of popular and readily-available
-
-              target hardware, like the Raspberry Pi and Beaglebone families,
-
-              and the Lego EV3, which is really neat.
-            </textarea>
-          </section>
-
           <section data-markdown>
             <textarea data-template>
               # Nerves 💜 Elixir
 
               ```bash
-              $ mix nerves.new    # Generate a Project
-              $ mix deps.get      # Download Pre-Compiled Infrastructure
-              $ mix firmware      # Cross-Compile your Project
+              $ mix nerves.new    # Start a Project
+              $ mix deps.get      # Download Artifacts
+              $ mix firmware      # Cross-Compile your Code
               $ mix firmware.burn # Burn your SD card
               # ... or ...
-              $ mix firmware.push # Update your Firmware over the Network
+              $ mix firmware.push # Remote Firmware Update
               ```
             </textarea>
           </section>
@@ -692,129 +946,88 @@
 
         </section>
 
-        <!-- Phoenix for Embedded -->
+        <!-- Nerves Community -->
 
         <section>
 
-          <section data-markdown class="nav">
+          <section data-markdown>
             <textarea data-template>
-              # Phoenix 💜 "IoT"
-              ![Tons of cats](img/cats.png) <!-- .element: class="plain" style="height: 12em" -->
+              # Overwhelmingly
+              # *welcoming* and *helpful*
+              # community
+              ![Welcome to Nerves](img/nerves_welcome.png) <!-- .element: class="plain" -->
 
               Notes:
 
-              Next, let's talk about Phoenix.
+              So I decided to focus on building a welcoming and helpful
 
-              This is your server on IoT.
+              community around Nerves.
+
+              For example, I started to manually and individually welcome each
+
+              new person to our Slack channel
+
+              and invite them to get involved.
+            </textarea>
+          </section>
+
+          <section data-markdown
+            data-background-image="img/nerves_slack_user_count.png"
+            data-background-size="contain">
+            <textarea data-template>
+              Notes:
+              The community has grown a lot.
+
+              We have over 1500 members in our Slack channel today.
+
+              I see that as the tip of the iceberg.
+
+              There are probably many more people that we never hear from because
+
+              they don't use Slack.
+
+              We've recently been working on having a stronger presence in
+
+              other spaces like the Elixir Forum and Stack Overflow so that we
+
+              can do better at meeting people where they are.
             </textarea>
           </section>
 
           <section data-markdown>
             <textarea data-template>
-              Avoid hard CS problems if you can
-
-              ![The Road to 2M Websocket Connections](img/the_road_to_2m_websockets.png) <!-- .element: class="plain" style="height: 10em" -->
-              <br/>
-              [Gary Rennie - The Road to 2 Million Websocket Connections in Phoenix](https://youtu.be/c6JcVwbOGXc) <!-- .element: class="attribution" -->
+              # You *Can* Contribute
+              ![Nerves](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 10em"-->
 
               Notes:
 
-              It turns out that Phoenix is pretty good at handling that
-
-              without much special tuning or architecture.
-
-              In this presentation, Gary describes how they were able to get a
-
-              single server to host 2M websocket connections.
-
-              That wasn't the limit of what's possible,
-
-              it was more of an arbitrary point at which they ran out of time
-
-              and motivation to keep going with the test.
-            </textarea>
-          </section>
-
-          <section>
-            <h1>Use all your <em>Cores</em></h1>
-
-            <div style="float: left">
-              <p>4 Cores</p>
-              <img src="img/rpi3.png" class="plain" style="width: 500px" />
-            </div>
-            <div style="float: right">
-              <p>96 Cores / 192 Threads</p>
-              <img src="img/r930.png" class="plain" style="width: 500px" />
-            </div>
-
-            <aside class="notes" data-markdown>
-              Phoenix does a great job of using all your cores
-
-              (fragment) Whether it's 4 cores in your Raspberry Pi
-
-              (fragment) or tons of cores in your beefy server hardware
-            </aside>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              # Pretty secure by default
-              ![Phoenix Security](img/phoenix_security.png) <!-- .element: class="plain" style="height: 10em" -->
-              [Griffin Byatt - Plugging the Security Holes in Your Phoenix Application](https://youtu.be/w3lKmFsmlvQ) <!-- .element: class="attribution" -->
-
-              Notes:
-
-              Phoenix is also pretty secure by default.
-
-              In this presentation, Griffin presented his findings from
-
-              analyzing a lot of Phoenix-based web applications in the wild.
-
-              My main take-away from his presentation was that,
-
-              unless you're doing something unusual,
-
-              Phoenix has your back and does the right thing by default.
             </textarea>
           </section>
 
           <section data-markdown>
             <textarea data-template>
-              # Embedded web server
-              (configuration, HMI, API)
-
-              ![Process Controls](img/process_controls.png) <!-- .element: class="plain" style="height: 11em" -->
+              # Wanted to *get involved*
+              ## Even though I was *new to Elixir*
 
               Notes:
 
-              Phoenix also makes a great embedded web server, whether you need
+              I really wanted to get more involved in the Nerves project,
 
-              a configuration page, a human-machine interface, or just a JSON API.
+              even though I was pretty new to Elixir at the time.
             </textarea>
           </section>
 
           <section data-markdown>
             <textarea data-template>
-              # Phoenix Channels
-              ![Channels](img/channels.png) <!-- .element: class="plain" style="height: 12em" -->
+              # Wanted to *get involved*
+              ## ~~Even though I was new to Elixir~~
+              ## *Because* I was new to Elixir
 
               Notes:
 
-              Phoenix Channels also offer a great way to easily connect your devices
+              And when I thought about it, I realized that I had something to
 
-              to a server, whether it's an app running in a browser or
-
-              a headless sensor device in the field.
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              # GraphQL Subscriptions
-
-              ![Live APIs with GraphQL Subscriptions - Bruce Williams and Ben Wilson](img/graphql_subscriptions.png) <!-- .element: class="plain" style="height: 10em" -->
-              <br/>
-              [Live APIs with GraphQL Subscriptions - Bruce Williams and Ben Wilson](https://youtu.be/PEckzwggd78) <!-- .element: class="attribution" -->
+              contribute to the project _because_ I was new to Elixir.
             </textarea>
           </section>
 
@@ -834,17 +1047,102 @@
           </textarea>
         </section>
 
-        <!-- Omni-Eye - Step 1 - Streaming Video -->
+        <!-- Poncho Project Structure -->
 
         <section>
 
           <section data-markdown>
             <textarea data-template>
-              # Eye
+              # Poncho Project
 
-              ![Eye](img/eye.jpg) <!-- .element: class="plain" style="height: 14em" -->
+              ![Poncho Projects](img/poncho_projects.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [http://embedded-elixir.com/post/2017-05-19-poncho-projects/](http://embedded-elixir.com/post/2017-05-19-poncho-projects/) <!-- .element: class="attribution" -->
             </textarea>
           </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Poncho Style
+
+              ``` bash
+              $ mkdir omni_eye && cd omni_eye
+              $ mix new eye --sup
+              $ mix phx.new eye_ui --no-ecto
+              $ mix nerves.new eye_fw
+              ```
+
+              ``` bash
+              omni_eye
+              ├── eye
+              ├── eye_fw
+              └── eye_ui
+              ```
+            </textarea>
+          </section>
+
+          <section data-background-image="img/project_eye_ui.png" data-background-size="contain">
+            <img src="img/phoenix_is_not_your_application.jpg" class="plain fragment" style="height: 900px"/>
+          </section>
+          <section data-background-image="img/project_logos.png" data-background-size="contain">
+            <img src="img/phoenix_is_not_your_application.jpg" class="plain" style="height: 900px"/>
+          </section>
+          <section data-background-image="img/project_firmware.png" data-background-size="contain"> </section>
+          <section data-background-image="img/project_nerves_deps.png" data-background-size="contain"> </section>
+          <section data-background-image="img/project_nerves_shaded.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # *Fake Camera* for Dev and Test
+
+              ``` elixir
+              # eye/config/config.exs
+              config :picam, camera: Picam.FakeCamera
+              ```
+
+              ``` elixir
+              # eye_ui/config/config.exs
+              config :picam, camera: Picam.FakeCamera
+              ```
+
+              ``` elixir
+              # eye_fw/config/host.exs
+              config :picam, camera: Picam.FakeCamera
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # *Real Camera* on Target Device
+
+              ``` elixir
+              # eye_fw/config/rpi0_zbar.exs
+              config :picam, camera: Picam.Camera
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # `eye` Application in `iex`
+              ![iex barcodes](img/iex_scan_barcode.png) <!-- .element: class="plain" style="width: 95%" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # `eye_ui` Application in `iex`
+              ![GraphiQL](img/graphiql_mutation.png) <!-- .element: class="plain" style="width: 1400px" -->
+              ![mutation debug in iex](img/iex_mutation.png) <!-- .element: class="plain" style="width: 1400px" -->
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- Omni-Eye - Step 1 - Streaming Video -->
+
+        <section>
 
           <section data-markdown>
             <textarea data-template>
@@ -930,16 +1228,6 @@
 
           <section data-markdown>
             <textarea data-template>
-              # Poncho Project
-
-              ![Poncho Projects](img/poncho_projects.png) <!-- .element: class="plain" style="height: 13em" -->
-              <br/>
-              [http://embedded-elixir.com/post/2017-05-19-poncho-projects/](http://embedded-elixir.com/post/2017-05-19-poncho-projects/) <!-- .element: class="attribution" -->
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
               ``` elixir
               # eye/mix.exs
               defp deps do
@@ -983,15 +1271,13 @@
 
           <section data-markdown>
             <textarea data-template>
-              ![nerves_init_gadget](img/nerves_init_gadget.png) <!-- .element: class="plain" style="height: 13em" -->
-              <br/>
-              [https://github.com/nerves-project/nerves_init_gadget/tree/dhcp](https://github.com/nerves-project/nerves_init_gadget/tree/dhcp) <!-- .element: class="attribution" -->
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ![nerves_init_gadget_deps](img/nerves_init_gadget_deps.png) <!-- .element: class="plain" style="height: 13em" -->
+              # *`nerves_init_gadget`*
+              * Config Ethernet and Serial over USB
+              * DHCP Server
+              * mDNS Responder (`nerves.local`)
+              * Manage Erlang Distribution
+              * `mix firmware.push` over SSH
+              * SSH console to IEx prompt
             </textarea>
           </section>
 
@@ -1324,6 +1610,29 @@
           <section data-background-image="img/custom_system_release_1.png" data-background-size="contain"> </section>
           <section data-background-image="img/custom_system_release_2.png" data-background-size="contain"> </section>
           <section data-background-image="img/custom_system_release_3.png" data-background-size="contain"> </section>
+
+        </section>
+
+        <!-- Rootfs Overlays -->
+
+        <section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # *`rootfs_overlay`*
+              ## Do you Need a Custom System?
+              ``` elixir
+              # eye_fw/config/config.exs
+
+              config :nerves, :firmware,
+                rootfs_overlay: "rootfs_overlay"
+              ```
+            </textarea>
+          </section>
+
+          <section data-background-image="img/nerves_overlays_1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/nerves_overlays_3.png" data-background-size="contain"> </section>
+          <section data-background-image="img/nerves_overlays_4.png" data-background-size="contain"> </section>
 
         </section>
 
@@ -2319,10 +2628,13 @@
         <section data-markdown class="nav">
           <textarea data-template>
             ## Have Fun with Nerves! 💜
-            ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 6em" -->
-            ![GregMefford](img/nerves_logo.png) <!-- .element: class="plain" style="height: 6em" -->
+            ![GregMefford](img/headshot_glowsticks.jpeg) <!-- .element: class="plain" style="height: 6em" -->
+            ![Nerves Logo](img/nerves_logo.png) <!-- .element: class="plain" style="height: 6em" -->
+            ![Tim Mecklem](img/tim-mecklem.jpg) <!-- .element: class="plain" style="height: 6em" -->
 
             Greg Mefford (@ferggo)
+
+            Tim Mecklem (@tim_mecklem)
           </textarea>
         </section>
 
@@ -2338,7 +2650,7 @@
         history: true,
         controls: false,
         progress: false,
-        transition: "fade",
+        transition: 'none',
         width: 1920,
         height: 1080,
         center: false,
