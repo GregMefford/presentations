@@ -219,7 +219,7 @@
 
               ![Eye](img/omni_eye.jpg) <!-- .element: class="plain" style="height: 14em" -->
               <br/>
-              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye) <!-- .element: class="attribution" -->
+              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye)
             </textarea>
           </section>
 
@@ -685,7 +685,7 @@
         <!-- Options for Embedding Elixir -->
 
         <section>
-          <section data-markdown class="nav">
+          <section data-markdown class="nav center">
             <textarea data-template>
 
               # Options for Embedding Elixir
@@ -735,7 +735,7 @@
         <!-- Nerves -->
 
         <section>
-          <section data-markdown class="nav">
+          <section data-markdown class="nav center">
             <textarea data-template>
               ![Nerves Sticker](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 6em" -->
 
@@ -921,6 +921,7 @@
               # ... or ...
               $ mix firmware.push # Remote Firmware Update
               ```
+              <!-- .element style="font-size: 28px" -->
             </textarea>
           </section>
 
@@ -1053,8 +1054,9 @@
               $ mkdir omni_eye && cd omni_eye
               $ mix new eye --sup
               $ mix phx.new eye_ui --no-ecto
-              $ mix nerves.new eye_fw
+              $ mix nerves.new eye_fw --init-gadget
               ```
+              <!-- .element style="font-size: 36px" -->
 
               ``` bash
               omni_eye
@@ -1062,6 +1064,7 @@
               ├── eye_fw
               └── eye_ui
               ```
+              <!-- .element style="font-size: 36px" -->
             </textarea>
           </section>
 
@@ -1122,7 +1125,7 @@
 
         </section>
 
-        <!-- Omni-Eye - Step 1 - Streaming Video -->
+        <!-- Step 1 - Getting Started in IEx -->
 
         <section>
 
@@ -1132,7 +1135,7 @@
 
               ![Eye](img/omni_eye.jpg) <!-- .element: class="plain" style="height: 14em" -->
               <br/>
-              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye) <!-- .element: class="attribution" -->
+              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye)
             </textarea>
           </section>
 
@@ -1165,7 +1168,7 @@
 
               we arrived there step-by-step.
 
-              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye) <!-- .element: class="attribution" -->
+              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye)
             </textarea>
           </section>
 
@@ -1177,7 +1180,7 @@
               $ mkdir omni_eye
               $ cd omni_eye
               $ mix new eye --sup
-              $ mix nerves.new eye_fw
+              $ mix nerves.new eye_fw --init-gadget
               ```
             </textarea>
           </section>
@@ -1205,53 +1208,38 @@
                   ├── rel
                   └── test
               ```
+              <!-- .element style="font-size: 18px" -->
             </textarea>
           </section>
+
+          <section data-background-image="img/step1_eye_cleanup1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_cleanup2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_mix.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_camera.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_router.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_streamer.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_application.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_config.png" data-background-size="contain"> </section>
 
           <section data-markdown>
             <textarea data-template>
-              ``` elixir
-              # eye/mix.exs
-              defp deps do
-                [
-                  {:picam, "~> 0.2.0"},
-                  {:cowboy, "~> 1.0.0"},
-                  {:plug, "~> 1.0"}
-                ]
-              end
+              # Try it in `iex`
+              ``` bash
+              $ cd eye
+              $ mix deps.get
+              $ iex -S mix
               ```
+              ![iex camera](img/step1_iex_camera.png) <!-- .element: class="plain" -->
             </textarea>
           </section>
 
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye_fw/mix.exs
-              defp deps do
-                [
-                  {:nerves, "~> 0.10.0", runtime: false},
-                  {:distillery, "~> 1.5"},
-                  {:eye, path: "../eye"}
-                ] ++ deps(@target)
-              end
+        </section>
 
-              defp deps("host"), do: []
-              defp deps(target) do
-                [
-                  {:shoehorn, "~> 0.2"},
-                  {:nerves_runtime, "~> 0.5"},
-                  {
-                    :nerves_init_gadget,
-                    github: "nerves-project/nerves_init_gadget",
-                    ref: "dhcp"
-                  },
-                ] ++ system(target)
-              end
-              ```
-            </textarea>
-          </section>
+        <!-- Step 1 - First Firmware -->
 
-          <section data-markdown>
+        <section>
+
+          <section data-markdown class="nav center">
             <textarea data-template>
               # *`nerves_init_gadget`*
               * Config Ethernet and Serial over USB
@@ -1263,206 +1251,17 @@
             </textarea>
           </section>
 
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye_fw/mix.exs
-              defp system("rpi0") do
-                [{:nerves_system_rpi0, "~> 0.21.0", runtime: false}]
-              end
-              defp system(target) do
-                Mix.raise "Unsupported MIX_TARGET: #{target}"
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/application.ex
-              defmodule Eye.Application do
-                use Application
-
-                def child_spec_no_args(module) do
-                  %{id: module, start: {module, :start_link, []}}
-                end
-
-                def start(_type, _args) do
-                  children = [
-                    child_spec_no_args(Picam.Camera),
-                    Plug.Adapters.Cowboy.child_spec(:http, Eye.Router, [], [port: 80])
-                  ]
-
-                  opts = [strategy: :one_for_one, name: Eye.Supervisor]
-                  Supervisor.start_link(children, opts)
-                end
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/router.ex
-              defmodule Eye.Router do
-                use Plug.Router
-
-                plug :match
-                plug :dispatch
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/router.ex
-              defmodule Eye.Router do
-                # ...
-                get "/" do
-                  markup = """
-                  <!DOCTYPE html>
-                  <html>
-                  <head>
-                    <meta charset="UTF-8" />
-                    <title>Eye - Video Stream</title>
-                  </head>
-                  <body> <img src="video.mjpg" /> </body>
-                  </html>
-                  """
-                  conn
-                  |> put_resp_header("Content-Type", "text/html")
-                  |> send_resp(200, markup)
-                end
-                #...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/router.ex
-              defmodule Eye.Router do
-                #...
-                forward "/video.mjpg", to: Eye.JPEGStreamer
-
-                match _ do
-                  send_resp(conn, 404, "Oops. Try /")
-                end
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/jpeg_streamer.ex
-              defmodule Eye.JPEGStreamer do
-                import Plug.Conn
-                @behaviour Plug
-                @boundary "w58EW1cEpjzydSCq"
-
-                def init(opts), do: opts
-
-                def call(conn, _opts) do
-                  Eye.Camera.configure()
-                  conn
-                  |> put_resp_header("Age", "0")
-                  |> put_resp_header("Cache-Control", "no-cache, private")
-                  |> put_resp_header("Pragma", "no-cache")
-                  |> put_resp_header("Content-Type",
-                    "multipart/x-mixed-replace; boundary=#{@boundary}")
-                  |> send_chunked(200)
-                  |> send_pictures
-                end
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/jpeg_streamer.ex
-              defmodule Eye.JPEGStreamer do
-                # ...
-                defp send_pictures(conn) do
-                  conn
-                  |> send_picture()
-                  |> send_pictures()
-                end
-
-                defp send_picture(conn) do
-                  jpg = Eye.Camera.next_frame
-                  size = byte_size(jpg)
-                  header = "------#{@boundary}\r\nContent-Type: image/jpeg\r\nContent-length: #{size}\r\n\r\n"
-                  footer = "\r\n"
-                  with {:ok, conn} <- chunk(conn, header),
-                       {:ok, conn} <- chunk(conn, jpg),
-                       {:ok, conn} <- chunk(conn, footer),
-                    do: conn
-                end
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/camera.ex
-              defmodule Eye.Camera do
-                require Logger
-
-                def configure do
-                  Logger.info("Configuring camera")
-                  Picam.set_quality(10)
-                  Picam.set_size(1280, 720)
-                  Picam.set_fps(30)
-                end
-
-                def next_frame do
-                  Picam.next_frame()
-                end
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye_fw/config/config.exs
-              config :shoehorn,
-                init: [:nerves_runtime, :nerves_init_gadget],
-                app: Mix.Project.config()[:app]
-
-              # VVV Make sure you actually have an SSH key generated VVV
-              config :nerves_firmware_ssh,
-                authorized_keys: [
-                  File.read!(Path.join(System.user_home!, ".ssh/id_rsa.pub"))
-                ]
-              # ^^^ Before you burn your firmware to your SD card ^^^
-
-              config :nerves_init_gadget,
-              address_method: :static
-
-              ```
-            </textarea>
-          </section>
+          <section data-background-image="img/step1_fw_cleanup1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_cleanup2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_mix1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_mix2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_config.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_config_key.png" data-background-size="contain"> </section>
 
           <section data-markdown>
             <textarea data-template>
               ``` bash
-              $ cd eye_fw
+              $ cd ../eye_fw
               $ export MIX_TARGET=rpi0
               $ mix deps.get
               $ mix firmware
@@ -1476,13 +1275,88 @@
             </textarea>
           </section>
 
+          <section data-markdown>
+            <textarea data-template>
+              # Try it on your Device
+              ``` bash
+              # Plug in the USB cable and wait about 15 seconds
+              $ open http://nerves.local
+              ```
+              ![USB cable](img/hardware_assembly_08.jpg) <!-- .element: class="plain" style="height: 10em" -->
+              ![Infinity Tunnel](img/eye_tunnel.png) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # SSH to IEx Console
+              ``` bash
+              # This will auth with the SSH key
+              # you configured in your firmware
+              $ ssh nerves.local
+              # To exit, type <RET>~.
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Serial IEx Console
+              ``` bash
+              # On OSX:
+              $ picocom /dev/tty.usbmodem<TAB>
+              # On Linux (probably):
+              $ picocom /dev/ttyACM0
+              # To exit, type CTRL-A CTRL-X
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # RingLogger
+              ``` iex
+              # Similar to tail -f
+              iex> RingLogger.attach
+
+              # Similar to cat /var/log/messages
+              iex> RingLogger.tail
+
+              # Search for something
+              iex> RingLogger.grep(~r/[Nn]eedle/)
+              16:55:41.614 [info]  Needle in a haystack
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # RingLogger
+              ``` iex
+              # Process log messages with Elixir
+              iex> RingLogger.get()
+              [
+                debug: {Logger, "8", {{2018, 2, 5}, {17, 44, 7, 675}}, [
+                  pid: #PID<0.139.0>,
+                  application: :example,
+                  module: Example,
+                  function: "log/1",
+                  file: "ring_logger/example/lib/example.ex",
+                  line: 11
+                ]},
+                # ...
+              ]
+              ```
+            </textarea>
+          </section>
+
         </section>
 
         <!-- Step 2 - Custom System with zbar -->
 
         <section>
 
-          <section data-markdown>
+          <section data-markdown class="nav center">
             <textarea data-template>
               # Scanning Barcodes with *`zbar`*
               ![zbar-elixir](img/zbar-elixir.png) <!-- .element: class="plain" style="height: 13em" -->
@@ -1520,8 +1394,8 @@
           <section data-markdown>
             <textarea data-template>
               ``` bash
-              # Leave the eye_fw directory
-              $ cd ..
+              # Leave the omni_eye directory
+              $ cd ../..
               $ git clone https://github.com/nerves-project/nerves_system_rpi0.git
               $ mv nerves_system_rpi0 system_rpi0_zbar
               $ cd system_rpi0_zbar
@@ -1599,7 +1473,7 @@
 
         <section>
 
-          <section data-markdown>
+          <section data-markdown class="nav center">
             <textarea data-template>
               # *`rootfs_overlay`*
               ## Do you Need a Custom System?
@@ -1620,7 +1494,7 @@
 
         <!-- Lunch Time! -->
 
-        <section data-markdown>
+        <section data-markdown class="nav center">
           <textarea data-template>
             # Lunch: 12:00 to 1:30 AM
 
@@ -1635,7 +1509,7 @@
 
         <section>
 
-          <section data-markdown>
+          <section data-markdown class="nav center">
             <textarea data-template>
               # Let's Actually
               # Scan some Barcodes!
@@ -1939,7 +1813,7 @@
 
         <section>
 
-          <section data-markdown>
+          <section data-markdown class="nav center">
             <textarea data-template>
               # GraphQL
               ![GraphiQL](img/step4_graphiql_query.png) <!-- .element: class="plain" -->
@@ -2305,7 +2179,7 @@
 
         <!-- Break Time! -->
 
-        <section data-markdown>
+        <section data-markdown class="nav center">
           <textarea data-template>
             # Break from 3:00 to 3:30 PM
 
@@ -2440,7 +2314,7 @@
           <section data-background-image="img/step5_eye_ui_config.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_eye_ui_config_base.png" data-background-size="contain"> </section>
 
-          <section data-markdown class="nav">
+          <section data-markdown>
             <textarea data-template>
               ![ui config base](img/step5_eye_ui_config_dev.png) <!-- .element: class="plain" -->
               ![ui config base](img/step5_eye_ui_config_test.png) <!-- .element: class="plain" -->
@@ -2449,7 +2323,7 @@
 
           <section data-background-image="img/step5_eye_ui_config_prod.png" data-background-size="contain"> </section>
 
-          <section data-markdown class="nav">
+          <section data-markdown>
             <textarea data-template>
               ![fw config](img/step5_eye_fw_config_1.png) <!-- .element: class="plain" -->
               ![fw config](img/step5_eye_fw_config_2.png) <!-- .element: class="plain" -->
@@ -2512,7 +2386,7 @@
 
         <section>
 
-          <section data-markdown>
+          <section data-markdown class="nav center">
             <textarea data-template>
               # Phoenix Channels and
               # GraphQL Subscriptions
@@ -2603,7 +2477,7 @@
 
         <!-- Exercise / Lab Time -->
 
-        <section data-markdown>
+        <section data-markdown class="nav center">
           <textarea data-template>
             # Exercise / Lab Time
           </textarea>
@@ -2611,7 +2485,7 @@
 
         <!-- Wrap Up -->
 
-        <section data-markdown class="nav">
+        <section data-markdown class="nav center">
           <textarea data-template>
             ## Have Fun with Nerves! 💜
             ![GregMefford](img/headshot_glowsticks.jpeg) <!-- .element: class="plain" style="height: 6em" -->
