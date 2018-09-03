@@ -345,7 +345,7 @@
 
         <section>
 
-          <section data-markdown class="nav center">
+          <section data-markdown class="nav">
             <textarea data-template>
               # Elixir 💜 Embedded
 
@@ -685,7 +685,7 @@
         <!-- Options for Embedding Elixir -->
 
         <section>
-          <section data-markdown class="nav center">
+          <section data-markdown class="nav">
             <textarea data-template>
 
               # Options for Embedding Elixir
@@ -735,7 +735,7 @@
         <!-- Nerves -->
 
         <section>
-          <section data-markdown class="nav center">
+          <section data-markdown class="nav">
             <textarea data-template>
               ![Nerves Sticker](img/nerves_sticker.png) <!-- .element: class="plain" style="height: 6em" -->
 
@@ -1129,6 +1129,12 @@
 
         <section>
 
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Step 1 - Getting Started
+            </textarea>
+          </section>
+
           <section data-markdown>
             <textarea data-template>
               # Omni Eye
@@ -1239,7 +1245,7 @@
 
         <section>
 
-          <section data-markdown class="nav center">
+          <section data-markdown class="nav">
             <textarea data-template>
               # *`nerves_init_gadget`*
               * Config Ethernet and Serial over USB
@@ -1315,7 +1321,7 @@
           <section data-markdown>
             <textarea data-template>
               # RingLogger
-              ``` iex
+              ``` elixir
               # Similar to tail -f
               iex> RingLogger.attach
 
@@ -1332,7 +1338,7 @@
           <section data-markdown>
             <textarea data-template>
               # RingLogger
-              ``` iex
+              ``` elixir
               # Process log messages with Elixir
               iex> RingLogger.get()
               [
@@ -1356,7 +1362,13 @@
 
         <section>
 
-          <section data-markdown class="nav center">
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Step 2 - Custom Systems
+            </textarea>
+          </section>
+
+          <section data-markdown>
             <textarea data-template>
               # Scanning Barcodes with *`zbar`*
               ![zbar-elixir](img/zbar-elixir.png) <!-- .element: class="plain" style="height: 13em" -->
@@ -1397,13 +1409,12 @@
               # Leave the omni_eye directory
               $ cd ../..
               $ git clone https://github.com/nerves-project/nerves_system_rpi0.git
-              $ mv nerves_system_rpi0 system_rpi0_zbar
-              $ cd system_rpi0_zbar
+              $ mv nerves_system_rpi0{,_zbar}
+              $ cd nerves_system_rpi0_zbar
               $ mix deps.get
               $ mix nerves.system.shell
-               Nerves /nerves/build > make menuconfig
               ```
-              ![system shell](img/sys_shell_01.png) <!-- .element: class="plain" -->
+              ![system shell](img/sys_shell_01.png) <!-- .element: class="plain" style="width: 90%" -->
             </textarea>
           </section>
 
@@ -1421,49 +1432,26 @@
               ``` bash
                Nerves /nerves/build > make save-defconfig
                Nerves /nerves/build > exit
-              $ git diff
               ```
             </textarea>
           </section>
 
           <section data-background-image="img/custom_system_diff_1.png" data-background-size="contain"> </section>
           <section data-background-image="img/custom_system_diff_2.png" data-background-size="contain"> </section>
-          <section data-background-image="img/custom_system_diff_3.png" data-background-size="contain"> </section>
-          <section data-background-image="img/custom_system_diff_4.png" data-background-size="contain"> </section>
 
           <section data-markdown>
             <textarea data-template>
-              ``` bash
-              $ cd ../omni_eye/eye_fw
-              $ export MIX_TARGET=rpi0_zbar
-              ```
-
-              ``` elixir
-              # eye_fw/mix.exs
-              defp system("rpi0_zbar") do
-                [{:nerves_system_rpi0_zbar, path: "../../system_rpi0_zbar", runtime: false}]
-              end
-              defp system(target) do
-                Mix.raise "Unsupported MIX_TARGET: #{target}"
-              end
-              ```
+              # 🎶 If you *liked* it then
+              # you should have put
+              # a *tag* on it 🎶
 
               ``` bash
-              $ mix firmware
+              $ mix nerves.artifact
               ```
+              ![Custom system Artifact](img/custom_system_artifact.png) <!-- .element: class="plain" style="width: 90%" -->
             </textarea>
           </section>
 
-          <section data-markdown>
-            <textarea data-template>
-              ``` bash
-              $ mix firmware.push 192.168.24.1
-              ```
-              ![mix firmware push](img/firmware_push.png) <!-- .element: class="plain" -->
-            </textarea>
-          </section>
-
-          <section data-background-image="img/custom_system_release_1.png" data-background-size="contain"> </section>
           <section data-background-image="img/custom_system_release_2.png" data-background-size="contain"> </section>
           <section data-background-image="img/custom_system_release_3.png" data-background-size="contain"> </section>
 
@@ -1473,7 +1461,7 @@
 
         <section>
 
-          <section data-markdown class="nav center">
+          <section data-markdown>
             <textarea data-template>
               # *`rootfs_overlay`*
               ## Do you Need a Custom System?
@@ -1492,9 +1480,33 @@
 
         </section>
 
+        <section>
+
+          <section data-markdown data-background-image="img/step2_mix.png" data-background-size="contain">
+            <textarea data-template>
+              # Try it on your Device
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              $ cd ../omni_eye/eye_fw
+              $ export MIX_TARGET=rpi0_zbar
+              $ mix deps.get
+              $ mix firmware
+              # Assuming your device is still connected
+              $ mix firmware.push nerves.local
+              ```
+              ![mix firmware push](img/firmware_push.png) <!-- .element: class="plain" style="width: 90%" -->
+            </textarea>
+          </section>
+
+        </section>
+
         <!-- Lunch Time! -->
 
-        <section data-markdown class="nav center">
+        <section data-markdown class="nav">
           <textarea data-template>
             # Lunch: 12:00 to 1:30 AM
 
@@ -1509,10 +1521,9 @@
 
         <section>
 
-          <section data-markdown class="nav center">
+          <section data-markdown class="nav">
             <textarea data-template>
-              # Let's Actually
-              # Scan some Barcodes!
+              # Step 3 - Let's Scan some Barcodes!
               ![watch barcodes](img/step3_watch_barcodes.png) <!-- .element: class="plain" -->
             </textarea>
           </section>
@@ -1813,7 +1824,7 @@
 
         <section>
 
-          <section data-markdown class="nav center">
+          <section data-markdown class="nav">
             <textarea data-template>
               # GraphQL
               ![GraphiQL](img/step4_graphiql_query.png) <!-- .element: class="plain" -->
@@ -2179,7 +2190,7 @@
 
         <!-- Break Time! -->
 
-        <section data-markdown class="nav center">
+        <section data-markdown class="nav">
           <textarea data-template>
             # Break from 3:00 to 3:30 PM
 
@@ -2386,7 +2397,7 @@
 
         <section>
 
-          <section data-markdown class="nav center">
+          <section data-markdown class="nav">
             <textarea data-template>
               # Phoenix Channels and
               # GraphQL Subscriptions
@@ -2477,7 +2488,7 @@
 
         <!-- Exercise / Lab Time -->
 
-        <section data-markdown class="nav center">
+        <section data-markdown class="nav">
           <textarea data-template>
             # Exercise / Lab Time
           </textarea>
@@ -2485,7 +2496,7 @@
 
         <!-- Wrap Up -->
 
-        <section data-markdown class="nav center">
+        <section data-markdown class="nav">
           <textarea data-template>
             ## Have Fun with Nerves! 💜
             ![GregMefford](img/headshot_glowsticks.jpeg) <!-- .element: class="plain" style="height: 6em" -->
