@@ -39,12 +39,28 @@
 
               ----
 
-              LoneStar ElixirConf - 2018-02-22
+              ElixirConf US 2018 - 2018-09-04 + 05
 
-              Greg Mefford (@ferggo)
+              Greg Mefford &amp; Tim Mecklem
 
-              ![GregMefford](img/GregMefford.jpg) <!-- .element: class="plain" style="height: 4em" -->
-              ![Le Tote](img/lt_logo.png) <!-- .element: class="plain" style="height: 4em" -->
+              ![GregMefford](img/headshot_glowsticks.jpeg) <!-- .element: class="plain" style="height: 6em" -->
+              ![Tim Mecklem](img/tim-mecklem.jpg) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Thanks, Bleacher Report!
+              ![GregMefford](img/headshot_glowsticks.jpeg) <!-- .element: class="plain" style="height: 10em" -->
+              ![Bleacher Report logo](img/BR_Logo_White.png) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Thanks, Gaslight!
+              ![Tim Mecklem](img/tim-mecklem.jpg) <!-- .element: class="plain" style="height: 10em" -->
+              ![Gaslight logo](img/gaslight.jpg) <!-- .element: class="plain" style="height: 10em" -->
             </textarea>
           </section>
 
@@ -65,10 +81,8 @@
               * 8:30 AM - 10:00 AM (1:30)
                 * Welcome / Overview
                 * Build some Hardware
-                * Elixir for Embedded
-                * Nerves Concepts
-                * Phoenix for Embedded
                 * Pre-Burned Firmware!
+                * Project Overview
               *  10:00 AM - 10:30 AM (0:30)
                 * Break (and help resolve issues)
             </textarea>
@@ -79,11 +93,13 @@
               # Tentative schedule 🕘
 
               *  10:30 AM - 12:00 PM (1:30)
+                * Elixir for Embedded
+                * Nerves Concepts
                 * Streaming Video
+                * Application Structure
                 * Custom Nerves Systems
-                * Scanning Barcodes
               *  12:00 PM - 1:30 PM (1:30)
-                * Lunch (and Play with `eye` firmware)
+                * Lunch (and explore Buildroot)
             </textarea>
           </section>
 
@@ -92,15 +108,15 @@
               # Tentative schedule 🕘
 
               *  1:30 PM - 3:00 PM (1:30)
+                * Scanning Barcodes
                 * GraphQL APIs
-                * Adding Phoenix
-                * Phoenix Channels
-                * GraphQL Subscriptions
               *  3:00 PM - 3:30 PM (0:30)
                 * Break
               *  3:30 PM - 5:00 PM (1:30)
-                * Exercises
-                * Build / Lab time
+                * Adding Phoenix
+                * Phoenix Channels
+                * GraphQL Subscriptions
+                * Play / Lab time
             </textarea>
           </section>
 
@@ -144,7 +160,7 @@
             <textarea data-template>
               # Electronics Safety
 
-              * Touch some grounded metal (like your MacBook)
+              * Touch some grounded metal (like your laptop)
               * It's technically not fine, but it'll probably be fine
               * Be gentle with the ribbon cables/connectors
             </textarea>
@@ -154,6 +170,12 @@
           </section>
 
           <section data-background-image="img/hardware_assembly_02.jpg" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/hardware_assembly_07.jpg" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/hardware_assembly_06.jpg" data-background-size="contain">
           </section>
 
           <section data-background-image="img/hardware_assembly_03.jpg" data-background-size="contain">
@@ -174,6 +196,149 @@
           <section data-background-image="img/hardware_assembly_08.jpg" data-background-size="contain">
           </section>
 
+        </section>
+
+        <!-- Quick Win Firmware / Project Overview -->
+
+        <section>
+
+          <section data-background-image="img/quick_win.jpg" data-background-size="contain">
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Eye
+
+              ![Eye](img/eye.jpg) <!-- .element: class="plain" style="height: 14em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Omni Eye
+
+              ![Eye](img/omni_eye.jpg) <!-- .element: class="plain" style="height: 14em" -->
+              <br/>
+              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Streaming Video with *Picam*
+              ![Picam](img/picam.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://github.com/electricshaman/picam](https://github.com/electricshaman/picam) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Scanning Barcodes with *Zbar*
+              ![zbar-elixir](img/zbar-elixir.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://github.com/GregMefford/zbar-elixir](https://github.com/GregMefford/zbar-elixir) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # GraphQL Queries, Mutations
+              # and Subscriptions
+
+              ![Live APIs with GraphQL Subscriptions - Bruce Williams and Ben Wilson](img/graphql_subscriptions.png) <!-- .element: class="plain" style="height: 10em" -->
+              <br/>
+              [Live APIs with GraphQL Subscriptions - Bruce Williams and Ben Wilson](https://youtu.be/PEckzwggd78) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Phoenix Channels
+              ![Channels](img/channels.png) <!-- .element: class="plain" style="height: 12em" -->
+
+              Notes:
+
+              Phoenix Channels also offer a great way to easily connect your devices
+
+              to a server, whether it's an app running in a browser or
+
+              a headless sensor device in the field.
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # *`nerves_init_gadget`*
+              ![USB Gadget Power](img/gadget_power.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://github.com/nerves-project/nerves_init_gadget](https://github.com/nerves-project/nerves_init_gadget) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # *`nerves_init_gadget`*
+              ![USB Gadget Composite Device](img/gadget_composite.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://github.com/nerves-project/nerves_init_gadget](https://github.com/nerves-project/nerves_init_gadget) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # *`nerves_init_gadget`*
+              * Config Ethernet and Serial over USB
+              * DHCP Server
+              * mDNS Responder (`nerves.local`)
+              * Manage Erlang Distribution
+              * `mix firmware.push` over SSH
+              * SSH console to IEx prompt
+            </textarea>
+          </section>
+
+          <section data-background-image="img/eye_barcode.png" data-background-size="contain">
+          </section>
+
+          <section data-background-image="img/eye_tunnel.png" data-background-size="contain">
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it on your Device
+              ``` bash
+              $ open http://nerves.local/
+              # Try scanning a barcode (you may need to reload
+              # the browser page after the device boots fully)
+
+              $ open http://nerves.local/graphiql
+              # Try running a query like:
+              # query {
+              #   config {
+              #     size {
+              #       width
+              #       height
+              #     }
+              #   }
+              # }
+              ```
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- Break Time! -->
+
+        <section data-markdown>
+          <textarea data-template>
+            # Break from 10:00 to 10:30 AM
+
+            * How is the pace?
+            * Any questions?
+            * Play with your shiny new hardware
+            * Mingle in the hall
+            * Get a snack, maybe?
+          </textarea>
         </section>
 
         <!-- Elixir for Embedded -->
@@ -651,30 +816,6 @@
               <br/>
               [Live APIs with GraphQL Subscriptions - Bruce Williams and Ben Wilson](https://youtu.be/PEckzwggd78) <!-- .element: class="attribution" -->
             </textarea>
-          </section>
-
-        </section>
-
-        <!-- Quick Win -->
-
-        <section>
-
-          <section data-background-image="img/quick_win.jpg" data-background-size="contain">
-          </section>
-
-          <section data-background-image="img/nerves_firmware.png" data-background-size="contain">
-          </section>
-
-          <section data-background-image="img/gadget_power.png" data-background-size="contain">
-          </section>
-
-          <section data-background-image="img/gadget_composite.png" data-background-size="contain">
-          </section>
-
-          <section data-background-image="img/eye_barcode.png" data-background-size="contain">
-          </section>
-
-          <section data-background-image="img/eye_tunnel.png" data-background-size="contain">
           </section>
 
         </section>
@@ -1431,6 +1572,20 @@
           <section data-markdown>
             <textarea data-template>
               # Try it in `iex`
+              If you want to try it on your laptop
+
+              you'll need `libjpeg` and `zbar` installed.
+              ``` bash
+              # NOTE: the zbar package brings in a bunch of
+              # other stuff, including imagemagick
+              $ brew install libjpeg zbar
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
               ``` bash
               $ cd ../eye
               $ mix deps.get
@@ -2013,6 +2168,7 @@
               ``` bash
               $ cd ../eye_ui/assets
               $ npm install
+              $ npm install -g brunch
               $ brunch build
               $ cd ../
               $ iex -S mix phx.server
@@ -2032,11 +2188,11 @@
               $ cd ../eye_fw
               $ mix deps.get
               $ mix firmware
-              $ mix firmware.push 192.168.24.1
+              $ mix firmware.push nerves.local
               # On OSX:
-              $ picocom /dev/tty.usbmodem<TAB> -b 115200
+              $ picocom /dev/tty.usbmodem<TAB>
               # On Linux (probably):
-              $ picocom /dev/ttyACM0 -b 115200
+              $ picocom /dev/ttyACM0
               ```
             </textarea>
           </section>
@@ -2183,8 +2339,8 @@
         controls: false,
         progress: false,
         transition: "fade",
-        width: 1024,
-        height: 768,
+        width: 1920,
+        height: 1080,
         center: false,
         pdfMaxPagesPerSlide: 1,
 
