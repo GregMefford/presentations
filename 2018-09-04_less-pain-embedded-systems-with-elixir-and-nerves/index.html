@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/customizations.css">
 
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/highlight/github.css">
 
     <!-- Printing and PDF exports -->
     <script>
@@ -583,7 +583,6 @@
 
               decode(<<0b01010101, 0b01010011>>) # => {2, 42, 83}
               ```
-              <!-- .element style="font-size: 15px" -->
 
               Notes:
               Let's pretend that we have an data sheet for an electronics component
@@ -611,7 +610,6 @@
               decode(<<0b00010101, 0b01010011>>) # => {0, 341, 3}
               decode(<<0b01010101, 0b01010011>>) # => {2, 42, 83}
               ```
-              <!-- .element style="font-size: 15px" -->
 
               Notes:
 
@@ -1082,10 +1080,8 @@
           </section>
 
           <section data-background-image="img/project_eye_ui.png" data-background-size="contain">
-            <img src="img/phoenix_is_not_your_application.jpg" class="plain fragment" style="height: 900px"/>
           </section>
           <section data-background-image="img/project_logos.png" data-background-size="contain">
-            <img src="img/phoenix_is_not_your_application.jpg" class="plain" style="height: 900px"/>
           </section>
           <section data-background-image="img/project_firmware.png" data-background-size="contain"> </section>
           <section data-background-image="img/project_nerves_deps.png" data-background-size="contain"> </section>
@@ -2323,10 +2319,12 @@
 
         <section>
 
-          <section data-markdown>
+          <section
+            data-markdown
+            data-background-image="img/project_logos.png"
+            data-background-size="contain">
             <textarea data-template>
               # Phoenix
-              ![Phoenix](img/phoenix_is_not_your_application.jpg) <!-- .element: class="plain" -->
             </textarea>
           </section>
 
