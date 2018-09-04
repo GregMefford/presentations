@@ -1430,7 +1430,7 @@
           <section data-markdown>
             <textarea data-template>
               ``` bash
-               Nerves /nerves/build > make save-defconfig
+               Nerves /nerves/build > make savedefconfig
                Nerves /nerves/build > exit
               ```
             </textarea>
@@ -1546,215 +1546,27 @@
             </textarea>
           </section>
 
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/mix.exs
-              defmodule Eye.MixProject do
-                # ...
+          <section data-background-image="img/step3_eye_scanner1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_eye_scanner2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_eye_scanner3.png" data-background-size="contain"> </section>
 
-                defp deps do
-                  [
-                    {:picam, "~> 0.2.0"},
-                    {:zbar, "~> 0.1.0"},
-                    {:cowboy, "~> 1.0.0"},
-                    {:plug, "~> 1.0"},
-                    {:poison, "~> 3.1.0"}
-                  ]
-                end
+          <section data-background-image="img/step3_eye_router1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_eye_router2.png" data-background-size="contain"> </section>
 
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
+          <section data-background-image="img/step3_eye_application.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_eye_mix.png" data-background-size="contain"> </section>
 
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/config/config.exs
-              config :eye, port: 4000
-              config :picam, camera: Picam.FakeCamera
-
-              config :logger, level: :debug, utc_log: true
-              config :logger, :console,
-                level: :debug,
-                format: "$dateT$time [$level] $message\n"
-              ```
-
-              ``` elixir
-              # eye_fw/config/config.exs
-              config :eye, port: 80
-              config :picam, camera: Picam.Camera
-
-              config :logger, level: :info, utc_log: true
-              config :logger, :console,
-                level: :info,
-                format: "$dateT$time [$level] $message\n"
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/application.ex
-              defmodule Eye.Application do
-                # ...
-                def start(_type, _args) do
-                  port = Application.get_env(:eye, :port)
-                  picam_camera = Application.get_env(:picam, :camera)
-
-                  children = [
-                    child_spec_no_args(picam_camera),
-                    Eye.BarcodeScanner,
-                    Plug.Adapters.Cowboy.child_spec(:http, Eye.Router, [], [port: port])
-                  ]
-
-                  opts = [strategy: :rest_for_one, name: Eye.Supervisor]
-                  Supervisor.start_link(children, opts)
-                end
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/barcode_scanner.ex
-              defmodule Eye.BarcodeScanner do
-                use GenServer
-                alias Eye.Camera
-
-                # BarcodeScanner API
-
-                def next_scan(timeout \\ 10_000) do
-                  GenServer.call(__MODULE__, :next_scan, timeout)
-                end
-
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/barcode_scanner.ex
-              defmodule Eye.BarcodeScanner do
-                # ...
-
-                # GenServer API
-
-                def start_link(opts \\ []) do
-                  GenServer.start_link(__MODULE__, opts, name: __MODULE__)
-                end
-
-                def init(_opts) do
-                  send(self(), :scan_next_frame)
-                  {:ok, []}
-                end
-
-                def handle_call(:next_scan, from, state) do
-                  {:noreply, [from | state]}
-                end
-
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/barcode_scanner.ex
-              defmodule Eye.BarcodeScanner do
-                # ...
-
-                def handle_info(:scan_next_frame, state) do
-                  {:ok, symbols} =
-                    Camera.next_frame()
-                    |> Zbar.scan()
-
-                  dispatch(symbols, state)
-
-                  send(self(), :scan_next_frame)
-                  {:noreply, []}
-                end
-
-                # Helpers
-
-                defp dispatch(symbols, requests) do
-                  Enum.each(requests, & GenServer.reply(&1, symbols))
-                end
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/router.ex
-              defmodule Eye.Router do
-                # ...
-                forward "/video.mjpg", to: Eye.JPEGStreamer
-
-                get "/barcodes.json" do
-                  response =
-                    Eye.BarcodeScanner.next_scan()
-                    |> format_symbols()
-                    |> Poison.encode!()
-
-                  conn
-                  |> put_resp_header("Age", "0")
-                  |> put_resp_header("Cache-Control", "no-cache, private")
-                  |> put_resp_header("Pragma", "no-cache")
-                  |> put_resp_header("Content-Type", "text/json")
-                  |> send_resp(200, response)
-                end
-
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/router.ex
-              defmodule Eye.Router do
-                # ...
-                defp format_symbols(nil), do: []
-                defp format_symbols(symbols) do
-                  Enum.map(symbols, & format_symbol/1)
-                end
-
-                defp format_symbol(%Zbar.Symbol{} = symbol) do
-                  symbol
-                  |> Map.delete(:__meta__)
-                  |> Map.update!(:points, & format_points/1)
-                end
-
-                defp format_points(points) do
-                  Enum.map(points, & format_point/1)
-                end
-
-                defp format_point({x, y}), do: %{x: x, y: y}
-              end
-              ```
-            </textarea>
-          </section>
+          <section data-background-image="img/step3_eye_config.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_fw_config.png" data-background-size="contain"> </section>
 
           <section data-markdown>
             <textarea data-template>
               # Test images
-              ![test image](img/1280_720.jpg) <!-- .element: class="plain" -->
+              * 1920_1080.jpg
+              * 1280_720.jpg
+              * 640_480.jpg
+
+              ![test image](img/1280_720.jpg) <!-- .element: class="plain" style="height: 10em" -->
             </textarea>
           </section>
 
@@ -1780,7 +1592,7 @@
               $ mix deps.get
               $ iex -S mix
               ```
-              ![iex barcodes](img/step3_iex_scan_barcode.png) <!-- .element: class="plain" -->
+              ![iex barcodes](img/step3_iex_scan_barcode.png) <!-- .element: class="plain" style="width: 90%" -->
             </textarea>
           </section>
 
@@ -1791,28 +1603,40 @@
               $ cd ../eye_fw
               $ mix deps.get
               $ mix firmware
-              $ mix firmware.push 192.168.24.1
+              $ mix firmware.push nerves.local
               ```
             </textarea>
           </section>
 
           <section data-markdown>
             <textarea data-template>
-              # Serial console
+              # SSH to IEx Console
+              ``` bash
+              # This will auth with the SSH key
+              # you configured in your firmware
+              $ ssh nerves.local
+              # To exit, type <RET>~.
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Serial IEx Console
               ``` bash
               # On OSX:
-              $ picocom /dev/tty.usbmodem<TAB> -b 115200
+              $ picocom /dev/tty.usbmodem<TAB>
               # On Linux (probably):
-              $ picocom /dev/ttyACM0 -b 115200
+              $ picocom /dev/ttyACM0
+              # To exit, type CTRL-A CTRL-X
               ```
-              ![picocom](img/step3_picocom.png) <!-- .element: class="plain" -->
             </textarea>
           </section>
 
           <section data-markdown>
             <textarea data-template>
               ``` bash
-              $ watch curl -s http://192.168.24.1/barcodes.json
+              $ watch curl -s http://nerves.local/barcodes.json
               ```
               ![watch barcodes](img/step3_watch_barcodes.png) <!-- .element: class="plain" -->
             </textarea>
@@ -1826,9 +1650,9 @@
 
           <section data-markdown class="nav">
             <textarea data-template>
-              # GraphQL
-              ![GraphiQL](img/step4_graphiql_query.png) <!-- .element: class="plain" -->
-              ![GraphiQL](img/step4_graphiql_mutation.png) <!-- .element: class="plain" -->
+              # Step 4 - GraphQL
+              ![GraphiQL](img/step4_graphiql_query.png) <!-- .element: class="plain" style="width: 70%" -->
+              ![GraphiQL](img/step4_graphiql_mutation.png) <!-- .element: class="plain" style="width: 70%" -->
             </textarea>
           </section>
 
@@ -1850,294 +1674,27 @@
             </textarea>
           </section>
 
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/configuration.ex
-              defmodule Eye.Configuration do
-                @moduledoc """
-                This camera configuration struct holds on to the current state of each
-                `Picam` camera setting that the `Eye` application supports:
+          <section data-background-image="img/step4_schema1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step4_schema2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step4_schema3.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step4_schema_camera.png" data-background-size="contain"> </section>
 
-                * `size`: The image resolution as a map of `%{width: w, height: h}`.
-                """
+          <section data-background-image="img/step4_resolvers_camera.png" data-background-size="contain"> </section>
 
-                defstruct [ size: %{width: 1280, height: 720} ]
+          <section data-background-image="img/step4_camera1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step4_camera2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step4_camera3.png" data-background-size="contain"> </section>
 
-                @typedoc @moduledoc
-                @type t ::
-                  %__MODULE__{
-                    size: dimensions()
-                  }
-                @type dimensions ::
-                  %{width: non_neg_integer(), height: non_neg_integer()}
-              end
-              ```
-            </textarea>
-          </section>
+          <section data-background-image="img/step4_application.png" data-background-size="contain"> </section>
 
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/camera.ex
-              defmodule Eye.Camera do
-                use GenServer
-                alias Eye.Configuration
-                require Logger
+          <section data-background-image="img/step4_streamer.png" data-background-size="contain"> </section>
 
-                # Public API
+          <section data-background-image="img/step4_config.png" data-background-size="contain"> </section>
 
-                def get_config(), do: GenServer.call(__MODULE__, :get_config)
+          <section data-background-image="img/step4_router1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step4_router2.png" data-background-size="contain"> </section>
 
-                def set_size(width, height) do
-                  GenServer.call(__MODULE__, {:set_size, width, height})
-                end
-
-                defdelegate next_frame(), to: Picam
-
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/camera.ex
-              defmodule Eye.Camera do
-                # ...
-
-                # GenServer API
-
-                def start_link(opts \\ []) do
-                  GenServer.start_link(__MODULE__, opts, name: __MODULE__)
-                end
-
-                def init(_opts) do
-                  Logger.info("Configuring camera")
-                  conf = %Configuration{}
-                  Picam.set_size(conf.size.width, conf.size.height)
-                  {:ok, conf}
-                end
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/camera.ex
-              defmodule Eye.Camera do
-                # ...
-
-                def handle_call(:get_config, _from, conf), do: {:reply, conf, conf}
-
-                def handle_call({:set_size, width, height}, _from, conf) do
-                  case Picam.set_size(width, height) do
-                    :ok ->
-                      conf = %{conf | size: %{width: width, height: height}}
-                      {:reply, :ok, conf}
-
-                    err ->
-                      {:reply, err, conf}
-                  end
-                end
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/application.ex
-              defmodule Eye.Application do
-                # ...
-
-                  children = [
-                    child_spec_no_args(picam_camera),
-                    Eye.Camera,
-                    Eye.BarcodeScanner,
-                    Plug.Adapters.Cowboy.child_spec(:http, Eye.Router, [], [port: port])
-                  ]
-
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ![remove camera config from streamer](img/step4_remove_camera_config_from_streamer.png) <!-- .element: class="plain" -->
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/mix.exs
-              defmodule Eye.MixProject do
-                # ...
-
-                defp deps do
-                  [
-                    {:picam, "~> 0.2.0"},
-                    {:zbar, "~> 0.1.0"},
-                    {:cowboy, "~> 1.0.0"},
-                    {:plug, "~> 1.0"},
-                    {:absinthe, "~> 1.4"},
-                    {:absinthe_plug, "~> 1.4"},
-                    {:poison, "~> 3.1.0"}
-                  ]
-                end
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/router.ex
-              defmodule Eye.Router do
-                use Plug.Router
-
-                plug Plug.Logger
-                plug Plug.Parsers,
-                  parsers: [
-                    :urlencoded,
-                    :multipart,
-                    :json,
-                    Absinthe.Plug.Parser
-                  ],
-                  pass: ["*/*"],
-                  json_decoder: Poison
-
-                plug :match
-                plug :dispatch
-
-                # ...
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/router.ex
-              defmodule Eye.Router do
-                # ...
-
-                forward "/graphql",
-                  to: Absinthe.Plug,
-                  init_opts: [schema: Eye.Schema]
-
-                forward "/graphiql",
-                  to: Absinthe.Plug.GraphiQL,
-                  init_opts: [
-                    schema: Eye.Schema,
-                    interface: :simple
-                  ]
-
-                match _ do
-                  send_resp(conn, 404, "Oops. Try /")
-                end
-
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/schema.ex
-              defmodule Eye.Schema do
-                use Absinthe.Schema
-
-                import_types Absinthe.Type.Custom
-                import_types Eye.Schema.CameraTypes
-
-                # ...
-              end
-
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/schema.ex
-              defmodule Eye.Schema do
-                # ...
-                alias Eye.Resolvers
-
-                query name: "Query" do
-                  @desc "Get current camera configuration"
-                  field :config, :camera_config do
-                    resolve &Resolvers.Camera.get_config/3
-                  end
-                end
-
-                mutation name: "Mutation" do
-                  @desc "Set camera resolution"
-                  field :size, :camera_config do
-                    arg :width, non_null(:integer)
-                    arg :height, non_null(:integer)
-                    resolve &Resolvers.Camera.set_size/3
-                  end
-                end
-              end
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/schema/camera.ex
-              defmodule Eye.Schema.CameraTypes do
-                use Absinthe.Schema.Notation
-
-                @desc "Camera configuration"
-                object :camera_config do
-                  field :size, :dimensions
-                end
-
-                @desc "Image dimensions"
-                object :dimensions do
-                  field :width, :integer
-                  field :height, :integer
-                end
-              end
-
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ``` elixir
-              # eye/lib/eye/resolvers/camera.ex
-              defmodule Eye.Resolvers.Camera do
-
-                def get_config(_parent, _args, _resolution) do
-                  {:ok, Eye.Camera.get_config()}
-                end
-
-                def set_size(_parent, args, _resolution) do
-                  Eye.Camera.set_size(args[:width], args[:height])
-                  {:ok, Eye.Camera.get_config()}
-                end
-              end
-              ```
-            </textarea>
-          </section>
+          <section data-background-image="img/step4_mix.png" data-background-size="contain"> </section>
 
           <section data-markdown>
             <textarea data-template>
@@ -2177,11 +1734,11 @@
               $ cd ../eye_fw
               $ mix deps.get
               $ mix firmware
-              $ mix firmware.push 192.168.24.1
+              $ mix firmware.push nerves.local
               # On OSX:
-              $ picocom /dev/tty.usbmodem<TAB> -b 115200
+              $ picocom /dev/tty.usbmodem<TAB>
               # On Linux (probably):
-              $ picocom /dev/ttyACM0 -b 115200
+              $ picocom /dev/ttyACM0
               ```
             </textarea>
           </section>
@@ -2240,7 +1797,8 @@
               # to make a new Phoenix application
               $ cd ../
               # If you don't already have the Phoenix archive installed:
-              $ mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez
+              $ mix archive.install \
+                  https://github.com/phoenixframework/archives/raw/master/phx_new.ez
               $ mix phx.new eye_ui --no-ecto
               ```
             </textarea>
@@ -2269,6 +1827,7 @@
               ✅ │   ├── prod.secret.exs
               ✅ │   └── test.exs
               ```
+              <!-- .element style="font-size: 16px" -->
             </textarea>
           </section>
 
@@ -2294,6 +1853,7 @@
               ✅ │   └── eye_ui_web.ex
               ✅ ├── mix.exs
               ```
+              <!-- .element style="font-size: 16px" -->
             </textarea>
           </section>
 
@@ -2316,6 +1876,7 @@
           <section data-background-image="img/step5_rename_things_2.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_remove_plug_from_eye_1.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_remove_plug_from_eye_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_remove_plug_from_eye_3.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_eye_ui_router.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_eye_ui_root_plug.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_index_html.png" data-background-size="contain"> </section>
@@ -2333,14 +1894,7 @@
           </section>
 
           <section data-background-image="img/step5_eye_ui_config_prod.png" data-background-size="contain"> </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              ![fw config](img/step5_eye_fw_config_1.png) <!-- .element: class="plain" -->
-              ![fw config](img/step5_eye_fw_config_2.png) <!-- .element: class="plain" -->
-            </textarea>
-          </section>
-
+          <section data-background-image="img/step5_eye_fw_config.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_eye_fw_config_host.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_eye_fw_config_target.png" data-background-size="contain"> </section>
 
@@ -2475,11 +2029,11 @@
               $ cd ../eye_fw
               $ mix deps.get
               $ mix firmware
-              $ mix firmware.push 192.168.24.1
+              $ mix firmware.push nerves.local
               # On OSX:
-              $ picocom /dev/tty.usbmodem<TAB> -b 115200
+              $ picocom /dev/tty.usbmodem<TAB>
               # On Linux (probably):
-              $ picocom /dev/ttyACM0 -b 115200
+              $ picocom /dev/ttyACM0
               ```
             </textarea>
           </section>
