@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Build a Smart Camera with Nerves</title>
+
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/white.css">
+    <link rel="stylesheet" href="../css/customizations.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../css/highlight/github.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Step 5 - Phoenix -->
+
+        <section>
+
+          <section
+            data-markdown
+            data-background-image="img/project_logos.png"
+            data-background-size="contain">
+            <textarea data-template>
+              # Phoenix
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Shortcut
+
+              Check out the `step5` branch
+
+              from the `omni_eye` repo.
+
+              ``` bash
+              $ git checkout step5
+              ```
+
+              The following slides show how
+
+              we arrived there step-by-step.
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              # Go back to the omni_eye directory
+              # to make a new Phoenix application
+              $ cd ../
+              # If you don't already have the Phoenix archive installed:
+              $ mix archive.install \
+                  https://github.com/phoenixframework/archives/raw/master/phx_new.ez
+              $ mix phx.new eye_ui --no-ecto
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              Phoenix includes a lot of stuff we won't be using.
+
+              Let's remove it all to reduce the noise.
+              ``` bash
+              ✅ eye_ui
+              ✅ ├── assets
+              ✅ │   ├── brunch-config.js
+              ✅ │   ├── css
+              ✅ │   │   ├── app.css
+              ✅ │   │   └── phoenix.css
+              ✅ │   ├── js
+              ✅ │   │   ├── app.js
+              ✅ │   │   └── socket.js
+              ✅ │   ├── node_modules
+              ✅ ├── config
+              ✅ │   ├── config.exs
+              ✅ │   ├── dev.exs
+              ✅ │   ├── prod.exs
+              ✅ │   ├── prod.secret.exs
+              ✅ │   └── test.exs
+              ```
+              <!-- .element style="font-size: 16px" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              Phoenix includes a lot of stuff we won't be using.
+
+              Let's remove it all to reduce the noise.
+              ``` bash
+              ✅ eye_ui
+              ✅ ├── lib
+              ✅ │   ├── eye_ui
+              ✅ │   │   └── application.ex
+              ✅ │   ├── eye_ui.ex
+              ✅ │   ├── eye_ui_web
+              ✅ │   │   ├── channels
+              ❌ │   │   ├── controllers
+              ✅ │   │   ├── endpoint.ex
+              ✅ │   │   ├── gettext.ex
+              ✅ │   │   ├── router.ex
+              ❌ │   │   ├── templates
+              ❌ │   │   └── views
+              ✅ │   └── eye_ui_web.ex
+              ✅ ├── mix.exs
+              ```
+              <!-- .element style="font-size: 16px" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              Phoenix includes a lot of stuff we won't be using.
+
+              Let's remove it all to reduce the noise.
+              ``` bash
+              $ cd eye_ui
+              $ rm -rf lib/eye_ui_web/controllers
+              $ rm -rf lib/eye_ui_web/templates
+              $ rm -rf lib/eye_ui_web/views
+              ```
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step5_move_things.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_rename_things_1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_rename_things_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_remove_plug_from_eye_1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_remove_plug_from_eye_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_remove_plug_from_eye_3.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_router.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_root_plug.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_index_html.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_endpoint.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_deps.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_fw_deps.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_config.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_config_base.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ![ui config base](img/step5_eye_ui_config_dev.png) <!-- .element: class="plain" -->
+              ![ui config base](img/step5_eye_ui_config_test.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step5_eye_ui_config_prod.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_fw_config.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_fw_config_host.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_fw_config_target.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
+              ``` bash
+              $ cd ../eye
+              $ mix deps.get
+              $ iex -S mix
+              ```
+              ![eye in iex](img/step5_eye_in_iex.png) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
+              ``` bash
+              $ cd ../eye_ui/assets
+              $ npm install
+              $ npm install -g brunch
+              $ brunch build
+              $ cd ../
+              $ iex -S mix phx.server
+              ```
+              ![graphql mutation](img/step4_graphiql_mutation.png) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it on your Device
+              ``` bash
+              $ cd assets
+              $ brunch build --production
+              $ cd ../ # to the eye_ui directory
+              $ mix phx.digest
+              $ cd ../eye_fw
+              $ mix deps.get
+              $ mix firmware
+              $ mix firmware.push nerves.local
+              # On OSX:
+              $ picocom /dev/tty.usbmodem<TAB>
+              # On Linux (probably):
+              $ picocom /dev/ttyACM0
+              ```
+            </textarea>
+          </section>
+
+        </section>
+
+      </div>
+    </div>
+
+    <script src="../lib/js/head.min.js"></script>
+    <script src="../js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        controls: false,
+        progress: false,
+        transition: 'none',
+        width: 1920,
+        height: 1080,
+        center: false,
+        pdfMaxPagesPerSlide: 1,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: '../plugin/markdown/marked.js' },
+          { src: '../plugin/markdown/markdown.js' },
+          { src: '../plugin/notes/notes.js', async: true },
+          { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+
+      for (var slide of document.getElementsByTagName('section')){
+        if (slide.getAttribute('data-markdown') == "") {
+          slide.setAttribute('data-separator-notes', '^Notes:');
+        }
+
+        if (!(slide.getAttribute('data-background') ||
+              slide.getAttribute('data-background-image') ||
+              slide.getAttribute('data-background-video') ||
+              slide.getAttribute('data-background-iframe'))){
+          slide.setAttribute('data-background-image', '../img/circuit.svg');
+          slide.setAttribute('data-background-color', '#DFDBE5');
+          slide.setAttribute('data-background-size', '200px');
+          slide.setAttribute('data-background-repeat', 'repeat');
+        }
+      }
+    </script>
+  </body>
+</html>

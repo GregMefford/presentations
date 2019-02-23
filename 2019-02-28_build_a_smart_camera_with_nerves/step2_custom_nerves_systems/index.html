@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Build a Smart Camera with Nerves</title>
+
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/white.css">
+    <link rel="stylesheet" href="../css/customizations.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../css/highlight/github.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Step 2 - Custom System with zbar -->
+
+        <section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Step 2 - Custom Nerves Systems
+              ![custom system docs](img/custom_system_hexdocs.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://hexdocs.pm/nerves/systems.html#customizing-your-own-nerves-system](https://hexdocs.pm/nerves/systems.html#customizing-your-own-nerves-system) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Scanning Barcodes with *`zbar`*
+              ![zbar-elixir](img/zbar-elixir.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://github.com/GregMefford/zbar-elixir](https://github.com/GregMefford/zbar-elixir) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Shortcut
+              Check out the `step2` branch
+
+              from the `omni_eye` repo.
+
+              ``` bash
+              $ git checkout step2
+              ```
+
+              The following slides show how
+
+              we arrived there step-by-step.
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              # Leave the omni_eye directory
+              $ cd ../..
+              $ git clone https://github.com/nerves-project/nerves_system_rpi0.git
+              $ mv nerves_system_rpi0{,_zbar}
+              $ cd nerves_system_rpi0_zbar
+              $ mix deps.get
+              $ mix nerves.system.shell
+              ```
+              ![system shell](img/sys_shell_01.png) <!-- .element: class="plain" style="width: 90%" -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/sys_shell_02.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_03.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_04.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_05.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_06.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_07.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_08.png" data-background-size="contain"> </section>
+          <section data-background-image="img/sys_shell_09.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+               Nerves /nerves/build > make savedefconfig
+               Nerves /nerves/build > exit
+              ```
+            </textarea>
+          </section>
+
+          <section data-background-image="img/custom_system_diff_1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/custom_system_diff_2.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # 🎶 If you *liked* it then
+              # you should have put
+              # a *tag* on it 🎶
+
+              ``` bash
+              $ mix nerves.artifact
+              ```
+              ![Custom system Artifact](img/custom_system_artifact.png) <!-- .element: class="plain" style="width: 90%" -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/custom_system_release_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/custom_system_release_3.png" data-background-size="contain"> </section>
+
+        </section>
+
+        <!-- Rootfs Overlays -->
+
+        <section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # *`rootfs_overlay`*
+              ## Do you Need a Custom System?
+              ``` elixir
+              # eye_fw/config/config.exs
+
+              config :nerves, :firmware,
+                rootfs_overlay: "rootfs_overlay"
+              ```
+            </textarea>
+          </section>
+
+          <section data-background-image="img/nerves_overlays_1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/nerves_overlays_3.png" data-background-size="contain"> </section>
+          <section data-background-image="img/nerves_overlays_4.png" data-background-size="contain"> </section>
+
+        </section>
+
+        <section>
+
+          <section data-markdown data-background-image="img/step2_mix.png" data-background-size="contain">
+            <textarea data-template>
+              # Try it on your Device
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              $ cd ../omni_eye/eye_fw
+              $ export MIX_TARGET=rpi0_zbar
+              $ mix deps.get
+              $ mix firmware
+              # Assuming your device is still connected
+              $ mix firmware.push nerves.local
+              ```
+              ![mix firmware push](img/firmware_push.png) <!-- .element: class="plain" style="width: 90%" -->
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- Lunch Time! -->
+
+        <section data-markdown class="nav">
+          <textarea data-template>
+            # Lunch: 12:00 to 1:30 AM
+
+            * Poke around in the Buildroot menus
+            * Brainstorm projects
+            * How is the pace?
+            * Any questions?
+          </textarea>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="../lib/js/head.min.js"></script>
+    <script src="../js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        controls: false,
+        progress: false,
+        transition: 'none',
+        width: 1920,
+        height: 1080,
+        center: false,
+        pdfMaxPagesPerSlide: 1,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: '../plugin/markdown/marked.js' },
+          { src: '../plugin/markdown/markdown.js' },
+          { src: '../plugin/notes/notes.js', async: true },
+          { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+
+      for (var slide of document.getElementsByTagName('section')){
+        if (slide.getAttribute('data-markdown') == "") {
+          slide.setAttribute('data-separator-notes', '^Notes:');
+        }
+
+        if (!(slide.getAttribute('data-background') ||
+              slide.getAttribute('data-background-image') ||
+              slide.getAttribute('data-background-video') ||
+              slide.getAttribute('data-background-iframe'))){
+          slide.setAttribute('data-background-image', '../img/circuit.svg');
+          slide.setAttribute('data-background-color', '#DFDBE5');
+          slide.setAttribute('data-background-size', '200px');
+          slide.setAttribute('data-background-repeat', 'repeat');
+        }
+      }
+    </script>
+  </body>
+</html>

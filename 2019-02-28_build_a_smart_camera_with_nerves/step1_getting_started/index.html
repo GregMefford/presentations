@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Build a Smart Camera with Nerves</title>
+
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/white.css">
+    <link rel="stylesheet" href="../css/customizations.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../css/highlight/github.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Step 1 - Getting Started in IEx -->
+
+        <section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Step 1 - Getting Started
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Omni Eye
+
+              ![Eye](img/omni_eye.jpg) <!-- .element: class="plain" style="height: 14em" -->
+              <br/>
+              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye)
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Let's Stream some Video
+              ## with *Picam*
+
+              ![Picam](img/picam.png) <!-- .element: class="plain" style="height: 13em" -->
+              <br/>
+              [https://github.com/electricshaman/picam](https://github.com/electricshaman/picam) <!-- .element: class="attribution" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Shortcut
+
+              Check out the `step1` branch
+
+              from the `omni_eye` repo.
+
+              ``` bash
+              $ git clone https://github.com/GregMefford/omni_eye.git
+              $ cd omni_eye
+              $ git checkout step1
+              ```
+
+              The following slides show how
+
+              we arrived there step-by-step.
+
+              [https://github.com/GregMefford/omni_eye](https://github.com/GregMefford/omni_eye)
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Getting Started
+
+              ``` bash
+              $ mkdir omni_eye
+              $ cd omni_eye
+              $ mix new eye --sup
+              $ mix nerves.new eye_fw --init-gadget
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Getting Started
+
+              ``` bash
+              omni_eye
+              ├── eye
+              │   ├── README.md
+              │   ├── config
+              │   ├── lib
+              │   ├── mix.exs
+              │   └── test
+              └── eye_fw
+                  ├── README.md
+                  ├── _build
+                  ├── config
+                  ├── deps
+                  ├── lib
+                  ├── mix.exs
+                  ├── mix.lock.host
+                  ├── rel
+                  └── test
+              ```
+              <!-- .element style="font-size: 18px" -->
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step1_eye_cleanup1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_cleanup2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_mix.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_camera.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_router.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_streamer.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_application.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_eye_config.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
+              ``` bash
+              $ cd eye
+              $ mix deps.get
+              $ iex -S mix
+              ```
+              ![iex camera](img/step1_iex_camera.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- Step 1 - First Firmware -->
+
+        <section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # *`nerves_init_gadget`*
+              * Config Ethernet and Serial over USB
+              * DHCP Server
+              * mDNS Responder (`nerves.local`)
+              * Manage Erlang Distribution
+              * `mix firmware.push` over SSH
+              * SSH console to IEx prompt
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step1_fw_cleanup1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_cleanup2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_mix1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_mix2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_config.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_config_key.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              $ cd ../eye_fw
+              $ export MIX_TARGET=rpi0
+              $ mix deps.get
+              $ mix firmware
+              # Extract your SD card from the Zero
+              # Connect it to your laptop
+              $ mix firmware.burn
+              # Put it back into your Zero
+              ```
+              ![zero retention tab](img/hardware_assembly_07.jpg) <!-- .element: class="plain" style="height: 10em" -->
+              ![tilt up the zero](img/hardware_assembly_06.jpg) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it on your Device
+              ``` bash
+              # Plug in the USB cable and wait about 15 seconds
+              $ open http://nerves.local
+              ```
+              ![USB cable](img/hardware_assembly_08.jpg) <!-- .element: class="plain" style="height: 10em" -->
+              ![Infinity Tunnel](img/eye_tunnel.png) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # SSH to IEx Console
+              ``` bash
+              # This will auth with the SSH key
+              # you configured in your firmware
+              $ ssh nerves.local
+              # To exit, type <RET>~.
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Serial IEx Console
+              ``` bash
+              # On OSX:
+              $ picocom /dev/tty.usbmodem<TAB>
+              # On Linux (probably):
+              $ picocom /dev/ttyACM0
+              # To exit, type CTRL-A CTRL-X
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # RingLogger
+              ``` elixir
+              # Similar to tail -f
+              iex> RingLogger.attach
+
+              # Similar to cat /var/log/messages
+              iex> RingLogger.tail
+
+              # Search for something
+              iex> RingLogger.grep(~r/[Nn]eedle/)
+              16:55:41.614 [info]  Needle in a haystack
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # RingLogger
+              ``` elixir
+              # Process log messages with Elixir
+              iex> RingLogger.get()
+              [
+                debug: {Logger, "8", {{2018, 2, 5}, {17, 44, 7, 675}}, [
+                  pid: #PID<0.139.0>,
+                  application: :example,
+                  module: Example,
+                  function: "log/1",
+                  file: "ring_logger/example/lib/example.ex",
+                  line: 11
+                ]},
+                # ...
+              ]
+              ```
+            </textarea>
+          </section>
+
+        </section>
+
+      </div>
+    </div>
+
+    <script src="../lib/js/head.min.js"></script>
+    <script src="../js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        controls: false,
+        progress: false,
+        transition: 'none',
+        width: 1920,
+        height: 1080,
+        center: false,
+        pdfMaxPagesPerSlide: 1,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: '../plugin/markdown/marked.js' },
+          { src: '../plugin/markdown/markdown.js' },
+          { src: '../plugin/notes/notes.js', async: true },
+          { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+
+      for (var slide of document.getElementsByTagName('section')){
+        if (slide.getAttribute('data-markdown') == "") {
+          slide.setAttribute('data-separator-notes', '^Notes:');
+        }
+
+        if (!(slide.getAttribute('data-background') ||
+              slide.getAttribute('data-background-image') ||
+              slide.getAttribute('data-background-video') ||
+              slide.getAttribute('data-background-iframe'))){
+          slide.setAttribute('data-background-image', '../img/circuit.svg');
+          slide.setAttribute('data-background-color', '#DFDBE5');
+          slide.setAttribute('data-background-size', '200px');
+          slide.setAttribute('data-background-repeat', 'repeat');
+        }
+      }
+    </script>
+  </body>
+</html>
