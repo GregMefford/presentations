@@ -65,76 +65,8 @@
               # to make a new Phoenix application
               $ cd ../
               # If you don't already have the Phoenix archive installed:
-              $ mix archive.install \
-                  https://github.com/phoenixframework/archives/raw/master/phx_new.ez
+              $ mix archive.install hex phx_new 1.4.1
               $ mix phx.new eye_ui --no-ecto
-              ```
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              Phoenix includes a lot of stuff we won't be using.
-
-              Let's remove it all to reduce the noise.
-              ``` bash
-              ✅ eye_ui
-              ✅ ├── assets
-              ✅ │   ├── brunch-config.js
-              ✅ │   ├── css
-              ✅ │   │   ├── app.css
-              ✅ │   │   └── phoenix.css
-              ✅ │   ├── js
-              ✅ │   │   ├── app.js
-              ✅ │   │   └── socket.js
-              ✅ │   ├── node_modules
-              ✅ ├── config
-              ✅ │   ├── config.exs
-              ✅ │   ├── dev.exs
-              ✅ │   ├── prod.exs
-              ✅ │   ├── prod.secret.exs
-              ✅ │   └── test.exs
-              ```
-              <!-- .element style="font-size: 16px" -->
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              Phoenix includes a lot of stuff we won't be using.
-
-              Let's remove it all to reduce the noise.
-              ``` bash
-              ✅ eye_ui
-              ✅ ├── lib
-              ✅ │   ├── eye_ui
-              ✅ │   │   └── application.ex
-              ✅ │   ├── eye_ui.ex
-              ✅ │   ├── eye_ui_web
-              ✅ │   │   ├── channels
-              ❌ │   │   ├── controllers
-              ✅ │   │   ├── endpoint.ex
-              ✅ │   │   ├── gettext.ex
-              ✅ │   │   ├── router.ex
-              ❌ │   │   ├── templates
-              ❌ │   │   └── views
-              ✅ │   └── eye_ui_web.ex
-              ✅ ├── mix.exs
-              ```
-              <!-- .element style="font-size: 16px" -->
-            </textarea>
-          </section>
-
-          <section data-markdown>
-            <textarea data-template>
-              Phoenix includes a lot of stuff we won't be using.
-
-              Let's remove it all to reduce the noise.
-              ``` bash
-              $ cd eye_ui
-              $ rm -rf lib/eye_ui_web/controllers
-              $ rm -rf lib/eye_ui_web/templates
-              $ rm -rf lib/eye_ui_web/views
               ```
             </textarea>
           </section>
@@ -142,12 +74,20 @@
           <section data-background-image="img/step5_move_things.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_rename_things_1.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_rename_things_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_rename_things_3.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_rename_things_4.png" data-background-size="contain"> </section>
+
           <section data-background-image="img/step5_remove_plug_from_eye_1.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_remove_plug_from_eye_2.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_remove_plug_from_eye_3.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_remove_plug_from_eye_4.png" data-background-size="contain"> </section>
+
           <section data-background-image="img/step5_eye_ui_router.png" data-background-size="contain"> </section>
-          <section data-background-image="img/step5_eye_ui_root_plug.png" data-background-size="contain"> </section>
-          <section data-background-image="img/step5_index_html.png" data-background-size="contain"> </section>
+
+          <section data-background-image="img/step5_eye_ui_app_html.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_index_html.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step5_eye_ui_app_css.png" data-background-size="contain"> </section>
+
           <section data-background-image="img/step5_eye_ui_endpoint.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_eye_ui_deps.png" data-background-size="contain"> </section>
           <section data-background-image="img/step5_eye_fw_deps.png" data-background-size="contain"> </section>
@@ -156,8 +96,8 @@
 
           <section data-markdown>
             <textarea data-template>
-              ![ui config base](img/step5_eye_ui_config_dev.png) <!-- .element: class="plain" -->
-              ![ui config base](img/step5_eye_ui_config_test.png) <!-- .element: class="plain" -->
+              ![ui config dev](img/step5_eye_ui_config_dev.png) <!-- .element: class="plain" -->
+              ![ui config test](img/step5_eye_ui_config_test.png) <!-- .element: class="plain" -->
             </textarea>
           </section>
 
@@ -184,8 +124,8 @@
               ``` bash
               $ cd ../eye_ui/assets
               $ npm install
-              $ npm install -g brunch
-              $ brunch build
+              $ npm install --global webpack webpack-cli
+              $ webpack
               $ cd ../
               $ iex -S mix phx.server
               ```
@@ -198,7 +138,7 @@
               # Try it on your Device
               ``` bash
               $ cd assets
-              $ brunch build --production
+              $ webpack
               $ cd ../ # to the eye_ui directory
               $ mix phx.digest
               $ cd ../eye_fw
