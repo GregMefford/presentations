@@ -62,12 +62,15 @@
           <section data-background-image="img/step6_index_html.png" data-background-size="contain"> </section>
           <section data-background-image="img/step6_css_1.png" data-background-size="contain"> </section>
           <section data-background-image="img/step6_css_2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step6_app_html.png" data-background-size="contain"> </section>
+
           <section data-background-image="img/step6_schema_1.png" data-background-size="contain"> </section>
           <section data-background-image="img/step6_schema_2.png" data-background-size="contain"> </section>
           <section data-background-image="img/step6_schemas_barcode.png" data-background-size="contain"> </section>
           <section data-background-image="img/step6_resolvers_barcode.png" data-background-size="contain"> </section>
           <section data-background-image="img/step6_publisher.png" data-background-size="contain"> </section>
           <section data-background-image="img/step6_publishers_barcode.png" data-background-size="contain"> </section>
+
           <section data-background-image="img/step6_application.png" data-background-size="contain"> </section>
           <section data-background-image="img/step6_user_socket.png" data-background-size="contain"> </section>
           <section data-background-image="img/step6_package_json.png" data-background-size="contain"> </section>
@@ -84,11 +87,31 @@
               ``` bash
               $ cd ../eye_ui/assets
               $ npm install
-              $ brunch build
+              $ webpack
               $ cd ../
               $ iex -S mix phx.server
               ```
               ![graphql mutation](img/step4_graphiql_mutation.png) <!-- .element: class="plain" style="height: 6em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it on your Device
+              ``` bash
+              $ cd assets
+              $ webpack
+              $ cd ../ # to the eye_ui directory
+              $ mix phx.digest
+              $ cd ../eye_fw
+              $ mix deps.get
+              $ mix firmware
+              $ mix firmware.push nerves.local
+              # On OSX:
+              $ picocom /dev/tty.usbmodem<TAB>
+              # On Linux (probably):
+              $ picocom /dev/ttyACM0
+              ```
             </textarea>
           </section>
 
