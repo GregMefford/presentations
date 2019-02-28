@@ -71,7 +71,8 @@
               ``` bash
               # Leave the omni_eye directory
               $ cd ../..
-              $ git clone https://github.com/nerves-project/nerves_system_rpi0.git
+              $ git clone \
+                  https://github.com/nerves-project/nerves_system_rpi0.git
               $ mv nerves_system_rpi0{,_zbar}
               $ cd nerves_system_rpi0_zbar
               $ mix deps.get
@@ -111,6 +112,7 @@
               ``` bash
               $ mix nerves.artifact
               ```
+              <!-- .element style="font-size: 0.8em" -->
               ![Custom system Artifact](img/custom_system_artifact.png) <!-- .element: class="plain" style="width: 90%" -->
             </textarea>
           </section>
@@ -134,6 +136,7 @@
               config :nerves, :firmware,
                 rootfs_overlay: "rootfs_overlay"
               ```
+              <!-- .element style="font-size: 0.8em" -->
             </textarea>
           </section>
 
@@ -157,8 +160,10 @@
               $ mix deps.get
               $ mix firmware
               # Assuming your device is still connected
-              $ mix firmware.push nerves.local
+              $ mix firmware.gen.script
+              $ ./upload.sh
               ```
+              <!-- .element style="font-size: 0.7em" -->
               ![mix firmware push](img/firmware_push.png) <!-- .element: class="plain" style="width: 90%" -->
             </textarea>
           </section>
@@ -178,8 +183,8 @@
         controls: false,
         progress: false,
         transition: 'none',
-        width: 1920,
-        height: 1080,
+        width: 1024,
+        height: 768,
         center: false,
         pdfMaxPagesPerSlide: 1,
 

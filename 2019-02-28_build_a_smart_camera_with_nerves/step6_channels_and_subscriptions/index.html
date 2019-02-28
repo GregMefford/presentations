@@ -91,7 +91,7 @@
               $ cd ../
               $ iex -S mix phx.server
               ```
-              ![graphql mutation](img/step4_graphiql_mutation.png) <!-- .element: class="plain" style="height: 6em" -->
+              ![graphql mutation](img/step4_graphiql_mutation.png) <!-- .element: class="plain" style="height: 8em" -->
             </textarea>
           </section>
 
@@ -106,7 +106,7 @@
               $ cd ../eye_fw
               $ mix deps.get
               $ mix firmware
-              $ mix firmware.push nerves.local
+              $ ./upload.sh
               # On OSX:
               $ picocom /dev/tty.usbmodem<TAB>
               # On Linux (probably):
@@ -144,8 +144,8 @@
         controls: false,
         progress: false,
         transition: 'none',
-        width: 1920,
-        height: 1080,
+        width: 1024,
+        height: 768,
         center: false,
         pdfMaxPagesPerSlide: 1,
 

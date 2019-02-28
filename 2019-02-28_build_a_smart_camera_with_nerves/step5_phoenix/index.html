@@ -36,7 +36,7 @@
             data-background-image="img/project_logos.png"
             data-background-size="contain">
             <textarea data-template>
-              # Phoenix
+              # Step 5 - Phoenix
             </textarea>
           </section>
 
@@ -64,7 +64,7 @@
               # Go back to the omni_eye directory
               # to make a new Phoenix application
               $ cd ../
-              # If you don't already have the Phoenix archive installed:
+              # Install Phoenix archive:
               $ mix archive.install hex phx_new 1.4.1
               $ mix phx.new eye_ui --no-ecto
               ```
@@ -144,7 +144,7 @@
               $ cd ../eye_fw
               $ mix deps.get
               $ mix firmware
-              $ mix firmware.push nerves.local
+              $ ./upload.sh
               # On OSX:
               $ picocom /dev/tty.usbmodem<TAB>
               # On Linux (probably):
@@ -168,8 +168,8 @@
         controls: false,
         progress: false,
         transition: 'none',
-        width: 1920,
-        height: 1080,
+        width: 1024,
+        height: 768,
         center: false,
         pdfMaxPagesPerSlide: 1,
 
