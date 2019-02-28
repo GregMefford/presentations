@@ -27,11 +27,93 @@
     <div class="reveal">
       <div class="slides">
 
+        <!-- Step 7 - Adding a new Feature -->
+
+        <section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Recap: Adding A
+              # Couple New Features
+              ![Snap and Image Effect Buttons](img/step7_new_features.png) <!-- .element: class="plain" style="height: 12em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Shortcut
+
+              Check out the `step7` branch
+
+              from the `omni_eye` repo.
+
+              ``` bash
+              $ git checkout step7
+              ```
+
+              The following slides show how
+
+              we arrived there step-by-step.
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step7_snap_router.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step7_snap_plug.png" data-background-size="contain"> </section>
+
+          <section data-background-image="img/step7_eye_camera_effect1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step7_eye_camera_effect2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step7_eye_configuration.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step7_eye_camera_effect3.png" data-background-size="contain"> </section>
+
+          <section data-background-image="img/step7_schema.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step7_schema_camera.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step7_resolver.png" data-background-size="contain"> </section>
+
+          <section data-background-image="img/step7_index_html.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step7_js_mutation.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step7_js_buttons.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
+              ``` bash
+              $ cd ../eye_ui/assets
+              $ npm install
+              $ webpack
+              $ cd ../
+              $ iex -S mix phx.server
+              ```
+              ![graphql mutation](img/step7_graphiql_mutation.png) <!-- .element: class="plain" style="height: 12em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it on your Device
+              ``` bash
+              $ cd assets
+              $ webpack
+              $ cd ../ # to the eye_ui directory
+              $ mix phx.digest
+              $ cd ../eye_fw
+              $ mix deps.get
+              $ mix firmware
+              $ ./upload.sh
+
+              # On OSX:
+              $ picocom /dev/tty.usbmodem<TAB>
+              # On Linux (probably):
+              $ picocom /dev/ttyACM0
+              ```
+            </textarea>
+          </section>
+
         <!-- Exercise / Lab Time -->
 
         <section data-markdown class="nav">
           <textarea data-template>
             # Exercise / Lab Time
+            # Maybe add another feature together?
           </textarea>
         </section>
 
@@ -40,13 +122,10 @@
         <section data-markdown class="nav">
           <textarea data-template>
             ## Have Fun with Nerves! 💜
-            ![GregMefford](img/headshot_glowsticks.jpeg) <!-- .element: class="plain" style="height: 6em" -->
-            ![Nerves Logo](img/nerves_logo.png) <!-- .element: class="plain" style="height: 6em" -->
-            ![Tim Mecklem](img/tim-mecklem.jpg) <!-- .element: class="plain" style="height: 6em" -->
+            ![GregMefford](../img/headshot_glowsticks.jpeg) <!-- .element: class="plain" style="height: 6em" -->
+            ![Nerves Logo](../img/nerves_logo.png) <!-- .element: class="plain" style="height: 6em" -->
 
             Greg Mefford (@ferggo)
-
-            Tim Mecklem (@tim_mecklem)
 
             Nerves (@NervesProject)
           </textarea>
