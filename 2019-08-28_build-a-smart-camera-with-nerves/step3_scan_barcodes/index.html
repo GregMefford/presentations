@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Build a Smart Camera with Nerves</title>
+
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/white.css">
+    <link rel="stylesheet" href="../css/customizations.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../css/highlight/github.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Step 3 - Scanning barcodes with zbar and Plug -->
+
+        <section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Step 3 - Let's Scan some Barcodes!
+              ![watch barcodes](img/step3_watch_barcodes.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Shortcut
+
+              Check out the `step3` branch
+
+              from the `omni_eye` repo.
+
+              ``` bash
+              $ git checkout step3
+              ```
+
+              The following slides show how
+
+              we arrived there step-by-step.
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step3_eye_scanner1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_eye_scanner2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_eye_scanner3.png" data-background-size="contain"> </section>
+
+          <section data-background-image="img/step3_eye_router1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_eye_router2.png" data-background-size="contain"> </section>
+
+          <section data-background-image="img/step3_eye_application.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_eye_mix.png" data-background-size="contain"> </section>
+
+          <section data-background-image="img/step3_eye_config.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step3_fw_config.png" data-background-size="contain"> </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Test images
+              * 1920_1080.jpg
+              * 1280_720.jpg
+              * 640_480.jpg
+
+              ![test image](img/1280_720.jpg) <!-- .element: class="plain" style="height: 10em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
+              If you want to try it on your laptop
+
+              you'll need `libjpeg` and `zbar` installed.
+              ``` bash
+              # NOTE: the zbar package brings in a bunch of
+              # other stuff, including imagemagick
+              $ brew install libjpeg zbar
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Try it in `iex`
+              ``` bash
+              $ cd ../eye
+              $ mix deps.get
+              $ iex -S mix
+              ```
+              ![iex barcodes](img/step3_iex_scan_barcode.png) <!-- .element: class="plain" style="width: 90%" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Push a firmware update
+              ``` bash
+              $ cd ../eye_fw
+              $ mix deps.get
+              $ mix firmware
+              $ ./upload.sh
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # SSH to IEx Console
+              ``` bash
+              # This will auth with the SSH key
+              # you configured in your firmware
+              $ ssh nerves.local
+              # To exit, type <RET>~.
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # Serial IEx Console
+              ``` bash
+              # On OSX:
+              $ picocom /dev/tty.usbmodem<TAB>
+              # On Linux (probably):
+              $ picocom /dev/ttyACM0
+              # To exit, type CTRL-A CTRL-X
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ``` bash
+              $ watch curl -s http://nerves.local/barcodes.json
+              ```
+              ![watch barcodes](img/step3_watch_barcodes.png) <!-- .element: class="plain" -->
+            </textarea>
+          </section>
+
+        </section>
+
+        <!-- Lunch Time! -->
+
+        <section data-markdown class="nav">
+          <textarea data-template>
+            # Lunch: 12:00 to 1:30 AM
+
+            * How is the pace?
+            * Poke around in the Buildroot menus
+            * Brainstorm projects
+            * Any questions / feedback / thoughts?
+          </textarea>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="../lib/js/head.min.js"></script>
+    <script src="../js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        controls: false,
+        progress: false,
+        transition: 'none',
+        width: 1024,
+        height: 768,
+        center: false,
+        pdfMaxPagesPerSlide: 1,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: '../plugin/markdown/marked.js' },
+          { src: '../plugin/markdown/markdown.js' },
+          { src: '../plugin/notes/notes.js', async: true },
+          { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+
+      for (var slide of document.getElementsByTagName('section')){
+        if (slide.getAttribute('data-markdown') == "") {
+          slide.setAttribute('data-separator-notes', '^Notes:');
+        }
+
+        if (!(slide.getAttribute('data-background') ||
+              slide.getAttribute('data-background-image') ||
+              slide.getAttribute('data-background-video') ||
+              slide.getAttribute('data-background-iframe'))){
+          slide.setAttribute('data-background-image', '../img/circuit.svg');
+          slide.setAttribute('data-background-color', '#DFDBE5');
+          slide.setAttribute('data-background-size', '200px');
+          slide.setAttribute('data-background-repeat', 'repeat');
+        }
+      }
+    </script>
+  </body>
+</html>
