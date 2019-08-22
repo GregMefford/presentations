@@ -36,7 +36,7 @@
               # Step 2 - Custom Nerves Systems
               ![custom system docs](img/custom_system_hexdocs.png) <!-- .element: class="plain" style="height: 13em" -->
               <br/>
-              [https://hexdocs.pm/nerves/systems.html#customizing-your-own-nerves-system](https://hexdocs.pm/nerves/systems.html#customizing-your-own-nerves-system) <!-- .element: class="attribution" -->
+              [https://hexdocs.pm/nerves/customizing-systems.html](https://hexdocs.pm/nerves/customizing-systems.html) <!-- .element: class="attribution" -->
             </textarea>
           </section>
 
@@ -45,7 +45,7 @@
               # Scanning Barcodes with *`zbar`*
               ![zbar-elixir](img/zbar-elixir.png) <!-- .element: class="plain" style="height: 13em" -->
               <br/>
-              [https://github.com/GregMefford/zbar-elixir](https://github.com/GregMefford/zbar-elixir) <!-- .element: class="attribution" -->
+              [https://github.com/elixir-vision/zbar](https://github.com/elixir-vision/zbar) <!-- .element: class="attribution" -->
             </textarea>
           </section>
 
@@ -156,11 +156,9 @@
 
               ``` bash
               $ cd ../omni_eye/eye_fw
-              $ export MIX_TARGET=rpi0_zbar
               $ mix deps.get
               $ mix firmware
               # Assuming your device is still connected
-              $ mix firmware.gen.script
               $ ./upload.sh
               ```
               <!-- .element style="font-size: 0.7em" -->
