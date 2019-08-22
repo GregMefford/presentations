@@ -35,7 +35,7 @@
             <textarea data-template>
               # Step 1 - Getting Started
 
-              ![Eye Hardware](img/hardware_assembly_08.jpg) <!-- .element: class="plain" style="height: 14em" -->
+              ![Eye Hardware](img/hardware_assembly_usb_port.jpg) <!-- .element: class="plain" style="height: 14em" -->
             </textarea>
           </section>
 
@@ -103,20 +103,17 @@
               ```
               omni_eye
               ├── eye
-              │   ├── README.md
               │   ├── config
               │   ├── lib
               │   ├── mix.exs
               │   └── test
               └── eye_fw
-                  ├── README.md
-                  ├── _build
                   ├── config
                   ├── deps
                   ├── lib
                   ├── mix.exs
-                  ├── mix.lock.host
                   ├── rel
+                  ├── rootfs_overlay
                   └── test
               ```
               <!-- .element style="font-size: 0.6em" -->
@@ -167,22 +164,70 @@
           <section data-background-image="img/step1_fw_cleanup1.png" data-background-size="contain"> </section>
           <section data-background-image="img/step1_fw_cleanup2.png" data-background-size="contain"> </section>
           <section data-background-image="img/step1_fw_mix.png" data-background-size="contain"> </section>
-          <section data-background-image="img/step1_fw_config_key.png" data-background-size="contain"> </section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # Generate a helper script to
+              # push firmware over SSH
+              ``` bash
+              $ mix firmware.gen.script
+              ```
+            </textarea>
+          </section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              # 🚨⚠️🚨 !!WARNING!! 🚨⚠️🚨
+
+              I generated keys for this class
+
+              that are *convenient* but *not secure*!
+
+              Don't check your real SSH keys into git! 🙀
+            </textarea>
+          </section>
+
+          <section data-markdown class="nav">
+            <textarea data-template>
+              ``` bash
+              # Git ignores file permissions, but SSH refuses
+              # to use keys that are stored insecurely
+              $ chmod 600 training_keys/id_rsa
+              ```
+            </textarea>
+          </section>
+
+          <section data-background-image="img/step1_fw_config_key1.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_config_key2.png" data-background-size="contain"> </section>
+          <section data-background-image="img/step1_fw_config_key3.png" data-background-size="contain"> </section>
 
           <section data-markdown>
             <textarea data-template>
               ``` bash
+              # Connect your Pi to your computer via USB
               $ cd ../eye_fw
               $ export MIX_TARGET=rpi0
               $ mix deps.get
               $ mix firmware
+              $ ./upload.sh
+              ```
+              ![USB cable](img/hardware_assembly_usb_port.jpg) <!-- .element: class="plain" style="height: 8em" -->
+            </textarea>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              # ⛑️ In Case of Emergency ⛑️
+              ``` bash
+              # Unplug the Pi so it powers down
               # Extract your SD card from the Zero
               # Connect it to your laptop
               $ mix firmware.burn
               # Put it back into your Zero
+              # Plug it back in
               ```
-              ![zero retention tab](img/hardware_assembly_07.jpg) <!-- .element: class="plain" style="height: 10em" -->
-              ![tilt up the zero](img/hardware_assembly_06.jpg) <!-- .element: class="plain" style="height: 10em" -->
+              ![zero retention tab](img/hardware_assembly_case_bottom.jpg) <!-- .element: class="plain" style="height: 10em" -->
+              ![tilt up the zero](img/hardware_assembly_remove_pcb.jpg) <!-- .element: class="plain" style="height: 10em" -->
             </textarea>
           </section>
 
@@ -190,11 +235,16 @@
             <textarea data-template>
               # Try it on your Device
               ``` bash
-              # Plug in the USB cable and wait about 15 seconds
+              # Connect your Pi to your computer via USB
+              $ cd ../eye_fw
+              $ export MIX_TARGET=rpi0
+              $ mix deps.get
+              $ mix firmware
+              $ ./upload.sh
               $ open http://nerves.local
               ```
-              ![USB cable](img/hardware_assembly_08.jpg) <!-- .element: class="plain" style="height: 8em" -->
-              ![Infinity Tunnel](img/eye_tunnel.png) <!-- .element: class="plain" style="height: 8em" -->
+              ![USB cable](img/hardware_assembly_usb_port.jpg) <!-- .element: class="plain" style="height: 8em" -->
+              ![Infinity Tunnel](img/eye_tunnel.jpg) <!-- .element: class="plain" style="height: 8em" -->
             </textarea>
           </section>
 
@@ -228,8 +278,8 @@
               # Similar to tail -f
               iex> RingLogger.attach
 
-              # Similar to cat /var/log/messages
-              iex> RingLogger.tail
+              # Shows the next logs you haven't seen yet
+              iex> RingLogger.next
 
               # Search for something
               iex> RingLogger.grep(~r/[Nn]eedle/)
